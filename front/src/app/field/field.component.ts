@@ -91,7 +91,7 @@ export class FieldComponent implements OnInit {
     }
   }
 
-  private verify(otherId) {
+  public verify(otherId) {
     if(String(otherId) == 'true') {
       return true;
     } else {
