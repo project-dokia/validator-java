@@ -42,7 +42,7 @@
           </select>
         </div>
       </div>
-      <div class="row m-2" *ngIf="field.needOtherId == true">
+      <div class="row m-2" *ngIf="verify(field.needOtherId)">
         <div class="col-3 text-right">
           <h5>Other ID</h5>
         </div>

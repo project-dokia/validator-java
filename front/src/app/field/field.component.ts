@@ -91,6 +91,14 @@ export class FieldComponent implements OnInit {
     }
   }
 
+  private verify(otherId) {
+    if(String(otherId) == 'true') {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   private setModels() {
     for (let field of this.fields) {
       for (let model of this.models) {

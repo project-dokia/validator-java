@@ -7,7 +7,7 @@ export class Field {
 	
 	title: String;
 	value : any;
-	needOtherId: boolean;
+	needOtherId: Boolean;
 	
 	otherId: String;
 	titleId:String;
