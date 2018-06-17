@@ -1,0 +1,100 @@
+<div class="container-fluid">
+  <!-- <h4 class="card-title">Type</h4>   -->
+  <div class="card m-2">
+    <div class="card-body">
+      <h4 class="card-text">Cadatro</h4>
+      <div class="row m-2">
+        <div class="col-3 text-right">
+          <h5>ID Type</h5>
+        </div>
+        <div class="col-9">
+          <select class="form-control" [(ngModel)]="field.idType">
+            <option *ngFor="let type of types" value="{{type._id}}">{{type.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-3 text-right">
+          <h5>ID Model</h5>
+        </div>
+        <div class="col-9">
+          <select class="form-control" [(ngModel)]="field.idModel">
+            <option *ngFor="let model of models" value="{{model._id}}">{{model.description}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-3 text-right">
+          <h5>Title</h5>
+        </div>
+        <div class="col-9">
+          <input type="text" class="form-control" [(ngModel)]="field.title">
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-3 text-right">
+          <h5>Need Other ID?</h5>
+        </div>
+        <div class="col-9">
+          <select class="form-control" [(ngModel)]="field.needOtherId">
+            <option value="false">NO</option>
+            <option value="true">YES</option>
+          </select>
+        </div>
+      </div>
+      <div class="row m-2" *ngIf="field.needOtherId == 'true'">
+        <div class="col-3 text-right">
+          <h5>Other ID</h5>
+        </div>
+        <div class="col-9">
+          <select class="form-control" [(ngModel)]="field.otherId">
+            <option *ngFor="let field of fields" value="{{field._id}}">{{field.title}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-6 offset-6 text-right">
+          <input type="button" value="INSERT" class="btn btn-primary form-control" (click)="insertField()">
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr/>
+
+  <div class="card m-2">
+    <div class="card-body">
+      <h4 class="card-text">Lista</h4>
+      <hr/>
+      <div class="row m-2">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-horvered ">
+              <thead>
+                <tr>
+                  <th>_id</th>
+                  <th>Title</th>
+                  <th>Model</th>
+                  <!-- <th>Need Other ID?</th> -->
+                  <th>Type</th>
+                  <th>Title ID</th>
+                  <th>Model ID</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let field of fields">
+                  <td>{{field._id}}</td>
+                  <td>{{field.title}}</td>
+                  <td>{{field.titleModel}}</td>
+                  <!-- <td>{{field.needOtderId}}</td> -->
+                  <td>{{field.titleType}}</td>
+                  <td>{{field.titleId}}</td>
+                  <td>{{field.titleModelId}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

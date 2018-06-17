@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="card m-2">
+    <div class="card-body">
+      <h4 class="card-text">Select</h4>
+      <hr/>
+      <div class="row m-2">
+        <div class="col-12">
+          <table class="table table-striped table-horvered">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>_id</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rule of rules; let i = index">
+                <td>{{rule.description}}</td>
+                <td>{{rule._id}}</td>
+                <td>
+                  <input type="button" value="ADD" class="btn btn-primary form-control" (click)="addValidator(i)">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card m-2">
+    <div class="card-body">
+      <h4 class="card-text">Lista</h4>
+      <div class="row m-2">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-horvered table-striped ">
+              <thead>
+                <tr>
+                  <th>Titile</th>
+                  <th>Model</th>
+                  <th>Value</th>
+                  <th>Type</th>
+                  <th>Other ID</th>
+                  <th>Model ID</th>
+                  <th>Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let field of rule.fields; let i = index;">
+                  <td>{{field.title}}</td>
+
+                  <td>{{field.titleModel}}</td>
+                  <td>
+                    <input type="text" class="form-control" [(ngModel)]="field.value">
+                  </td>
+                  <td>{{field.titleType}}</td>
+                  <td>{{field.titleId}}</td>
+                  <td>{{field.titleModelId}}</td>
+                  <td>{{field.result}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row m-2">
+        <div class="col-6 offset-3">
+          <input type="button" class="btn btn-primary form-control" value="VALIDATOR" (click)="validator()" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- COLOCAR MODAL -->
+</div>
