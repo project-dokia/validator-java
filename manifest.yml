@@ -2,6 +2,6 @@
 applications:
 - name: validator-dokia
   path: defaultServer
-  memory: 768MB
+  memory: 1GB
   host: validator-dokia
   domain: mybluemix.net

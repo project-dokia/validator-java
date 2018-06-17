@@ -66,6 +66,8 @@ public class FieldController {
 							result = true;
 						}
 
+						// CADASTRAR MENOR IGUAL DATA
+						
 						results.add(new ResultValidator(validator.get_id(), validator.getValue(), result,
 								validator.getTitle(), type.getDescription()));
 					}
