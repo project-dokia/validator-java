@@ -41,7 +41,7 @@ public class ValidatorController {
 		ArrayList<Result> resultsValidator = new ArrayList<Result>();
 		
 		for (ResultValidator result : results) {
-			resultsValidator.add(new Result(result.isResult(), result.getIdField()));
+			resultsValidator.add(new Result(result.isResult(), result.getIdField(), result.getTitleValidator()));
 //			System.out.println("\nResult: " + result.isResult());
 //			System.out.println("Value: " + result.getValue());
 //			System.out.println("Title Validator: " + result.getTitleValidator());

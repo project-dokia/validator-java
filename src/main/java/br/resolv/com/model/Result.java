@@ -4,14 +4,30 @@ public class Result {
 
 	private boolean result;
 	private String idField;
+	private String title;
 	
 	public Result() {
 		
 	}
 	
-	public Result(boolean result, String idField) {
+	
+	
+	public String getTitle() {
+		return title;
+	}
+
+
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+
+
+	public Result(boolean result, String idField, String title) {
 		this.result = result;
 		this.idField = idField;
+		this.title = title;
 	}
 	
 	public boolean isResult() {

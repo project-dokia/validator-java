@@ -25,11 +25,17 @@ public class FieldController {
 		boolean result = false;
 		if (validators.size() > 0) {
 			for (Field validatorEquals : validators) {
-				if (validatorEquals.get_id().equals(field.getOtherId())) {
-					if (validatorEquals.getValue().equals(field.getValue())) {
-						result = true;
-					} else {
-						result = false;
+				if (field != null) {
+//					System.out.println(field.getOtherId());
+//					System.out.println(validatorEquals.get_id());
+					if (validatorEquals.get_id().equals(field.getOtherId())) {
+						if (field.getValue() != null && validatorEquals.getValue() != null) {
+							if (validatorEquals.getValue().equals(field.getValue())) {
+								result = true;
+							} else {
+								result = false;
+							}
+						}
 					}
 				}
 			}
@@ -64,10 +70,18 @@ public class FieldController {
 
 						} else if (type.getCommand().equals("nenhum")) {
 							result = true;
+						} else if (type.getCommand().equals("menor_igual_data")) {
+							result = true;
+						} else if (type.getCommand().equals("verifica_existencia")) {
+							result = true;
+						} else if (type.getCommand().equals("dependencia")) {
+							result = true;
 						}
 
-						// CADASTRAR MENOR IGUAL DATA
-						
+						// CADASTRAR MENOR IGUAL DATA - menor_igual_data
+						// verifica_existencia
+						// fazer regra dependecia dependencia
+
 						results.add(new ResultValidator(validator.get_id(), validator.getValue(), result,
 								validator.getTitle(), type.getDescription()));
 					}
