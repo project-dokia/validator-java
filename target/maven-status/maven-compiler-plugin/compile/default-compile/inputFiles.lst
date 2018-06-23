@@ -1,4 +1,3 @@
-/Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/util/ComparatorDocument.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/ws/FieldWS.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/model/Change.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/model/ResultValidator.java
@@ -20,6 +19,7 @@
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/model/Result.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/factory/CloudantFactory.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/controller/FieldController.java
+/Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/util/Comparator.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/filter/ConnFilter.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/model/Type.java
 /Users/matheuscatossi/eclipse-workspace/dokia/src/main/java/br/resolv/com/controller/ValidatorController.java

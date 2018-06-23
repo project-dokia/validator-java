@@ -25,6 +25,7 @@ public class FieldController {
 	}
 
 	private boolean verifyRule(Field field, List<Field> validators, String command) {
+		boolean result = false;
 		if (validators.size() > 0) {
 			for (Field validatorEquals : validators) {
 				if (field != null) {
@@ -32,7 +33,9 @@ public class FieldController {
 						if (field.getValue() != null && validatorEquals.getValue() != null) {
 							if (command.equals("equals")) {
 								if (validatorEquals.getValue().equals(field.getValue())) {
-									return true;
+									result = true;
+								} else {
+									result = false;
 								}
 							} else if (command.equals("menor_igual_data")) {
 								return verifyDate(validatorEquals.getValue(), field.getValue());
@@ -43,13 +46,15 @@ public class FieldController {
 				}
 			}
 		}
-		return false;
+		return result;
 	}
 
 	public boolean verifyDate(Object dateInitial, Object dateFinal) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
 		String strDateInitial = dateInitial.toString(); // "28/04/2018";
 		String strDateFinal = dateFinal.toString(); // "25/04/2018";
+	
 		try {
 			java.util.Date dtInitial = sdf.parse(strDateInitial);
 			java.util.Date dtFinal = sdf.parse(strDateFinal);
@@ -68,7 +73,6 @@ public class FieldController {
 
 		for (Field field : fields) {
 			for (Type type : types) {
-
 				if (field.getIdType() != null && type.get_id() != null) {
 					boolean result = false;
 
@@ -100,8 +104,7 @@ public class FieldController {
 							result = verifyRule(field, fields, "menor_igual_data");
 						}
 
-						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(),
-								type.getDescription(), field.isDependency(), field.getIdDependency()));
+						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency()));
 					}
 				}
 			}

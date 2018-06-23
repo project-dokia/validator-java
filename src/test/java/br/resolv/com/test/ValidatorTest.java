@@ -1,11 +1,6 @@
 package br.resolv.com.test;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-
 import org.junit.Test;
-
-import br.resolv.com.util.Comparator;
 
 public class ValidatorTest {
 
@@ -28,9 +23,5 @@ public class ValidatorTest {
 		// ValidatorController validatorController = new ValidatorController();
 		// validatorController.validate(new Document("90ad561435df4489b29e9fa8b4540315",
 		// inputs));
-
-		
-
 	}
-
 }
