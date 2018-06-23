@@ -46,23 +46,23 @@ public class FieldController {
 	public List<ResultValidator> documentVersusRule(List<Field> fields, List<Type> types) {
 		List<ResultValidator> results = new ArrayList<ResultValidator>();
 
-		for (Field validator : fields) {
+		for (Field field : fields) {
 			for (Type type : types) {
 
-				if (validator.getIdType() != null && type.get_id() != null) {
+				if (field.getIdType() != null && type.get_id() != null) {
 					boolean result = false;
 
-					if (validator.getIdType().equals(type.get_id())) {
+					if (field.getIdType().equals(type.get_id())) {
 						if (type.getCommand().equals("equals")) {
-							result = this.equals(validator, fields);
+							result = this.equals(field, fields);
 						} else if (type.getCommand().equals("number")) {
-							if (validator.getValue().getClass().toString().equals("class java.lang.Integer")) {
+							if (field.getValue().getClass().toString().equals("class java.lang.Integer")) {
 								result = true;
 							} else {
 								result = false;
 							}
 						} else if (type.getCommand().equals("text")) {
-							if (validator.getValue().getClass().toString().equals("class java.lang.String")) {
+							if (field.getValue().getClass().toString().equals("class java.lang.String")) {
 								result = true;
 							} else {
 								result = false;
@@ -74,16 +74,30 @@ public class FieldController {
 							result = true;
 						} else if (type.getCommand().equals("verifica_existencia")) {
 							result = true;
-						} else if (type.getCommand().equals("dependencia")) {
-							result = true;
-						}
+						} 
+						
+						
 
 						// CADASTRAR MENOR IGUAL DATA - menor_igual_data
 						// verifica_existencia
-						// fazer regra dependecia dependencia
-
-						results.add(new ResultValidator(validator.get_id(), validator.getValue(), result,
-								validator.getTitle(), type.getDescription()));
+//						System.out.println(validator.isDependency());
+						
+						results.add(new ResultValidator(field.get_id(), field.getValue(), result,
+								field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency()));
+					}
+				}
+			}
+		}
+		
+		for(ResultValidator resultValidator : results) {
+			if(resultValidator.isDependency() == true) {
+				for(ResultValidator resultValidatorDependency : results) {
+					if(resultValidatorDependency.getIdField().equals(resultValidator.getIdField())) {
+						if(resultValidatorDependency.isResult() == true && resultValidator.isResult() == true) {
+							resultValidator.setResult(true);
+						} else {
+							resultValidator.setResult(false);
+						}
 					}
 				}
 			}
@@ -91,4 +105,7 @@ public class FieldController {
 
 		return results;
 	}
+	
+	
+	
 }

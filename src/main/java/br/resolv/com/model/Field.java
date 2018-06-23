@@ -11,23 +11,29 @@ public class Field {
 	private String otherId;
 	private String type;
 	private String idModel;
+	private boolean dependency;
+	private String idDependency;
 
-	public Field(String _id, String title, String idModel) {
+	public Field(String _id, String title, String idModel, boolean dependency, String idDependency) {
 		this.type = "FIELD";
 		this._id = _id;
 		this.title = title;
 		this.idModel = idModel;
+		this.dependency = dependency;
+		this.idDependency = idDependency;
 	}
 
-	public Field(String _id, String idType, String title, String idModel) {
+	public Field(String _id, String idType, String title, String idModel, boolean dependency, String idDependency) {
 		this.type = "FIELD";
 		this._id = _id;
 		this.idType = idType;
 		this.title = title;
 		this.idModel = idModel;
+		this.dependency = dependency;
+		this.idDependency = idDependency;
 	}
 
-	public Field(String _id, String idType, String title, boolean needOtherId, String otherId, String idModel) {
+	public Field(String _id, String idType, String title, boolean needOtherId, String otherId, String idModel, boolean dependency, String idDependency) {
 		this.type = "FIELD";
 		this._id = _id;
 		this.idType = idType;
@@ -35,23 +41,47 @@ public class Field {
 		this.needOtherId = needOtherId;
 		this.otherId = otherId;
 		this.idModel = idModel;
+		this.dependency = dependency;
+		this.idDependency = idDependency;
 	}
 
-	public Field(String idType, String title, boolean needOtherId, String idModel) {
+	public Field(String idType, String title, boolean needOtherId, String idModel, boolean dependency, String idDependency) {
 		this.type = "FIELD";
 		this.idType = idType;
 		this.title = title;
 		this.needOtherId = needOtherId;
 		this.idModel = idModel;
+		this.dependency = dependency;
+		this.idDependency = idDependency;
 	}
 
-	public Field(String idType, String title, boolean needOtherId, String otherId, String idModel) {
+	public Field(String idType, String title, boolean needOtherId, String otherId, String idModel, boolean dependency, String idDependency) {
 		this.type = "FIELD";
 		this.idType = idType;
 		this.title = title;
 		this.needOtherId = needOtherId;
 		this.otherId = otherId;
 		this.idModel = idModel;
+		this.dependency = dependency;
+		this.idDependency = idDependency;
+	}
+
+	
+	
+	public boolean isDependency() {
+		return dependency;
+	}
+
+	public void setDependency(boolean dependency) {
+		this.dependency = dependency;
+	}
+
+	public String getIdDependency() {
+		return idDependency;
+	}
+
+	public void setIdDependency(String idDependency) {
+		this.idDependency = idDependency;
 	}
 
 	public String getIdModel() {

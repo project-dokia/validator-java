@@ -18,6 +18,8 @@ export class Field {
 	idModel:String;
 	titleModel:String;
 
+	dependency:boolean;
+	idDependency:string;
 
 	result:String;
 }
