@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -12,9 +13,10 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 
 import br.resolv.com.model.Change;
 
-public class ComparatorDocument {
+public class Comparator {
 
-	public static final String[] DO_NOT_CHECK = new String[] { "documentsLog", "class", "lastModify", "class", "_id", "_rev", "author" };
+	public static final String[] DO_NOT_CHECK = new String[] { "documentsLog", "class", "lastModify", "class", "_id",
+			"_rev", "author" };
 	public static final String ARRAYLIST = "class java.util.ArrayList";
 	public static final String STRING = "class java.lang.String";
 	public static final String BOOLEAN = "boolean";
@@ -40,9 +42,10 @@ public class ComparatorDocument {
 
 	private boolean vefiryModify(Object last, Object current, String keyOld)
 			throws IllegalArgumentException, IllegalAccessException {
-		
-		if(last == null || current == null || keyOld == null || keyOld.toString().equals("empty")) return false;
-		
+
+		if (last == null || current == null || keyOld == null || keyOld.toString().equals("empty"))
+			return false;
+
 		return (FieldUtils.getField(last.getClass(), keyOld, true).get(last) != null
 				&& FieldUtils.getField(current.getClass(), keyOld, true).get(current) != null
 				&& !FieldUtils.getField(last.getClass(), keyOld, true).get(last)
@@ -82,12 +85,13 @@ public class ComparatorDocument {
 							Field field = clazz.getDeclaredField(keyOld);
 							Class<?> type = field.getType();
 
-							if (type.toString().equals(STRING) || type.toString().equals(BOOLEAN) || type.toString().equals(INT)) {
+							if (type.toString().equals(STRING) || type.toString().equals(BOOLEAN)
+									|| type.toString().equals(INT)) {
 								if (type.toString().equals(BOOLEAN)) {
 									valueCurrent = Boolean.parseBoolean(valueCurrent.toString());
 									valueOld = Boolean.parseBoolean(valueOld.toString());
 								}
-								
+
 								if (type.toString().equals(INT)) {
 									valueCurrent = Integer.parseInt(valueCurrent.toString());
 									valueOld = Integer.parseInt(valueOld.toString());
@@ -119,13 +123,13 @@ public class ComparatorDocument {
 												listModificationsCurrent = listCurrent;
 											} else {
 												for (int i = 0; i < listOld.size(); i++) {
-													
+
 													// array de string dando erro
-													
+
 													System.out.println(listOld.get(i));
 													System.out.println(listCurrent.get(i));
 													System.out.println(listOld.get(i).getClass());
-													
+
 													Change change = verifyDocument(listOld.get(i), listCurrent.get(i),
 															listOld.get(i).getClass());
 
@@ -154,8 +158,10 @@ public class ComparatorDocument {
 										Change change = verifyDocument(objOld, objCurrent, objOld.getClass());
 
 										if (change != null) {
-											if (instanceOld != null) set(instanceOld, keyOld, change.getOld());
-											if (instanceCurrent != null) set(instanceCurrent, keyOld, change.getCurrent());
+											if (instanceOld != null)
+												set(instanceOld, keyOld, change.getOld());
+											if (instanceCurrent != null)
+												set(instanceCurrent, keyOld, change.getCurrent());
 										}
 										modification = true;
 									}
@@ -203,5 +209,16 @@ public class ComparatorDocument {
 	private Map<String, Object> extracted(Object last)
 			throws IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 		return (Map<String, Object>) BeanUtils.describe(last);
+	}
+
+	public boolean verifyDateInitialMoreDateFinal(Date dateInitial, Date dateFinal) {
+		boolean result;
+		if (dateInitial.before(dateFinal)) {
+			result = false;
+		} else if (dateInitial.after(dateFinal))
+			result = true;
+		else
+			result = true;
+		return result;
 	}
 }

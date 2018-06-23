@@ -1,5 +1,7 @@
 package br.resolv.com.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,7 @@ import br.resolv.com.model.Field;
 import br.resolv.com.model.Input;
 import br.resolv.com.model.ResultValidator;
 import br.resolv.com.model.Type;
+import br.resolv.com.util.Comparator;
 
 public class FieldController {
 
@@ -21,26 +24,43 @@ public class FieldController {
 		return fields;
 	}
 
-	private boolean equals(Field field, List<Field> validators) {
-		boolean result = false;
+	private boolean verifyRule(Field field, List<Field> validators, String command) {
 		if (validators.size() > 0) {
 			for (Field validatorEquals : validators) {
 				if (field != null) {
-//					System.out.println(field.getOtherId());
-//					System.out.println(validatorEquals.get_id());
 					if (validatorEquals.get_id().equals(field.getOtherId())) {
 						if (field.getValue() != null && validatorEquals.getValue() != null) {
-							if (validatorEquals.getValue().equals(field.getValue())) {
-								result = true;
-							} else {
-								result = false;
+							if (command.equals("equals")) {
+								if (validatorEquals.getValue().equals(field.getValue())) {
+									return true;
+								}
+							} else if (command.equals("menor_igual_data")) {
+								return verifyDate(validatorEquals.getValue(), field.getValue());
 							}
+
 						}
 					}
 				}
 			}
 		}
-		return result;
+		return false;
+	}
+
+	public boolean verifyDate(Object dateInitial, Object dateFinal) {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String strDateInitial = dateInitial.toString(); // "28/04/2018";
+		String strDateFinal = dateFinal.toString(); // "25/04/2018";
+		try {
+			java.util.Date dtInitial = sdf.parse(strDateInitial);
+			java.util.Date dtFinal = sdf.parse(strDateFinal);
+
+			Comparator comparator = new Comparator();
+			return comparator.verifyDateInitialMoreDateFinal(dtInitial, dtFinal);
+		} catch (ParseException pe) {
+			pe.printStackTrace();
+		}
+
+		return false;
 	}
 
 	public List<ResultValidator> documentVersusRule(List<Field> fields, List<Type> types) {
@@ -54,7 +74,7 @@ public class FieldController {
 
 					if (field.getIdType().equals(type.get_id())) {
 						if (type.getCommand().equals("equals")) {
-							result = this.equals(field, fields);
+							result = this.verifyRule(field, fields, "equals");
 						} else if (type.getCommand().equals("number")) {
 							if (field.getValue().getClass().toString().equals("class java.lang.Integer")) {
 								result = true;
@@ -70,30 +90,28 @@ public class FieldController {
 
 						} else if (type.getCommand().equals("nenhum")) {
 							result = true;
-						} else if (type.getCommand().equals("menor_igual_data")) {
-							result = true;
 						} else if (type.getCommand().equals("verifica_existencia")) {
-							result = true;
-						} 
-						
-						
+							if (field.getValue() != null) {
+								result = true;
+							} else {
+								result = false;
+							}
+						} else if (type.getCommand().equals("menor_igual_data")) {
+							result = verifyRule(field, fields, "menor_igual_data");
+						}
 
-						// CADASTRAR MENOR IGUAL DATA - menor_igual_data
-						// verifica_existencia
-//						System.out.println(validator.isDependency());
-						
-						results.add(new ResultValidator(field.get_id(), field.getValue(), result,
-								field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency()));
+						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(),
+								type.getDescription(), field.isDependency(), field.getIdDependency()));
 					}
 				}
 			}
 		}
-		
-		for(ResultValidator resultValidator : results) {
-			if(resultValidator.isDependency() == true) {
-				for(ResultValidator resultValidatorDependency : results) {
-					if(resultValidatorDependency.getIdField().equals(resultValidator.getIdField())) {
-						if(resultValidatorDependency.isResult() == true && resultValidator.isResult() == true) {
+
+		for (ResultValidator resultValidator : results) {
+			if (resultValidator.isDependency() == true) {
+				for (ResultValidator resultValidatorDependency : results) {
+					if (resultValidatorDependency.getIdField().equals(resultValidator.getIdField())) {
+						if (resultValidatorDependency.isResult() == true && resultValidator.isResult() == true) {
 							resultValidator.setResult(true);
 						} else {
 							resultValidator.setResult(false);
@@ -105,7 +123,5 @@ public class FieldController {
 
 		return results;
 	}
-	
-	
-	
+
 }
