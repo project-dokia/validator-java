@@ -1,0 +1,37 @@
+<server>
+	<featureManager>
+
+		<feature>javaee-7.0</feature>
+		<feature>localConnector-1.0</feature>
+		<feature>cloudant-1.0</feature>
+
+	</featureManager>
+
+	<!-- <logging traceSpecification="*=audit:com.ibm.ws.security.*=all" /> -->
+
+	<httpEndpoint httpPort="9080" httpsPort="9443"
+		id="defaultHttpEndpoint" />
+
+
+
+	<!-- OIDC -->
+	<sslDefault sslRef="DefaultSSLSettings" />
+	<ssl id="DefaultSSLSettings" keyStoreRef="keyStore"
+		trustStoreRef="trustStore" /> 
+
+	<keyStore id="keyStore"
+		location="${server.config.dir}/ssl/key.jks" password="wasadmin"
+		type="JKS" />
+	<keyStore id="trustStore"
+		location="${server.config.dir}/ssl/trust.jks" password="wasadmin"
+		type="JKS" />
+
+	<!-- <basicRegistry id="basic" realm="BasicRealm"> -->
+	<!-- <user name="wasadmin" password="{xor}KD4sPjsyNjE="/> -->
+	<!-- </basicRegistry> -->
+
+
+	<applicationMonitor updateTrigger="mbean" />
+
+	<application id="dokia" location="validator-dokia-1.0-SNAPSHOT.war" name="dokia" context-root="/" />
+</server>
