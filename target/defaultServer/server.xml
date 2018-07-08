@@ -33,5 +33,5 @@
 
 	<applicationMonitor updateTrigger="mbean" />
 
-	<application id="dokia" location="validator-dokia-1.0-SNAPSHOT.war" name="dokia" context-root="/" />
+	<application id="dokia" location="validator-dokia.war" name="dokia" context-root="/" />
 </server>
