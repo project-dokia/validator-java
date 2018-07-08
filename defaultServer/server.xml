@@ -5,9 +5,6 @@
 		<feature>localConnector-1.0</feature>
 		<feature>cloudant-1.0</feature>
 
-		<!-- OIDC -->
-		<feature>openidConnectClient-1.0</feature>
-
 	</featureManager>
 
 	<!-- <logging traceSpecification="*=audit:com.ibm.ws.security.*=all" /> -->
@@ -20,7 +17,7 @@
 	<!-- OIDC -->
 	<sslDefault sslRef="DefaultSSLSettings" />
 	<ssl id="DefaultSSLSettings" keyStoreRef="keyStore"
-		trustStoreRef="trustStore" />
+		trustStoreRef="trustStore" /> 
 
 	<keyStore id="keyStore"
 		location="${server.config.dir}/ssl/key.jks" password="wasadmin"
@@ -36,6 +33,5 @@
 
 	<applicationMonitor updateTrigger="mbean" />
 
-	<webApplication id="dokia" location="dokia.war" context-root="/"
-		name="dokia" />
+	<application id="dokia" location="validator-dokia-1.0-SNAPSHOT.war" name="dokia" context-root="/" />
 </server>
