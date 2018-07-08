@@ -23,7 +23,6 @@ public class TypeController {
 			.build()
 			.getResponse();
 			
-			
 			for(Type rowType : response.getValues()) {
 				types.add(rowType);
 			}

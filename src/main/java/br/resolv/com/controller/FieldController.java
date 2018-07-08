@@ -104,25 +104,25 @@ public class FieldController {
 							result = verifyRule(field, fields, "menor_igual_data");
 						}
 
-						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency()));
+						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency(), field.getIdModel()));
 					}
 				}
 			}
 		}
 
-		for (ResultValidator resultValidator : results) {
-			if (resultValidator.isDependency() == true) {
-				for (ResultValidator resultValidatorDependency : results) {
-					if (resultValidatorDependency.getIdField().equals(resultValidator.getIdField())) {
-						if (resultValidatorDependency.isResult() == true && resultValidator.isResult() == true) {
-							resultValidator.setResult(true);
-						} else {
-							resultValidator.setResult(false);
-						}
-					}
-				}
-			}
-		}
+//		for (ResultValidator resultValidator : results) {
+//			if (resultValidator.isDependency() == true) {
+//				for (ResultValidator resultValidatorDependency : results) {
+//					if (resultValidatorDependency.getIdField().equals(resultValidator.getIdField())) {
+//						if (resultValidatorDependency.isResult() == true && resultValidator.isResult() == true) {
+//							resultValidator.setResult(true);
+//						} else {
+//							resultValidator.setResult(false);
+//						}
+//					}
+//				}
+//			}
+//		}
 
 		return results;
 	}
