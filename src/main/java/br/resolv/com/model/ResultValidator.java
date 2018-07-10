@@ -9,12 +9,13 @@ public class ResultValidator {
 	private String titleValidator;
 	private String descriptionType;
 	private String idField;
+	private String idOther;
 	private boolean dependency;
 	private String idDependency;
 	private String idModel;
 
 	public ResultValidator(String idField, Object value, boolean result, String titleValidator, String descriptionType,
-			boolean dependency, String idDependency, String idModel) {
+			boolean dependency, String idDependency, String idModel, String idOther) {
 		this.idField = idField;
 		this.value = value;
 		this.result = result;
@@ -23,10 +24,21 @@ public class ResultValidator {
 		this.dependency = dependency;
 		this.idDependency = idDependency;
 		this.idModel = idModel;
+		this.idOther = idOther;
 	}
 
 	
 	
+	public String getIdOther() {
+		return idOther;
+	}
+
+
+
+	public void setIdOther(String idOther) {
+		this.idOther = idOther;
+	}
+
 	public String getIdModel() {
 		return idModel;
 	}

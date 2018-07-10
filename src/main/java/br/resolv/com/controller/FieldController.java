@@ -104,7 +104,7 @@ public class FieldController {
 							result = verifyRule(field, fields, "menor_igual_data");
 						}
 
-						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency(), field.getIdModel()));
+						results.add(new ResultValidator(field.get_id(), field.getValue(), result, field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency(), field.getIdModel(), field.getOtherId()));
 					}
 				}
 			}

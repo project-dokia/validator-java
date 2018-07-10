@@ -26,21 +26,24 @@ public class ValidatorController {
 	}
 
 	private void sleep() {
-		try { Thread.sleep (300); } catch (InterruptedException ex) {}
+		try {
+			Thread.sleep(300);
+		} catch (InterruptedException ex) {
+		}
 	}
-	
+
 	public List<Result> validate(Document document) {
 		RuleController ruleController = new RuleController();
 		Rule rule = ruleController.getRuleById(document.getIdRule(), conn);
 
 		TypeController typeController = new TypeController();
 		List<Type> types = typeController.getAllTypes(this.conn);
-		
+
 		ModelController modelController = new ModelController();
 		List<Model> models = modelController.getAllModels(this.conn);
 
 		sleep();
-		
+
 		FieldController fieldController = new FieldController();
 		List<Field> fields = fieldController.setValuesFields(document.getInputs(), rule.getFields());
 
@@ -52,42 +55,51 @@ public class ValidatorController {
 		for (ResultValidator result : results) {
 			if (result.getDescriptionType() != null) {
 				if (!result.getDescriptionType().toUpperCase().equals("nenhum".toUpperCase())) {
-					if (result.getDescriptionType().equals("equals")) {
+					if (result.getDescriptionType().toString().toUpperCase().equals("equals".toUpperCase()) || result.getDescriptionType().toString().toUpperCase().equals("Menor Igual (data)".toUpperCase())) {
 						String fieldOther = "";
 						String valueOther = "";
+
 						for (ResultValidator resultOther : results) {
-							if (resultOther.get_id().equals(result.getIdDependency())) {
-								fieldOther = resultOther.getTitleValidator();
-								valueOther = resultOther.getValue().toString();
+							if (result.getIdOther() != null) {
+								if (resultOther.getIdField() != null) {
+									if (resultOther.getIdField().toString().equals(result.getIdOther().toString())) {
+										fieldOther = resultOther.getTitleValidator();
+										if (resultOther.getValue() != null) {
+											valueOther = resultOther.getValue().toString();
+										}
+									}
+								}
 							}
 						}
 
 						String modelDescription = "";
-						
-						for(Model model : models) {
-							if(model.get_id().equals(result.getIdModel())) {
+
+						for (Model model : models) {
+							if (model.get_id().equals(result.getIdModel())) {
 								modelDescription = model.getDescription();
 							}
 						}
-						
-						resultsValidator.add(new Result(result.getIdField(), result.isResult(),
-								result.getTitleValidator(), result.getValue().toString(), result.getDescriptionType(),
-								fieldOther, valueOther, modelDescription));
 
+						if(result.getValue() != null) {
+							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
+									result.getTitleValidator(), result.getValue().toString(), result.getDescriptionType(),
+									fieldOther, valueOther, modelDescription));
+						}
+						
 					} else {
 						if (result.getValue() != null) {
-							
+
 							String modelDescription = "";
-							
-							for(Model model : models) {
-								if(model.get_id().equals(result.getIdModel())) {
+
+							for (Model model : models) {
+								if (model.get_id().equals(result.getIdModel())) {
 									modelDescription = model.getDescription();
 								}
 							}
-							
-							resultsValidator.add(
-									new Result(result.getIdField(), result.isResult(), result.getTitleValidator(), result.getValue().toString(),
-											 result.getDescriptionType(), "", "", modelDescription));
+
+							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
+									result.getTitleValidator(), result.getValue().toString(),
+									result.getDescriptionType(), "", "", modelDescription));
 
 						}
 					}
