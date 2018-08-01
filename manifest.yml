@@ -3,6 +3,4 @@ applications:
 - name: validator-dokia
   path: defaultServer
   memory: 1GB
-  host: validator-dokia
-  domain: mybluemix.net
   buildpack: liberty-for-java_v3_22-20180601-1200
