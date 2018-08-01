@@ -83,7 +83,17 @@ public class ValidatorController {
 						if(result.getValue() != null) {
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(), result.getDescriptionType(),
-									fieldOther, valueOther, modelDescription));
+									fieldOther, valueOther, modelDescription, true));
+						} else {
+							
+							// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
+							
+							result.setValue("");
+							result.setResult(false);
+							
+							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
+									result.getTitleValidator(), result.getValue().toString(), result.getDescriptionType(),
+									fieldOther, valueOther, modelDescription, false));
 						}
 						
 					} else {
@@ -99,10 +109,30 @@ public class ValidatorController {
 
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
-									result.getDescriptionType(), "", "", modelDescription));
+									result.getDescriptionType(), "", "", modelDescription, true));
 
 						}
 					}
+				} else {
+					
+					// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
+					
+					String modelDescription = "";
+
+					for (Model model : models) {
+						if (model.get_id().equals(result.getIdModel())) {
+							modelDescription = model.getDescription();
+						}
+					}
+					
+					if(result.getValue() == null) 
+						result.setValue("");
+					
+					result.setResult(false);
+					
+					resultsValidator.add(new Result(result.getIdField(), result.isResult(),
+							result.getTitleValidator(), result.getValue().toString(),
+							result.getDescriptionType(), "", "", modelDescription, false));
 				}
 			}
 

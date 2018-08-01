@@ -36,5 +36,4 @@ public class ValidatorWS {
 		
 		return Response.status(200).entity(result).build();
 	}
-	
 }

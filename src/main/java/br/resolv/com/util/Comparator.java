@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -212,13 +213,25 @@ public class Comparator {
 	}
 
 	public boolean verifyDateInitialMoreDateFinal(Date dateInitial, Date dateFinal) {
-		boolean result;
-		if (dateInitial.before(dateFinal)) {
+		boolean result = false;
+		
+		long diffInMillies = 0;
+		long diff = 0;
+	    
+		if (dateInitial.after(dateFinal)) {
 			result = false;
-		} else if (dateInitial.after(dateFinal))
+		} else if (dateInitial.before(dateFinal)) {
+			diffInMillies = Math.abs(dateFinal.getTime() - dateInitial.getTime());
+		 	diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+		 	
+		    if(diff > 60) result = false;
+		    else result = true;
+		} else {
 			result = true;
-		else
-			result = true;
+		}
+			
+			
+			
 		return result;
 	}
 }

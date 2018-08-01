@@ -10,6 +10,7 @@ public class Result {
 	private String value;
 	private String valueOther;
 	private String model;
+	private boolean exist;
 	
 	
 
@@ -69,7 +70,7 @@ public class Result {
 	}
 
 	public Result(String idField, boolean result, String title, String value, String descriptionType, String titleOther,
-			String valueOther, String model) {
+			String valueOther, String model, boolean exist) {
 		this.idField = idField;
 		this.result = result;
 		this.title = title;
@@ -78,6 +79,17 @@ public class Result {
 		this.value = value;
 		this.valueOther = valueOther;
 		this.model = model;
+		this.exist = exist;
+	}
+
+	
+	
+	public boolean isExist() {
+		return exist;
+	}
+
+	public void setExist(boolean exist) {
+		this.exist = exist;
 	}
 
 	public boolean isResult() {

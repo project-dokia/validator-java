@@ -2,10 +2,16 @@ package br.resolv.com.test;
 
 import org.junit.Test;
 
+import br.resolv.com.controller.FieldController;
+
 public class ValidatorTest {
 
 	@Test
 	public void testValidator() {
+		
+		FieldController fieldController = new FieldController();
+		System.out.println(fieldController.verifyDate("29/04/2018", "27/06/2018"));;
+		
 		// List<Input> inputs = new ArrayList<Input>();
 		//
 		// Input input1 = new Input("1234", "1234", 1234, "45");

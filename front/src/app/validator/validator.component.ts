@@ -170,11 +170,16 @@ export class ValidatorComponent implements OnInit {
       let result = Array<Result>();
       result = res;
 
-      console.log(result);
-
       let count = 0;
-      for(let rst of result) {
-        this.rule.fields[count].result = String(rst.result);
+      for(let fields of this.rule.fields) {
+        let res = "";
+        for(let rst of result) {
+          if(fields._id == rst.idField) {
+            res = String(rst.result);
+          }
+        }
+
+        this.rule.fields[count].result = res;
         count ++;
       }
     })
