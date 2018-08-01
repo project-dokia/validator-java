@@ -921,11 +921,17 @@ var ValidatorComponent = /** @class */ (function () {
         this.validatorService.insertValidatorObservable(document).subscribe(function (res) {
             var result = Array();
             result = res;
-            console.log(result);
             var count = 0;
-            for (var _i = 0, result_1 = result; _i < result_1.length; _i++) {
-                var rst = result_1[_i];
-                _this.rule.fields[count].result = String(rst.result);
+            for (var _i = 0, _a = _this.rule.fields; _i < _a.length; _i++) {
+                var fields = _a[_i];
+                var res_1 = "";
+                for (var _b = 0, result_1 = result; _b < result_1.length; _b++) {
+                    var rst = result_1[_b];
+                    if (fields._id == rst.idField) {
+                        res_1 = String(rst.result);
+                    }
+                }
+                _this.rule.fields[count].result = res_1;
                 count++;
             }
         });
@@ -970,7 +976,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     production: false,
-    apiUrl: 'http://localhost:9080/validator-dokia/api',
+    apiUrl: 'http://localhost:9080/api',
 };
 
 
