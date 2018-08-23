@@ -1,0 +1,10 @@
+br/resolv/com/model/Result.class
+br/resolv/com/controller/ModelController.class
+br/resolv/com/filter/RedirectFilter.class
+br/resolv/com/model/Model.class
+br/resolv/com/filter/ConnFilter.class
+br/resolv/com/factory/CloudantFactory.class
+br/resolv/com/filter/CorsFilter.class
+br/resolv/com/ws/ModelWS.class
+br/resolv/com/controller/ValidatorController.class
+br/resolv/com/util/Comparator.class

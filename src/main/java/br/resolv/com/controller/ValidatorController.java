@@ -53,6 +53,7 @@ public class ValidatorController {
 		ArrayList<Result> resultsValidator = new ArrayList<Result>();
 
 		for (ResultValidator result : results) {
+			
 			if (result.getDescriptionType() != null) {
 				if (!result.getDescriptionType().toUpperCase().equals("nenhum".toUpperCase())) {
 					if (result.getDescriptionType().toString().toUpperCase().equals("equals".toUpperCase()) || result.getDescriptionType().toString().toUpperCase().equals("Menor Igual (data)".toUpperCase())) {
@@ -97,6 +98,22 @@ public class ValidatorController {
 						}
 						
 					} else {
+						String fieldOther = "";
+						String valueOther = "";
+						for (ResultValidator resultOther : results) {
+							if (result.getIdOther() != null) {
+								if (resultOther.getIdField() != null) {
+									if (resultOther.getIdField().toString().equals(result.getIdOther().toString())) {
+										fieldOther = resultOther.getTitleValidator();
+										if (resultOther.getValue() != null) {
+											valueOther = resultOther.getValue().toString();
+										}
+									}
+								}
+							}
+						}
+						
+						
 						if (result.getValue() != null) {
 
 							String modelDescription = "";
@@ -109,8 +126,27 @@ public class ValidatorController {
 
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
-									result.getDescriptionType(), "", "", modelDescription, true));
+									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true));
 
+						} else {
+							
+							
+							
+							String modelDescription = "";
+
+							for (Model model : models) {
+								if (model.get_id().equals(result.getIdModel())) {
+									modelDescription = model.getDescription();
+								}
+							}
+							
+							if(result.getValue() == null) result.setValue("");
+							
+							result.setResult(false);
+							
+							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
+									result.getTitleValidator(), result.getValue().toString(),
+									result.getDescriptionType(), fieldOther, valueOther, modelDescription, false));
 						}
 					}
 				} else {
@@ -125,8 +161,7 @@ public class ValidatorController {
 						}
 					}
 					
-					if(result.getValue() == null) 
-						result.setValue("");
+					if(result.getValue() == null) result.setValue("");
 					
 					result.setResult(false);
 					

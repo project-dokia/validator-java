@@ -580,8 +580,8 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/matheuscatossi/eclipse-workspace/dokia/front/src/styles.css */"./src/styles.css");
-module.exports = __webpack_require__(/*! /Users/matheuscatossi/eclipse-workspace/dokia/node_modules/bootstrap/dist/css/bootstrap.min.css */"../node_modules/bootstrap/dist/css/bootstrap.min.css");
+__webpack_require__(/*! /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/front/src/styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/node_modules/bootstrap/dist/css/bootstrap.min.css */"../node_modules/bootstrap/dist/css/bootstrap.min.css");
 
 
 /***/ })

@@ -976,7 +976,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     production: false,
-    apiUrl: 'http://localhost:9080/api',
+    apiUrl: 'https://dokia-rules.mybluemix.net/api',
 };
 
 
@@ -1386,7 +1386,7 @@ var ValidatorService = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/matheuscatossi/eclipse-workspace/dokia/front/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/front/src/main.ts */"./src/main.ts");
 
 
 /***/ })
