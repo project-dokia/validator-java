@@ -18,6 +18,15 @@ export class FieldService {
     return this.http.get<Field[]>(this.fieldURL)
   }
 
+  getFieldByIdObservable(_id:string) : Observable<Field> {
+    return this.http.get<Field>(this.fieldURL + "/byId/" + _id);
+  }
+
+  updateField(field: Field) : Observable<Object> {
+    return this.http.post<Object>(this.fieldURL + "/update", field);
+  }
+
+
   insertFieldObservable(field: Field) : Observable<Object> {
     return this.http.post<Object>(this.fieldURL, field);
   }

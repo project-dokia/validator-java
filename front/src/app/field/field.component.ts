@@ -6,6 +6,8 @@ import { TypeService } from '../../service/type.service';
 import { Model } from '../../model/model';
 import { ModelService } from '../../service/model.service';
 
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
   selector: 'app-field',
   templateUrl: './field.component.html',
@@ -18,13 +20,18 @@ export class FieldComponent implements OnInit {
     private fieldService: FieldService,
     private typeService: TypeService,
     private modelService: ModelService,
+    private modalService: NgbModal,
   ) { }
 
   fields: Field[];
+  fieldsNenhum: Field[];
+  fieldsSelected: Field[];
+
   types: Type[];
   models: Model[];
 
   field: Field;
+  fieldEdit: Field;
   ngOnInit() {
 
     this.field = new Field();
@@ -35,33 +42,8 @@ export class FieldComponent implements OnInit {
     this.types = new Array<Type>();
 
     this.getAllFields();
-    this.getAllTypes();
-    this.getAllModels();
+
   }
-
-  // private getAllFields() {
-  //   this.fieldService.getFieldsObservable().
-  //   subscribe((res: Array<Field>) => {
-  //     this.fields = new Array<Field>();
-  //     this.fields = res;
-  //   });
-  // }
-
-  // private getAllTypes() {
-  //   this.typeService.getTypesObservable().
-  //   subscribe((res: Array<Type>) => {
-  //     this.types = new Array<Type>();
-  //     this.types = res;
-  //   });
-  // }
-
-  // private getAllModels() {
-  //   this.modelService.getModelsObservable().
-  //   subscribe((res: Array<Model>) => {
-  //     this.models = new Array<Model>();
-  //     this.models = res;
-  //   });
-  // }
 
   private getAllModels() {
     if (this.models.length == 0) {
@@ -84,7 +66,7 @@ export class FieldComponent implements OnInit {
           this.types = new Array<Type>();
           this.types = res;
 
-          this.setTypes();
+          this.setFields();
         });
     } else {
       this.setTypes();
@@ -92,7 +74,7 @@ export class FieldComponent implements OnInit {
   }
 
   public verify(response) {
-    if(String(response) == 'true') {
+    if (String(response) == 'true') {
       return true;
     } else {
       return false;
@@ -119,6 +101,9 @@ export class FieldComponent implements OnInit {
         }
       }
     }
+
+
+    this.setTypes();
   }
 
   private setTypes() {
@@ -131,6 +116,17 @@ export class FieldComponent implements OnInit {
       }
       count++;
     }
+
+    this.fieldsNenhum = new Array<Field>();
+    this.fieldsSelected = new Array<Field>();
+    
+    for (let field of this.fields) {
+      if (field.titleType == "Nenhum") {
+        this.fieldsNenhum.push(field);
+      } else {
+        this.fieldsSelected.push(field);
+      }
+    }
   }
 
   private setFields() {
@@ -141,6 +137,9 @@ export class FieldComponent implements OnInit {
         }
       }
     }
+
+    this.getAllModels();
+
   }
 
   private getAllFields() {
@@ -150,7 +149,8 @@ export class FieldComponent implements OnInit {
           this.fields = new Array<Field>();
           this.fields = res;
 
-          this.setFields();
+
+          this.getAllTypes();
         });
     } else {
       this.setFields();
@@ -165,5 +165,30 @@ export class FieldComponent implements OnInit {
       this.field = new Field();
       this.field.type = "FIELD";
     })
+  }
+
+  closeResult: string;
+
+  public updateField() {
+    this.fieldService.updateField(this.fieldEdit)
+    .subscribe(res => {
+      let close = document.getElementById("close");
+      close.click();
+    },
+    err => {
+      console.log(err);
+    });
+  }
+
+  public modifyField(content, _id) {
+
+    this.fieldService.getFieldByIdObservable(_id)
+      .subscribe(field => {
+        this.fieldEdit = new Field;
+        this.fieldEdit = field;
+        this.modalService.open(content, { centered: true, size: 'lg' });
+      })
+
+
   }
 }

@@ -11,6 +11,9 @@ import { ValidatorComponent } from './validator/validator.component';
 import { FormsModule } from '@angular/forms';
 import { ModelComponent } from './model/model.component';
 
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { NgbModalModule, NgbModal, NgbModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,10 +21,13 @@ import { ModelComponent } from './model/model.component';
     FieldComponent,
     RuleComponent,
     ValidatorComponent,
-    ModelComponent
+    ModelComponent,
   ],
   imports: [
+    NgbModule.forRoot(),
     BrowserModule,
+    NgbModalModule,
+    AngularFontAwesomeModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

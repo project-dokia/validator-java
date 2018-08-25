@@ -5,7 +5,7 @@
       <h4 class="card-text">Cadatro</h4>
       <div class="row m-2">
         <div class="col-3 text-right">
-          <h5>ID Type</h5>
+          <h5>Type</h5>
         </div>
         <div class="col-9">
           <select class="form-control" [(ngModel)]="field.idType">
@@ -15,7 +15,7 @@
       </div>
       <div class="row m-2">
         <div class="col-3 text-right">
-          <h5>ID Model</h5>
+          <h5>Model</h5>
         </div>
         <div class="col-9">
           <select class="form-control" [(ngModel)]="field.idModel">
@@ -84,7 +84,51 @@
 
   <div class="card m-2">
     <div class="card-body">
-      <h4 class="card-text">Lista</h4>
+      <h4 class="card-text">List Fields</h4>
+      <hr/>
+      <div class="row m-2">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table table-striped table-horvered ">
+              <thead>
+                <tr>
+                  <!-- <th>_id</th> -->
+                  <th>Title</th>
+                  <th>Model</th>
+                  <!-- <th>Need Other ID?</th> -->
+                  <th>Type</th>
+                  <th>Title</th>
+                  <th>Model</th>
+                  <!-- <th>Dependency</th> -->
+                  <!-- <th>Dependency ID</th> -->
+                  <th>Edit</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let field of fieldsSelected" >
+                  <!-- <td>{{field._id}}</td> -->
+                  <td>{{field.title}}</td>
+                  <td>{{field.titleModel}}</td>
+                  <!-- <td>{{field.needOtderId}}</td> -->
+                  <td>{{field.titleType}}</td>
+                  <td>{{field.titleId}}</td>
+                  <td>{{field.titleModelId}}</td>
+                  <!-- <td>{{field.dependency}}</td> -->
+                  <!-- <td>{{field.idDependency}}</td> -->
+                  <td>
+                    <i class="fa fa-2x fa-edit click" style="cursor:pointer;" (click)="modifyField(content, field._id)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body">
+      <h4 class="card-text">List (Nenhum)
+      </h4>
       <hr/>
       <div class="row m-2">
         <div class="col-12">
@@ -97,14 +141,14 @@
                   <th>Model</th>
                   <!-- <th>Need Other ID?</th> -->
                   <th>Type</th>
-                  <th>Title ID</th>
-                  <th>Model ID</th>
-                  <th>Dependency</th>
-                  <th>Dependency ID</th>
+                  <th>Title</th>
+                  <th>Model</th>
+                  <!-- <th>Dependency</th> -->
+                  <!-- <th>Dependency ID</th> -->
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let field of fields">
+                <tr *ngFor="let field of fieldsNenhum">
                   <td>{{field._id}}</td>
                   <td>{{field.title}}</td>
                   <td>{{field.titleModel}}</td>
@@ -112,8 +156,8 @@
                   <td>{{field.titleType}}</td>
                   <td>{{field.titleId}}</td>
                   <td>{{field.titleModelId}}</td>
-                  <td>{{field.dependency}}</td>
-                  <td>{{field.idDependency}}</td>
+                  <!-- <td>{{field.dependency}}</td> -->
+                  <!-- <td>{{field.idDependency}}</td> -->
                 </tr>
               </tbody>
             </table>
@@ -122,4 +166,93 @@
       </div>
     </div>
   </div>
+
+  <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="row m-2">
+            <div class="col-3 text-right">
+              <h5>Type</h5>
+            </div>
+            <div class="col-9">
+              <select class="form-control" [(ngModel)]="fieldEdit.idType">
+                <option *ngFor="let type of types" value="{{type._id}}">{{type.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row m-2">
+            <div class="col-3 text-right">
+              <h5>Model</h5>
+            </div>
+            <div class="col-9">
+              <select class="form-control" [(ngModel)]="fieldEdit.idModel">
+                <option *ngFor="let model of models" value="{{model._id}}">{{model.description}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row m-2">
+            <div class="col-3 text-right">
+              <h5>Title</h5>
+            </div>
+            <div class="col-9">
+              <input type="text" class="form-control" [(ngModel)]="fieldEdit.title">
+            </div>
+          </div>
+          <div class="row m-2">
+            <div class="col-3 text-right">
+              <h5>Need Other ID?</h5>
+            </div>
+            <div class="col-9">
+              <select class="form-control" [(ngModel)]="fieldEdit.needOtherId">
+                <option value="false">NO</option>
+                <option value="true">YES</option>
+              </select>
+            </div>
+          </div>
+          <div class="row m-2" *ngIf="verify(fieldEdit.needOtherId)">
+            <div class="col-3 text-right">
+              <h5>Other ID</h5>
+            </div>
+            <div class="col-9">
+              <select class="form-control" [(ngModel)]="fieldEdit.otherId">
+                <option *ngFor="let field of fields" value="{{field._id}}">{{field.title}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row m-2">
+            <div class="col-3 text-right">
+              <h5>Dependency</h5>
+            </div>
+            <div class="col-9">
+              <select class="form-control" [(ngModel)]="fieldEdit.dependency">
+                <option value="false">NO</option>
+                <option value="true">YES</option>
+              </select>
+            </div>
+          </div>
+          <div class="row m-2" *ngIf="verify(fieldEdit.dependency)">
+            <div class="col-3 text-right">
+              <h5>Dependency ID</h5>
+            </div>
+            <div class="col-9">
+              <select class="form-control" [(ngModel)]="fieldEdit.idDependency">
+                <option *ngFor="let field of fields" value="{{fieldEdit._id}}">{{fieldEdit.title}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" id="close" (click)="c('Close click')">Close</button>
+      <button type="button" class="btn btn-primary"(click)="updateField()">Update</button>
+    </div>
+  </ng-template>
 </div>
