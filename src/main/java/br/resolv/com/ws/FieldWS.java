@@ -15,16 +15,17 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import com.cloudant.client.api.Database;
 import com.cloudant.client.api.model.FindByIndexOptions;
 import com.cloudant.client.api.views.Key;
 import com.cloudant.client.api.views.ViewResponse;
 
-import br.resolv.com.controller.ValidatorController;
+import br.resolv.com.controller.RuleController;
 import br.resolv.com.factory.CloudantFactory;
-import br.resolv.com.model.Document;
 import br.resolv.com.model.Field;
-import br.resolv.com.model.Result;
+import br.resolv.com.model.Rule;
 import br.resolv.com.util.JavaException;
 import br.resolv.com.util.MyUtils;
 
@@ -36,10 +37,18 @@ public class FieldWS {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response insert(Object field) throws JavaException {
+	public Response insert(Field field) throws JavaException {
 		Database conn = MyUtils.getStoredConnection(request);
 		CloudantFactory cloudantFactory = new CloudantFactory();
 		String _id = cloudantFactory.insert(field, conn);
+		
+		RuleController ruleController = new RuleController();
+		Rule rule = ruleController.getRuleById("90ad561435df4489b29e9fa8b4540315", conn);
+		
+		rule.getFields().add(field);
+		
+		conn.update(rule);
+		
 		return Response.status(200).entity("{\"_id\": \"" +  _id + "\"}").build();
 	}
 	
@@ -59,13 +68,24 @@ public class FieldWS {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/update")
-	public Response update(Object field) throws JavaException {
+	public Response update(Field fieldUpdate) throws JavaException {
 		Database conn = MyUtils.getStoredConnection(request);
-	
-		conn.update(field);
 		
-		Field f = (Field) field;
-		System.out.println(f.get_id());
+		conn.update(fieldUpdate);
+		
+		RuleController ruleController = new RuleController();
+		Rule rule = ruleController.getRuleById("90ad561435df4489b29e9fa8b4540315", conn);
+		
+		int count = 0;
+		for(Field field : rule.getFields()) {
+			if(fieldUpdate.get_id().equals(field.get_id())) {
+				rule.getFields().set(count, fieldUpdate);
+				
+			}
+			count++;
+		}
+		
+		conn.update(rule);
 		
 		return Response.status(200).entity(true).build();
 	}

@@ -13,17 +13,24 @@ public class Field {
 	private String idModel;
 	private boolean dependency;
 	private String idDependency;
-
-	public Field(String _id, String title, String idModel, boolean dependency, String idDependency) {
+	private double percentage;
+	
+	
+	public Field() {
+		
+	}
+	
+	public Field(String _id, String title, String idModel, boolean dependency, String idDependency, double percentage) {
 		this.type = "FIELD";
 		this._id = _id;
 		this.title = title;
 		this.idModel = idModel;
 		this.dependency = dependency;
 		this.idDependency = idDependency;
+		this.percentage = percentage; 
 	}
 
-	public Field(String _id, String idType, String title, String idModel, boolean dependency, String idDependency) {
+	public Field(String _id, String idType, String title, String idModel, boolean dependency, String idDependency, double percentage) {
 		this.type = "FIELD";
 		this._id = _id;
 		this.idType = idType;
@@ -31,9 +38,10 @@ public class Field {
 		this.idModel = idModel;
 		this.dependency = dependency;
 		this.idDependency = idDependency;
+		this.percentage = percentage; 
 	}
 
-	public Field(String _id, String idType, String title, boolean needOtherId, String otherId, String idModel, boolean dependency, String idDependency) {
+	public Field(String _id, String idType, String title, boolean needOtherId, String otherId, String idModel, boolean dependency, String idDependency, double percentage) {
 		this.type = "FIELD";
 		this._id = _id;
 		this.idType = idType;
@@ -43,9 +51,10 @@ public class Field {
 		this.idModel = idModel;
 		this.dependency = dependency;
 		this.idDependency = idDependency;
+		this.percentage = percentage; 
 	}
 
-	public Field(String idType, String title, boolean needOtherId, String idModel, boolean dependency, String idDependency) {
+	public Field(String idType, String title, boolean needOtherId, String idModel, boolean dependency, String idDependency, double percentage) {
 		this.type = "FIELD";
 		this.idType = idType;
 		this.title = title;
@@ -53,9 +62,10 @@ public class Field {
 		this.idModel = idModel;
 		this.dependency = dependency;
 		this.idDependency = idDependency;
+		this.percentage = percentage; 
 	}
 
-	public Field(String idType, String title, boolean needOtherId, String otherId, String idModel, boolean dependency, String idDependency) {
+	public Field(String idType, String title, boolean needOtherId, String otherId, String idModel, boolean dependency, String idDependency, double percentage) {
 		this.type = "FIELD";
 		this.idType = idType;
 		this.title = title;
@@ -64,6 +74,7 @@ public class Field {
 		this.idModel = idModel;
 		this.dependency = dependency;
 		this.idDependency = idDependency;
+		this.percentage = percentage; 
 	}
 
 	
@@ -154,5 +165,13 @@ public class Field {
 
 	public void setOtherId(String otherId) {
 		this.otherId = otherId;
+	}
+
+	public double getPercentage() {
+		return percentage;
+	}
+
+	public void setPercentage(double percentage) {
+		this.percentage = percentage;
 	}
 }

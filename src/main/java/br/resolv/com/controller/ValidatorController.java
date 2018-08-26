@@ -53,10 +53,11 @@ public class ValidatorController {
 		ArrayList<Result> resultsValidator = new ArrayList<Result>();
 
 		for (ResultValidator result : results) {
-			
+
 			if (result.getDescriptionType() != null) {
 				if (!result.getDescriptionType().toUpperCase().equals("nenhum".toUpperCase())) {
-					if (result.getDescriptionType().toString().toUpperCase().equals("equals".toUpperCase()) || result.getDescriptionType().toString().toUpperCase().equals("Menor Igual (data)".toUpperCase())) {
+					if (result.getDescriptionType().toString().toUpperCase().equals("equals".toUpperCase()) || result
+							.getDescriptionType().toString().toUpperCase().equals("Menor Igual (data)".toUpperCase())) {
 						String fieldOther = "";
 						String valueOther = "";
 
@@ -81,22 +82,24 @@ public class ValidatorController {
 							}
 						}
 
-						if(result.getValue() != null) {
+						if (result.getValue() != null) {
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
-									result.getTitleValidator(), result.getValue().toString(), result.getDescriptionType(),
-									fieldOther, valueOther, modelDescription, true));
+									result.getTitleValidator(), result.getValue().toString(),
+									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
+									result.getPercentage(), result.getPercentageResult()));
 						} else {
-							
+
 							// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
-							
+
 							result.setValue("");
 							result.setResult(false);
-							
+
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
-									result.getTitleValidator(), result.getValue().toString(), result.getDescriptionType(),
-									fieldOther, valueOther, modelDescription, false));
+									result.getTitleValidator(), result.getValue().toString(),
+									result.getDescriptionType(), fieldOther, valueOther, modelDescription, false,
+									result.getPercentage(), result.getPercentageResult()));
 						}
-						
+
 					} else {
 						String fieldOther = "";
 						String valueOther = "";
@@ -112,8 +115,7 @@ public class ValidatorController {
 								}
 							}
 						}
-						
-						
+
 						if (result.getValue() != null) {
 
 							String modelDescription = "";
@@ -126,12 +128,11 @@ public class ValidatorController {
 
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
-									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true));
+									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
+									result.getPercentage(), result.getPercentageResult()));
 
 						} else {
-							
-							
-							
+
 							String modelDescription = "";
 
 							for (Model model : models) {
@@ -139,20 +140,22 @@ public class ValidatorController {
 									modelDescription = model.getDescription();
 								}
 							}
-							
-							if(result.getValue() == null) result.setValue("");
-							
+
+							if (result.getValue() == null)
+								result.setValue("");
+
 							result.setResult(false);
-							
+
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
-									result.getDescriptionType(), fieldOther, valueOther, modelDescription, false));
+									result.getDescriptionType(), fieldOther, valueOther, modelDescription, false,
+									result.getPercentage(), result.getPercentageResult()));
 						}
 					}
 				} else {
-					
+
 					// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
-					
+
 					String modelDescription = "";
 
 					for (Model model : models) {
@@ -160,14 +163,15 @@ public class ValidatorController {
 							modelDescription = model.getDescription();
 						}
 					}
-					
-					if(result.getValue() == null) result.setValue("");
-					
+
+					if (result.getValue() == null)
+						result.setValue("");
+
 					result.setResult(false);
-					
-					resultsValidator.add(new Result(result.getIdField(), result.isResult(),
-							result.getTitleValidator(), result.getValue().toString(),
-							result.getDescriptionType(), "", "", modelDescription, false));
+
+					resultsValidator.add(new Result(result.getIdField(), result.isResult(), result.getTitleValidator(),
+							result.getValue().toString(), result.getDescriptionType(), "", "", modelDescription, false,
+							result.getPercentage(), result.getPercentageResult()));
 				}
 			}
 
