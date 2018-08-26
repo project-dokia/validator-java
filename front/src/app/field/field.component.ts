@@ -33,14 +33,6 @@ export class FieldComponent implements OnInit {
   field: Field;
   fieldEdit: Field;
   ngOnInit() {
-
-    this.field = new Field();
-    this.field.type = "FIELD";
-
-    this.models = new Array<Model>();
-    this.fields = new Array<Field>();
-    this.types = new Array<Type>();
-
     this.getAllFields();
 
   }
@@ -70,6 +62,18 @@ export class FieldComponent implements OnInit {
         });
     } else {
       this.setTypes();
+    }
+  }
+
+  public verifyIdType(idType) {
+    for(const type of this.types) {
+      if(type._id == idType) {
+        if (type.description == "Equals") {
+          return true;
+        } else {
+          return false;
+        }
+      }
     }
   }
 
@@ -119,7 +123,7 @@ export class FieldComponent implements OnInit {
 
     this.fieldsNenhum = new Array<Field>();
     this.fieldsSelected = new Array<Field>();
-    
+
     for (let field of this.fields) {
       if (field.titleType == "Nenhum") {
         this.fieldsNenhum.push(field);
@@ -143,6 +147,14 @@ export class FieldComponent implements OnInit {
   }
 
   private getAllFields() {
+
+    this.field = new Field();
+    this.models = new Array<Model>();
+    this.fields = new Array<Field>();
+    this.types = new Array<Type>();
+
+    this.field.type = "FIELD";
+    
     if (this.fields.length == 0) {
       this.fieldService.getFieldsObservable().
         subscribe((res: Array<Field>) => {
@@ -174,6 +186,8 @@ export class FieldComponent implements OnInit {
     .subscribe(res => {
       let close = document.getElementById("close");
       close.click();
+
+      this.getAllFields();
     },
     err => {
       console.log(err);

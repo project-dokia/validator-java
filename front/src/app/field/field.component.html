@@ -23,6 +23,14 @@
           </select>
         </div>
       </div>
+      <div class="row m-2" *ngIf="verifyIdType(field.idType)">
+        <div class="col-3 text-right">
+          <h5>Percentage</h5>
+        </div>
+        <div class="col-9">
+          <input type="text" class="form-control" [(ngModel)]="field.percentage">
+        </div>
+      </div>
       <div class="row m-2">
         <div class="col-3 text-right">
           <h5>Title</h5>
@@ -204,6 +212,14 @@
               <select class="form-control" [(ngModel)]="fieldEdit.idModel">
                 <option *ngFor="let model of models" value="{{model._id}}">{{model.description}}</option>
               </select>
+            </div>
+          </div>
+          <div class="row m-2" *ngIf="verifyIdType(fieldEdit.idType)">
+            <div class="col-3 text-right">
+              <h5>Percentage</h5>
+            </div>
+            <div class="col-9">
+              <input type="text" class="form-control" [(ngModel)]="fieldEdit.percentage">
             </div>
           </div>
           <div class="row m-2">

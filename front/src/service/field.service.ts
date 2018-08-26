@@ -29,8 +29,8 @@ export class FieldService {
   }
 
 
-  insertFieldObservable(field: Field): Observable<Object> {
-    return this.http.post<Object>(this.fieldURL, field, {
+  insertFieldObservable(field: Field): Observable<boolean> {
+    return this.http.post<boolean>(this.fieldURL, field, {
       headers: this.headers
     });
   }
