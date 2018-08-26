@@ -12,7 +12,11 @@ import { FormsModule } from '@angular/forms';
 import { ModelComponent } from './model/model.component';
 
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-import { NgbModalModule, NgbModal, NgbModule } from '../../node_modules/@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpsRequestInterceptor, HTTPStatus } from '../service/interceptor.module';
+
+const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
 
 @NgModule({
   declarations: [
@@ -31,9 +35,13 @@ import { NgbModalModule, NgbModal, NgbModule } from '../../node_modules/@ng-boot
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    
   ],
-  providers: [],
+  providers: [RxJS_Services
+    , {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpsRequestInterceptor,
+        multi: true
+    },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

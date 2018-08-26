@@ -1,3 +1,4 @@
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/Comparator.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/controller/RuleController.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Change.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/controller/TypeController.java
@@ -15,12 +16,14 @@
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Rule.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/util/CloudantClientMgr.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/ValidatorWS.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/ResultVerifyRule.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/factory/CloudantFactory.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/RuleWS.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/TypeWS.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/FieldWS.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Model.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/filter/ConnFilter.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/LogRequestValidator.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Result.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/util/JavaException.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/ResultValidator.java

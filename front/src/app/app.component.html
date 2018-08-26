@@ -26,28 +26,25 @@
 </nav>
 
 <div class="container-fluid">
-  <!-- <section class="card text-center"> -->
-    <!-- <div class="card-header">
-          <ul class="nav nav-tabs card-header-tabs">
-            <li class="nav-item">
-              <a class="nav-link " routerLink="/type" routerLinkActive="active">Type</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/model" routerLinkActive="active">Model</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/field" routerLinkActive="active">Field</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/rule" routerLinkActive="active">Rule</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/validator" routerLinkActive="active">Validator</a>
-            </li>
-          </ul>
-        </div> -->
-    <!-- <div class="card-body"> -->
-      <router-outlet></router-outlet>
-    <!-- </div> -->
-  <!-- </section> -->
+  <router-outlet></router-outlet>
+
+  <div class="holder" [hidden]="count == 0">
+
+    <div class="loader-wrapper">
+      <div class="loader">
+        <div class="roller"></div>
+        <div class="roller"></div>
+      </div>
+
+      <div id="loader2" class="loader">
+        <div class="roller"></div>
+        <div class="roller"></div>
+      </div>
+
+      <div id="loader3" class="loader">
+        <div class="roller"></div>
+        <div class="roller"></div>
+      </div>
+    </div>
+  </div>
 </div>
