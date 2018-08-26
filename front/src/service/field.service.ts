@@ -9,26 +9,30 @@ import { Field } from '../model/field';
 })
 export class FieldService {
 
-  constructor(public http: HttpClient) {}
+  constructor(public http: HttpClient) { }
 
-  private headers =  new HttpHeaders().set('Content-Type', 'application/json');
+  private headers = new HttpHeaders().set('Content-Type', 'application/json');
   private fieldURL = environment.apiUrl + '/field';
 
   getFieldsObservable(): Observable<Object> {
     return this.http.get<Field[]>(this.fieldURL)
   }
 
-  getFieldByIdObservable(_id:string) : Observable<Field> {
+  getFieldByIdObservable(_id: string): Observable<Field> {
     return this.http.get<Field>(this.fieldURL + "/byId/" + _id);
   }
 
-  updateField(field: Field) : Observable<Object> {
-    return this.http.post<Object>(this.fieldURL + "/update", field);
+  updateField(field: Field): Observable<Object> {
+    return this.http.post<Object>(this.fieldURL + "/update", field, {
+      headers: this.headers
+    });
   }
 
 
-  insertFieldObservable(field: Field) : Observable<Object> {
-    return this.http.post<Object>(this.fieldURL, field);
+  insertFieldObservable(field: Field): Observable<Object> {
+    return this.http.post<Object>(this.fieldURL, field, {
+      headers: this.headers
+    });
   }
 
 }

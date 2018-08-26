@@ -173,13 +173,17 @@ export class ValidatorComponent implements OnInit {
       let count = 0;
       for(let fields of this.rule.fields) {
         let res = "";
+        let percentageResult = "";
+
         for(let rst of result) {
           if(fields._id == rst.idField) {
             res = String(rst.result);
+            percentageResult = String(rst.percentageResult);
           }
         }
 
         this.rule.fields[count].result = res;
+        this.rule.fields[count].percentageResult = Math.round(Number(percentageResult));
         count ++;
       }
     })

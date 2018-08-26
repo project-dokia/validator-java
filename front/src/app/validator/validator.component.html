@@ -9,16 +9,16 @@
             <thead>
               <tr>
                 <th>Description</th>
-                <th>_id</th>
+                <!-- <th>_id</th> -->
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let rule of rules; let i = index">
                 <td>{{rule.description}}</td>
-                <td>{{rule._id}}</td>
+                <!-- <td>{{rule._id}}</td> -->
                 <td>
-                  <input type="button" value="ADD" class="btn btn-primary form-control" (click)="addValidator(i)">
+                  <input type="button" value="TEST" class="btn btn-primary form-control" (click)="addValidator(i)">
                 </td>
               </tr>
             </tbody>
@@ -43,12 +43,15 @@
                   <th>Type</th>
                   <th>Other ID</th>
                   <th>Model ID</th>
+                  <th>Percentage</th>
+                  <th>Percentage Obtained</th>
                   <th>Result</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let field of rule.fields; let i = index;">
-                  <td>{{field.title}}</td>
+                <tr *ngFor="let field of rule.fields; let i = index;" [ngClass]="[field.result == 'true' ? 'table-success' : '']">
+                  <td class="success">{{field.title}}</td>
 
                   <td>{{field.titleModel}}</td>
                   <td>
@@ -57,7 +60,13 @@
                   <td>{{field.titleType}}</td>
                   <td>{{field.titleId}}</td>
                   <td>{{field.titleModelId}}</td>
+                  <td>{{field.percentage == 100 || field.percentage == 0 || field.percentage == undefined ? '' : field.percentage + '%'}}</td>
+                  <td>{{field.percentageResult == undefined || field.percentageResult == 0 ? '' : field.percentageResult + '%'}}</td>
                   <td>{{field.result}}</td>
+                  <td>
+                    <i *ngIf="field.result == 'true' && field.value != '' && field.value != undefined && field.titleType != 'Nenhum'" class="fa fa-2x fa-check"></i>
+                    <i *ngIf="field.result == 'false' && field.value != '' && field.value != undefined && field.titleType != 'Nenhum'" class="fa fa-2x fa-times"></i>
+                  </td>
                 </tr>
               </tbody>
             </table>

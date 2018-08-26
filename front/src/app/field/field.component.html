@@ -99,13 +99,14 @@
                   <th>Type</th>
                   <th>Title</th>
                   <th>Model</th>
+                  <th>Percentage</th>
                   <!-- <th>Dependency</th> -->
                   <!-- <th>Dependency ID</th> -->
                   <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let field of fieldsSelected" >
+                <tr *ngFor="let field of fieldsSelected">
                   <!-- <td>{{field._id}}</td> -->
                   <td>{{field.title}}</td>
                   <td>{{field.titleModel}}</td>
@@ -113,6 +114,7 @@
                   <td>{{field.titleType}}</td>
                   <td>{{field.titleId}}</td>
                   <td>{{field.titleModelId}}</td>
+                  <td>{{field.percentage == 100 || field.percentage == 0 ? '' : field.percentage}}</td>
                   <!-- <td>{{field.dependency}}</td> -->
                   <!-- <td>{{field.idDependency}}</td> -->
                   <td>
@@ -136,28 +138,35 @@
             <table class="table table-striped table-horvered ">
               <thead>
                 <tr>
-                  <th>_id</th>
+                  <!-- <th>_id</th> -->
                   <th>Title</th>
                   <th>Model</th>
                   <!-- <th>Need Other ID?</th> -->
                   <th>Type</th>
-                  <th>Title</th>
-                  <th>Model</th>
+                  <!-- <th>Title</th> -->
+                  <!-- <th>Model</th> -->
+                  <!-- <th>Percentage</th> -->
                   <!-- <th>Dependency</th> -->
                   <!-- <th>Dependency ID</th> -->
+
+                  <th>Edit</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let field of fieldsNenhum">
-                  <td>{{field._id}}</td>
+                  <!-- <td>{{field._id}}</td> -->
                   <td>{{field.title}}</td>
                   <td>{{field.titleModel}}</td>
                   <!-- <td>{{field.needOtderId}}</td> -->
                   <td>{{field.titleType}}</td>
-                  <td>{{field.titleId}}</td>
-                  <td>{{field.titleModelId}}</td>
+                  <!-- <td>{{field.titleId}}</td> -->
+                  <!-- <td>{{field.titleModelId}}</td> -->
+                  <!-- <td>{{field.percentage}}</td> -->
                   <!-- <td>{{field.dependency}}</td> -->
                   <!-- <td>{{field.idDependency}}</td> -->
+                  <td>
+                    <i class="fa fa-2x fa-edit click" style="cursor:pointer;" (click)="modifyField(content, field._id)"></i>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -169,7 +178,7 @@
 
   <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-      <h4 class="modal-title">Modal title</h4>
+      <h4 class="modal-title">Update Field</h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -252,7 +261,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-light" id="close" (click)="c('Close click')">Close</button>
-      <button type="button" class="btn btn-primary"(click)="updateField()">Update</button>
+      <button type="button" class="btn btn-primary" (click)="updateField()">Update</button>
     </div>
   </ng-template>
 </div>

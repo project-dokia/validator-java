@@ -22,4 +22,6 @@ export class Field {
 	idDependency:string;
 
 	result:String;
+	percentage: number;
+	percentageResult: number;
 }

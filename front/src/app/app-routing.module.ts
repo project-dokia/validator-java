@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'rule', component: RuleComponent },
   { path: 'model', component: ModelComponent },
   { path: 'validator', component: ValidatorComponent },
-  { path: '', component: AppComponent }
+  { path: '', component: ValidatorComponent }
 ];
 
 @NgModule({
