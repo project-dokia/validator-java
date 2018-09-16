@@ -1,0 +1,64 @@
+<div class="container-fluid gap-top20">
+
+    <div class="row gap-top20">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <input type="button" value="IA" class="btn btn-primary form-control" (click)="viewTableIA()">
+                </div>
+                <div class="col-4">
+                    <input type="button" value="OCR" class="btn btn-primary form-control" (click)="viewOCRTable()">
+                </div>
+                <div class="col-4">
+                    <input type="button" value="Regras" class="btn btn-primary form-control" (click)="viewRegTablRegra()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gap-top20">
+        <div class="col-12">
+            <table class="table table-horvered table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Correct Comment</th>
+                        <th>Wrong Comment</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngIf="viewIA">
+                        <tr *ngFor="let feedback of feedbacksIA">
+                            <td>IA</td>
+                            <td>{{feedback.comentario_correto}}</td>
+                            <td>{{feedback.comentario_errado}}</td>
+                            <td>{{feedback.dt_consulta}}</td>
+                            <td>Solved</td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="viewOCR">
+                        <tr *ngFor="let feedback of feedbacksOCR">
+                            <td>OCR</td>
+                            <td>{{feedback.comentario_correto}}</td>
+                            <td>{{feedback.comentario_errado}}</td>
+                            <td>{{feedback.dt_consulta}}</td>
+                            <td>Solved</td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="viewRegra">
+                        <tr *ngFor="let feedback of feedbacksRegra">
+                            <td>REGRA</td>
+                            <td>{{feedback.comentario_correto}}</td>
+                            <td>{{feedback.comentario_errado}}</td>
+                            <td>{{feedback.dt_consulta}}</td>
+                            <td>Solved</td>
+                        </tr>
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

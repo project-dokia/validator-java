@@ -224,7 +224,7 @@ public class Comparator {
 			diffInMillies = Math.abs(dateFinal.getTime() - dateInitial.getTime());
 		 	diff = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
 		 	
-		    if(diff > 60) result = false;
+		    if(diff > 90) result = false;
 		    else result = true;
 		} else {
 			result = true;

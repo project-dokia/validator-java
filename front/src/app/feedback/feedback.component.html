@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="row gap-top20">
+        <div class="col-2 offset-10">
+                <input type="button" value="History" class="btn btn-dark form-control" routerLink="/tickets/history">
+        </div>
+    </div>
+
+    <div class="row gap-top20">
+        <div class="col-12">
+            <div class="row">
+                <div class="col-4">
+                    <input type="button" value="IA" class="btn btn-primary form-control" (click)="viewTableIA()">
+                </div>
+                <div class="col-4">
+                    <input type="button" value="OCR" class="btn btn-primary form-control" (click)="viewOCRTable()">
+                </div>
+                <div class="col-4">
+                    <input type="button" value="Regras" class="btn btn-primary form-control" (click)="viewRegTablRegra()">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row gap-top20">
+        <div class="col-12">
+            <table class="table table-horvered table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Correct Comment</th>
+                        <th>Wrong Comment</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <ng-container *ngIf="viewIA">
+                        <tr *ngFor="let feedback of feedbacksIA">
+                            <td>IA</td>
+                            <td>{{feedback.comentario_correto}}</td>
+                            <td>{{feedback.comentario_errado}}</td>
+                            <td>{{feedback.dt_consulta}}</td>
+                            <td>
+                                <input type="button" value="UPDATE" class="btn btn-primary form-control" (click)="updateStatus(content, feedback.id)">
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="viewOCR">
+                        <tr *ngFor="let feedback of feedbacksOCR">
+                            <td>OCR</td>
+                            <td>{{feedback.comentario_correto}}</td>
+                            <td>{{feedback.comentario_errado}}</td>
+                            <td>{{feedback.dt_consulta}}</td>
+                            <td>
+                                <input type="button" value="UPDATE" class="btn btn-primary form-control" (click)="updateStatus(content, feedback.id)">
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngIf="viewRegra">
+                        <tr *ngFor="let feedback of feedbacksRegra">
+                            <td>REGRA</td>
+                            <td>{{feedback.comentario_correto}}</td>
+                            <td>{{feedback.comentario_errado}}</td>
+                            <td>{{feedback.dt_consulta}}</td>
+                            <td>
+                                <input type="button" value="UPDATE" class="btn btn-primary form-control" (click)="updateStatus(content, feedback.id)">
+                            </td>
+                        </tr>
+                    </ng-container>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Update Status</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="col-12">
+                    <h5>What do you did?</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <!-- <input type="text" class="form-control" [(ngModel)]="comment"> -->
+                    <textarea class="form-control" [(ngModel)]="comment" rows="10" id="comment"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-light" id="close" (click)="c('Close click')">Close</button>
+            <button type="button" class="btn btn-primary" (click)="updateFeedback()">Update Status</button>
+        </div>
+    </ng-template>
+
+</div>

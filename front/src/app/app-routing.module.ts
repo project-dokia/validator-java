@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { RuleComponent } from './rule/rule.component';
 import { ValidatorComponent } from './validator/validator.component';
 import { ModelComponent } from './model/model.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { HistoryComponent } from './history/history.component';
 
 
 const routes: Routes = [
@@ -14,6 +16,8 @@ const routes: Routes = [
   { path: 'rule', component: RuleComponent },
   { path: 'model', component: ModelComponent },
   { path: 'validator', component: ValidatorComponent },
+  { path: 'tickets', component: FeedbackComponent },
+  { path: 'tickets/history', component: HistoryComponent },
   { path: '', component: ValidatorComponent }
 ];
 

@@ -15,6 +15,8 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { NgbModalModule, NgbModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpsRequestInterceptor, HTTPStatus } from '../service/interceptor.module';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { HistoryComponent } from './history/history.component';
 
 const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
 
@@ -24,6 +26,8 @@ const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
     TypeComponent,
     FieldComponent,
     RuleComponent,
+    FeedbackComponent,
+    HistoryComponent,
     ValidatorComponent,
     ModelComponent,
   ],
