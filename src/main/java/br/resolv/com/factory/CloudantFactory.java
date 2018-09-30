@@ -8,5 +8,11 @@ public class CloudantFactory {
 		com.cloudant.client.api.model.Response resp = conn.save(object);
 		return resp.getId();
 	}
+	
+
+	public String update(Object object, Database conn) {
+		com.cloudant.client.api.model.Response resp = conn.update(object);
+		return resp.getId();
+	}
 
 }

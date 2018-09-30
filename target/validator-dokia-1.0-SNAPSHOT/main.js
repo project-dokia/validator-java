@@ -40,6 +40,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _rule_rule_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./rule/rule.component */ "./src/app/rule/rule.component.ts");
 /* harmony import */ var _validator_validator_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./validator/validator.component */ "./src/app/validator/validator.component.ts");
 /* harmony import */ var _model_model_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./model/model.component */ "./src/app/model/model.component.ts");
+/* harmony import */ var _feedback_feedback_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./feedback/feedback.component */ "./src/app/feedback/feedback.component.ts");
+/* harmony import */ var _history_history_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./history/history.component */ "./src/app/history/history.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -53,12 +55,16 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
+
+
 var routes = [
     { path: 'type', component: _type_type_component__WEBPACK_IMPORTED_MODULE_2__["TypeComponent"] },
     { path: 'field', component: _field_field_component__WEBPACK_IMPORTED_MODULE_3__["FieldComponent"] },
     { path: 'rule', component: _rule_rule_component__WEBPACK_IMPORTED_MODULE_4__["RuleComponent"] },
     { path: 'model', component: _model_model_component__WEBPACK_IMPORTED_MODULE_6__["ModelComponent"] },
     { path: 'validator', component: _validator_validator_component__WEBPACK_IMPORTED_MODULE_5__["ValidatorComponent"] },
+    { path: 'tickets', component: _feedback_feedback_component__WEBPACK_IMPORTED_MODULE_7__["FeedbackComponent"] },
+    { path: 'tickets/history', component: _history_history_component__WEBPACK_IMPORTED_MODULE_8__["HistoryComponent"] },
     { path: '', component: _validator_validator_component__WEBPACK_IMPORTED_MODULE_5__["ValidatorComponent"] }
 ];
 var AppRoutingModule = /** @class */ (function () {
@@ -84,7 +90,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" routerLinkActive=\"active\" routerLink=\"/validator\">Dok.IA Rules</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/type\">Type</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/model\">Model</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/field\">Field</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/rule\">Rule</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/validator\">Validator</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n\n  <div class=\"holder\" [hidden]=\"count == 0\">\n\n    <div class=\"loader-wrapper\">\n      <div class=\"loader\">\n        <div class=\"roller\"></div>\n        <div class=\"roller\"></div>\n      </div>\n\n      <div id=\"loader2\" class=\"loader\">\n        <div class=\"roller\"></div>\n        <div class=\"roller\"></div>\n      </div>\n\n      <div id=\"loader3\" class=\"loader\">\n        <div class=\"roller\"></div>\n        <div class=\"roller\"></div>\n      </div>\n    </div>\n  </div>\n</div>"
+module.exports = "<nav class=\"navbar navbar-expand-lg navbar-dark bg-dark\">\n  <a class=\"navbar-brand\" routerLinkActive=\"active\" routerLink=\"/validator\">Dok.IA Rules</a>\n  <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarNav\" aria-controls=\"navbarNav\" aria-expanded=\"false\"\n    aria-label=\"Toggle navigation\">\n    <span class=\"navbar-toggler-icon\"></span>\n  </button>\n  <div class=\"collapse navbar-collapse\" id=\"navbarNav\">\n    <ul class=\"navbar-nav\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/type\">Type</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/model\">Model</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/field\">Field</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/rule\">Rule</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/validator\">Validator</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLinkActive=\"active\" routerLink=\"/tickets\">Tickets</a>\n      </li>\n    </ul>\n  </div>\n</nav>\n\n<div class=\"container-fluid\">\n  <router-outlet></router-outlet>\n\n  <div class=\"holder\" [hidden]=\"count == 0\">\n\n    <div class=\"loader-wrapper\">\n      <div class=\"loader\">\n        <div class=\"roller\"></div>\n        <div class=\"roller\"></div>\n      </div>\n\n      <div id=\"loader2\" class=\"loader\">\n        <div class=\"roller\"></div>\n        <div class=\"roller\"></div>\n      </div>\n\n      <div id=\"loader3\" class=\"loader\">\n        <div class=\"roller\"></div>\n        <div class=\"roller\"></div>\n      </div>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -184,12 +190,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var angular_font_awesome__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! angular-font-awesome */ "./node_modules/angular-font-awesome/dist/angular-font-awesome.es5.js");
 /* harmony import */ var _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
 /* harmony import */ var _service_interceptor_module__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../service/interceptor.module */ "./src/service/interceptor.module.ts");
+/* harmony import */ var _feedback_feedback_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./feedback/feedback.component */ "./src/app/feedback/feedback.component.ts");
+/* harmony import */ var _history_history_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./history/history.component */ "./src/app/history/history.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -216,6 +226,8 @@ var AppModule = /** @class */ (function () {
                 _type_type_component__WEBPACK_IMPORTED_MODULE_3__["TypeComponent"],
                 _field_field_component__WEBPACK_IMPORTED_MODULE_4__["FieldComponent"],
                 _rule_rule_component__WEBPACK_IMPORTED_MODULE_7__["RuleComponent"],
+                _feedback_feedback_component__WEBPACK_IMPORTED_MODULE_14__["FeedbackComponent"],
+                _history_history_component__WEBPACK_IMPORTED_MODULE_15__["HistoryComponent"],
                 _validator_validator_component__WEBPACK_IMPORTED_MODULE_8__["ValidatorComponent"],
                 _model_model_component__WEBPACK_IMPORTED_MODULE_10__["ModelComponent"],
             ],
@@ -238,6 +250,137 @@ var AppModule = /** @class */ (function () {
         })
     ], AppModule);
     return AppModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/feedback/feedback.component.css":
+/*!*************************************************!*\
+  !*** ./src/app/feedback/feedback.component.css ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".gap-top20 {\n    margin-top: 20px;\n}"
+
+/***/ }),
+
+/***/ "./src/app/feedback/feedback.component.html":
+/*!**************************************************!*\
+  !*** ./src/app/feedback/feedback.component.html ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid\">\n    <div class=\"row gap-top20\">\n        <div class=\"col-2 offset-10\">\n                <input type=\"button\" value=\"History\" class=\"btn btn-dark form-control\" routerLink=\"/tickets/history\">\n        </div>\n    </div>\n\n    <div class=\"row gap-top20\">\n        <div class=\"col-12\">\n            <div class=\"row\">\n                <div class=\"col-4\">\n                    <input type=\"button\" value=\"IA\" class=\"btn btn-primary form-control\" (click)=\"viewTableIA()\">\n                </div>\n                <div class=\"col-4\">\n                    <input type=\"button\" value=\"OCR\" class=\"btn btn-primary form-control\" (click)=\"viewOCRTable()\">\n                </div>\n                <div class=\"col-4\">\n                    <input type=\"button\" value=\"Regras\" class=\"btn btn-primary form-control\" (click)=\"viewRegTablRegra()\">\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"row gap-top20\">\n        <div class=\"col-12\">\n            <table class=\"table table-horvered table-striped\">\n                <thead>\n                    <tr>\n                        <th>Type</th>\n                        <th>Correct Comment</th>\n                        <th>Wrong Comment</th>\n                        <th>Date</th>\n                        <th>Action</th>\n                    </tr>\n                </thead>\n                <tbody>\n\n                    <ng-container *ngIf=\"viewIA\">\n                        <tr *ngFor=\"let feedback of feedbacksIA\">\n                            <td>IA</td>\n                            <td>{{feedback.comentario_correto}}</td>\n                            <td>{{feedback.comentario_errado}}</td>\n                            <td>{{feedback.dt_consulta}}</td>\n                            <td>\n                                <input type=\"button\" value=\"UPDATE\" class=\"btn btn-primary form-control\" (click)=\"updateStatus(content, feedback.id)\">\n                            </td>\n                        </tr>\n                    </ng-container>\n                    <ng-container *ngIf=\"viewOCR\">\n                        <tr *ngFor=\"let feedback of feedbacksOCR\">\n                            <td>OCR</td>\n                            <td>{{feedback.comentario_correto}}</td>\n                            <td>{{feedback.comentario_errado}}</td>\n                            <td>{{feedback.dt_consulta}}</td>\n                            <td>\n                                <input type=\"button\" value=\"UPDATE\" class=\"btn btn-primary form-control\" (click)=\"updateStatus(content, feedback.id)\">\n                            </td>\n                        </tr>\n                    </ng-container>\n                    <ng-container *ngIf=\"viewRegra\">\n                        <tr *ngFor=\"let feedback of feedbacksRegra\">\n                            <td>REGRA</td>\n                            <td>{{feedback.comentario_correto}}</td>\n                            <td>{{feedback.comentario_errado}}</td>\n                            <td>{{feedback.dt_consulta}}</td>\n                            <td>\n                                <input type=\"button\" value=\"UPDATE\" class=\"btn btn-primary form-control\" (click)=\"updateStatus(content, feedback.id)\">\n                            </td>\n                        </tr>\n                    </ng-container>\n\n                </tbody>\n            </table>\n        </div>\n    </div>\n\n    <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n        <div class=\"modal-header\">\n            <h4 class=\"modal-title\">Update Status</h4>\n            <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n        </div>\n        <div class=\"modal-body\">\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <h5>What do you did?</h5>\n                </div>\n            </div>\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <!-- <input type=\"text\" class=\"form-control\" [(ngModel)]=\"comment\"> -->\n                    <textarea class=\"form-control\" [(ngModel)]=\"comment\" rows=\"10\" id=\"comment\"></textarea>\n                </div>\n            </div>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-light\" id=\"close\" (click)=\"c('Close click')\">Close</button>\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"updateFeedback()\">Update Status</button>\n        </div>\n    </ng-template>\n\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/feedback/feedback.component.ts":
+/*!************************************************!*\
+  !*** ./src/app/feedback/feedback.component.ts ***!
+  \************************************************/
+/*! exports provided: FeedbackComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FeedbackComponent", function() { return FeedbackComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _service_feedback_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/feedback.service */ "./src/service/feedback.service.ts");
+/* harmony import */ var _node_modules_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/@ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FeedbackComponent = /** @class */ (function () {
+    function FeedbackComponent(feedbackService, modalService) {
+        this.feedbackService = feedbackService;
+        this.modalService = modalService;
+    }
+    FeedbackComponent.prototype.ngOnInit = function () {
+        this.feedbacks = new Array();
+        this.getAllFeedbacks();
+        this.viewIA = true;
+        this.viewOCR = false;
+        this.viewRegra = false;
+        this.comment = "";
+    };
+    FeedbackComponent.prototype.viewTableIA = function () {
+        this.viewIA = !this.viewIA;
+        this.viewOCR = false;
+        this.viewRegra = false;
+    };
+    FeedbackComponent.prototype.viewOCRTable = function () {
+        this.viewOCR = !this.viewOCR;
+        this.viewIA = false;
+        this.viewRegra = false;
+    };
+    FeedbackComponent.prototype.viewRegTablRegra = function () {
+        this.viewRegra = !this.viewRegra;
+        this.viewIA = false;
+        this.viewOCR = false;
+    };
+    FeedbackComponent.prototype.getAllFeedbacks = function () {
+        var _this = this;
+        this.feedbackService.getFeedbacksObservable().
+            subscribe(function (res) {
+            _this.feedbacks = new Array();
+            _this.feedbacksIA = new Array();
+            _this.feedbacksOCR = new Array();
+            _this.feedbacksRegra = new Array();
+            _this.feedbacks = res;
+            // console.log(this.feedbacks);
+            for (var _i = 0, _a = _this.feedbacks; _i < _a.length; _i++) {
+                var feedback = _a[_i];
+                if (feedback.erro_id == "1") {
+                    _this.feedbacksIA.push(feedback);
+                }
+                else if (feedback.erro_id == "2") {
+                    _this.feedbacksOCR.push(feedback);
+                }
+                else if (feedback.erro_id == "3") {
+                    _this.feedbacksRegra.push(feedback);
+                }
+            }
+        });
+    };
+    FeedbackComponent.prototype.updateStatus = function (content, id) {
+        this.id = id;
+        this.modalService.open(content, { centered: true, size: 'lg' });
+    };
+    FeedbackComponent.prototype.updateFeedback = function () {
+        // comentario ainda nao esta implantado :(
+        var _this = this;
+        this.feedbackService.updateStatus(this.id).subscribe(function (res) {
+            alert("Updated");
+            var close = document.getElementById("close");
+            close.click();
+            _this.getAllFeedbacks();
+        });
+    };
+    FeedbackComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-type',
+            template: __webpack_require__(/*! ./feedback.component.html */ "./src/app/feedback/feedback.component.html"),
+            styles: [__webpack_require__(/*! ./feedback.component.css */ "./src/app/feedback/feedback.component.css")],
+            providers: [_service_feedback_service__WEBPACK_IMPORTED_MODULE_1__["FeedbackService"]]
+            //   TypeService
+        }),
+        __metadata("design:paramtypes", [_service_feedback_service__WEBPACK_IMPORTED_MODULE_1__["FeedbackService"],
+            _node_modules_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]])
+    ], FeedbackComponent);
+    return FeedbackComponent;
 }());
 
 
@@ -479,6 +622,122 @@ var FieldComponent = /** @class */ (function () {
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_5__["NgbModal"]])
     ], FieldComponent);
     return FieldComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/history/history.component.css":
+/*!***********************************************!*\
+  !*** ./src/app/history/history.component.css ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".gap-top20 {\n    margin-top: 20px;\n}"
+
+/***/ }),
+
+/***/ "./src/app/history/history.component.html":
+/*!************************************************!*\
+  !*** ./src/app/history/history.component.html ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container-fluid gap-top20\">\n\n    <div class=\"row gap-top20\">\n        <div class=\"col-12\">\n            <div class=\"row\">\n                <div class=\"col-4\">\n                    <input type=\"button\" value=\"IA\" class=\"btn btn-primary form-control\" (click)=\"viewTableIA()\">\n                </div>\n                <div class=\"col-4\">\n                    <input type=\"button\" value=\"OCR\" class=\"btn btn-primary form-control\" (click)=\"viewOCRTable()\">\n                </div>\n                <div class=\"col-4\">\n                    <input type=\"button\" value=\"Regras\" class=\"btn btn-primary form-control\" (click)=\"viewRegTablRegra()\">\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"row gap-top20\">\n        <div class=\"col-12\">\n            <table class=\"table table-horvered table-striped\">\n                <thead>\n                    <tr>\n                        <th>Type</th>\n                        <th>Correct Comment</th>\n                        <th>Wrong Comment</th>\n                        <th>Date</th>\n                        <th>Status</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <ng-container *ngIf=\"viewIA\">\n                        <tr *ngFor=\"let feedback of feedbacksIA\">\n                            <td>IA</td>\n                            <td>{{feedback.comentario_correto}}</td>\n                            <td>{{feedback.comentario_errado}}</td>\n                            <td>{{feedback.dt_consulta}}</td>\n                            <td>Solved</td>\n                        </tr>\n                    </ng-container>\n                    <ng-container *ngIf=\"viewOCR\">\n                        <tr *ngFor=\"let feedback of feedbacksOCR\">\n                            <td>OCR</td>\n                            <td>{{feedback.comentario_correto}}</td>\n                            <td>{{feedback.comentario_errado}}</td>\n                            <td>{{feedback.dt_consulta}}</td>\n                            <td>Solved</td>\n                        </tr>\n                    </ng-container>\n                    <ng-container *ngIf=\"viewRegra\">\n                        <tr *ngFor=\"let feedback of feedbacksRegra\">\n                            <td>REGRA</td>\n                            <td>{{feedback.comentario_correto}}</td>\n                            <td>{{feedback.comentario_errado}}</td>\n                            <td>{{feedback.dt_consulta}}</td>\n                            <td>Solved</td>\n                        </tr>\n                    </ng-container>\n\n                </tbody>\n            </table>\n        </div>\n    </div>\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/history/history.component.ts":
+/*!**********************************************!*\
+  !*** ./src/app/history/history.component.ts ***!
+  \**********************************************/
+/*! exports provided: HistoryComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HistoryComponent", function() { return HistoryComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _service_feedback_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/feedback.service */ "./src/service/feedback.service.ts");
+/* harmony import */ var _node_modules_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/@ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var HistoryComponent = /** @class */ (function () {
+    function HistoryComponent(feedbackService, modalService) {
+        this.feedbackService = feedbackService;
+        this.modalService = modalService;
+    }
+    HistoryComponent.prototype.ngOnInit = function () {
+        this.feedbacks = new Array();
+        this.getAllFeedbacks();
+        this.viewIA = true;
+        this.viewOCR = false;
+        this.viewRegra = false;
+    };
+    HistoryComponent.prototype.viewTableIA = function () {
+        this.viewIA = !this.viewIA;
+        this.viewOCR = false;
+        this.viewRegra = false;
+    };
+    HistoryComponent.prototype.viewOCRTable = function () {
+        this.viewOCR = !this.viewOCR;
+        this.viewIA = false;
+        this.viewRegra = false;
+    };
+    HistoryComponent.prototype.viewRegTablRegra = function () {
+        this.viewRegra = !this.viewRegra;
+        this.viewIA = false;
+        this.viewOCR = false;
+    };
+    HistoryComponent.prototype.getAllFeedbacks = function () {
+        var _this = this;
+        this.feedbackService.getAllFeedbacksSolved().
+            subscribe(function (res) {
+            _this.feedbacks = new Array();
+            _this.feedbacksIA = new Array();
+            _this.feedbacksOCR = new Array();
+            _this.feedbacksRegra = new Array();
+            _this.feedbacks = res;
+            // console.log(this.feedbacks);
+            for (var _i = 0, _a = _this.feedbacks; _i < _a.length; _i++) {
+                var feedback = _a[_i];
+                if (feedback.erro_id == "1") {
+                    _this.feedbacksIA.push(feedback);
+                }
+                else if (feedback.erro_id == "2") {
+                    _this.feedbacksOCR.push(feedback);
+                }
+                else if (feedback.erro_id == "3") {
+                    _this.feedbacksRegra.push(feedback);
+                }
+            }
+        });
+    };
+    HistoryComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'app-type',
+            template: __webpack_require__(/*! ./history.component.html */ "./src/app/history/history.component.html"),
+            styles: [__webpack_require__(/*! ./history.component.css */ "./src/app/history/history.component.css")],
+            providers: [_service_feedback_service__WEBPACK_IMPORTED_MODULE_1__["FeedbackService"]]
+            //   TypeService
+        }),
+        __metadata("design:paramtypes", [_service_feedback_service__WEBPACK_IMPORTED_MODULE_1__["FeedbackService"],
+            _node_modules_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_2__["NgbModal"]])
+    ], HistoryComponent);
+    return HistoryComponent;
 }());
 
 
@@ -1181,6 +1440,59 @@ var Type = /** @class */ (function () {
     function Type() {
     }
     return Type;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/service/feedback.service.ts":
+/*!*****************************************!*\
+  !*** ./src/service/feedback.service.ts ***!
+  \*****************************************/
+/*! exports provided: FeedbackService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FeedbackService", function() { return FeedbackService; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../environments/environment */ "./src/environments/environment.ts");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var FeedbackService = /** @class */ (function () {
+    function FeedbackService(http) {
+        this.http = http;
+        this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/json');
+        this.feedbackURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl + '/feedback';
+    }
+    FeedbackService.prototype.getFeedbacksObservable = function () {
+        return this.http.get(this.feedbackURL);
+    };
+    FeedbackService.prototype.getAllFeedbacksSolved = function () {
+        return this.http.get(this.feedbackURL + "/solved");
+    };
+    FeedbackService.prototype.updateStatus = function (id) {
+        return this.http.post(this.feedbackURL + "/" + id, {});
+    };
+    FeedbackService = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
+            providedIn: 'root'
+        }),
+        __metadata("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpClient"]])
+    ], FeedbackService);
+    return FeedbackService;
 }());
 
 

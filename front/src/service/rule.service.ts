@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Rule } from '../model/rule';
+import { FieldRule } from '../model/field-rule';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,13 @@ export class RuleService {
 
   private headers =  new HttpHeaders().set('Content-Type', 'application/json');
   private ruleURL = environment.apiUrl + '/rule';
+ 
+ 
+  getRuleByIdObservable(_id:String): Observable<Rule> {
+    return this.http.get<Rule>(this.ruleURL + "/" + _id);
+  }
+
+
 
   getRulesObservable(): Observable<Object> {
     return this.http.get<Rule[]>(this.ruleURL)
@@ -20,6 +28,14 @@ export class RuleService {
 
   insertRuleObservable(rule: Rule) : Observable<Object> {
     return this.http.post<Object>(this.ruleURL, rule);
+  }
+  
+  removeFieldFromRule(fieldRule: FieldRule) : Observable<Object> {
+    return this.http.post<Object>(this.ruleURL + "/remove-field", fieldRule);
+  }
+
+  addFieldFromRule(fieldRule: FieldRule) : Observable<Object> {
+    return this.http.post<Object>(this.ruleURL + "/add-field", fieldRule);
   }
 
 }

@@ -26,7 +26,6 @@ export class FieldComponent implements OnInit {
   fields: Field[];
   fieldsNenhum: Field[];
   fieldsSelected: Field[];
-
   types: Type[];
   models: Model[];
 
@@ -66,8 +65,8 @@ export class FieldComponent implements OnInit {
   }
 
   public verifyIdType(idType) {
-    for(const type of this.types) {
-      if(type._id == idType) {
+    for (const type of this.types) {
+      if (type._id == idType) {
         if (type.description == "Equals") {
           return true;
         } else {
@@ -154,7 +153,7 @@ export class FieldComponent implements OnInit {
     this.types = new Array<Type>();
 
     this.field.type = "FIELD";
-    
+
     if (this.fields.length == 0) {
       this.fieldService.getFieldsObservable().
         subscribe((res: Array<Field>) => {
@@ -183,15 +182,15 @@ export class FieldComponent implements OnInit {
 
   public updateField() {
     this.fieldService.updateField(this.fieldEdit)
-    .subscribe(res => {
-      let close = document.getElementById("close");
-      close.click();
+      .subscribe(res => {
+        let close = document.getElementById("close");
+        close.click();
 
-      this.getAllFields();
-    },
-    err => {
-      console.log(err);
-    });
+        this.getAllFields();
+      },
+        err => {
+          console.log(err);
+        });
   }
 
   public modifyField(content, _id) {

@@ -3,4 +3,4 @@ applications:
 - name: dokia-rules
   path: defaultServer
   memory: 1GB
-  buildpack: liberty-for-java_v3_22-20180601-1200
+  # buildpack: liberty-for-java_v3_22-20180601-1200

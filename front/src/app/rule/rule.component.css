@@ -1,0 +1,14 @@
+.gap-top5 {
+    margin-top:5px;
+}
+
+.border-other {
+    margin-top:0px;
+    padding:5px;
+    border: #CCCCCC 1px solid;
+    border-radius: 3px;
+}
+
+.gap-top20 {
+    margin-top:20px;
+}

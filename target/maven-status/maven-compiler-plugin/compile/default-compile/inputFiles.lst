@@ -1,6 +1,8 @@
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/Comparator.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/controller/RuleController.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Change.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/FeedbackWS.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Feedback.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/controller/TypeController.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/ModelWS.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/controller/FieldController.java
@@ -9,10 +11,13 @@
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/ApplicationApis.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/filter/RedirectFilter.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Document.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/ResponseStatus.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/controller/FeedbackController.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/filter/CorsFilter.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/util/MyUtils.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Type.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Input.java
+/Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Feedbacks.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/model/Rule.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/util/CloudantClientMgr.java
 /Users/matheuscatossi/Documents/IBM/eclipse-workspace/validator-java/src/main/java/br/resolv/com/ws/ValidatorWS.java

@@ -49,9 +49,4 @@ public class FeedbackWS {
 		ArrayList<Feedback> feedbacks = this.feedbackController.getAllFeedbacksSolved();
 		return Response.status(200).entity(feedbacks).build(); 
 	}
-	
-	
-	
-	
-	
 }
