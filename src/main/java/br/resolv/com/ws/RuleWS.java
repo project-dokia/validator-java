@@ -52,6 +52,7 @@ public class RuleWS {
 		return Response.status(200).entity("{\"result\": \"" +  ruleController.removeFieldFromRule(fieldRule, conn) + "\"}").build();
 	}
 	
+	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)

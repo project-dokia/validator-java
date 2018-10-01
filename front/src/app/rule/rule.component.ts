@@ -37,15 +37,17 @@ export class RuleComponent implements OnInit {
 
   rules: Rule[];
   rule: Rule;
+  ruleTitle: string;
   fields: Field[];
 
-  fieldsRuleView : Field[];
+  fieldsRuleView: Field[];
   fieldsSelectedForm: any[];
   fieldsSelectedFormOthers: any[];
   fieldsRuleViewNenhum: any[];
-  fieldAddrule:string;
+  fieldAddrule: string;
+  fieldAddruleOtherId: string;
 
-  _id:string;
+  _id: string;
   ngOnInit() {
 
     this.rule = new Rule();
@@ -63,14 +65,14 @@ export class RuleComponent implements OnInit {
     this.getAllFields();
   }
 
-  public changeField(index:string) {
+  public changeField(index: string) {
     var contains: boolean = false;
-    for(let field of this.fields) {
-      if(field._id == this.fieldsSelectedForm[parseInt(index)]) {
-        if(field.needOtherId == true) {
-          for(let fieldOtherId of this.fields) { 
-            if(field.otherId == fieldOtherId._id){
-              if(fieldOtherId.titleType == "Nenhum") {
+    for (let field of this.fields) {
+      if (field._id == this.fieldsSelectedForm[parseInt(index)]) {
+        if (field.needOtherId == true) {
+          for (let fieldOtherId of this.fields) {
+            if (field.otherId == fieldOtherId._id) {
+              if (fieldOtherId.titleType == "Nenhum") {
                 this.fieldsSelectedFormOthers[parseInt(index)] = fieldOtherId.title;
                 contains = true;
               }
@@ -80,8 +82,30 @@ export class RuleComponent implements OnInit {
       }
     }
 
-    if(contains == false) {
+    if (contains == false) {
       this.fieldsSelectedFormOthers[parseInt(index)] = "";
+    }
+  }
+
+  public changeFieldAddRule(index: string) {
+    var contains: boolean = false;
+    for (let field of this.fields) {
+      if (field._id == this.fieldAddrule) {
+        if (field.needOtherId == true) {
+          for (let fieldOtherId of this.fields) {
+            if (field.otherId == fieldOtherId._id) {
+              if (fieldOtherId.titleType == "Nenhum") {
+                this.fieldAddruleOtherId = String(fieldOtherId.title);
+                contains = true;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    if (contains == false) {
+      this.fieldAddruleOtherId = "";
     }
   }
 
@@ -96,25 +120,56 @@ export class RuleComponent implements OnInit {
     fieldRule._id = this._id;
 
     this.ruleService.addFieldFromRule(fieldRule)
-    .subscribe(res => {
-      console.log(res);
-    }, err => {
-      console.log(err);
-    })
+      .subscribe(res => {
+        let contains = false;
+        for (let field of this.fields) {
+          if (field.title == this.fieldAddruleOtherId) {
+            contains = true;
+            fieldRule.idField = String(field._id);
+            fieldRule._id = this._id;
+
+            this.ruleService.addFieldFromRule(fieldRule)
+              .subscribe(res => {
+                alert("Inserido com sucesso");
+                this.view(this._id, "");
+
+                let close = document.getElementById("close");
+                close.click();
+              }, err => {
+                console.log(err);
+              })
+            break;
+          }
+        }
+
+        if (contains == false) {
+          alert("Inserido com sucesso");
+          this.view(this._id, "");
+
+          let close = document.getElementById("close");
+          close.click();
+        }
+      }, err => {
+        console.log(err);
+      });
+
+
+
+
   }
 
-  public removeFieldFromRule(idField:string) {
+  public removeFieldFromRule(idField: string) {
     let fieldRule = new FieldRule();
     fieldRule.idField = idField;
     fieldRule._id = this._id;
 
     this.ruleService.removeFieldFromRule(fieldRule)
-    .subscribe(res => {
-      console.log(res);
-      this.view(this._id);
-    }, err => {
-      console.log(err);
-    })
+      .subscribe(res => {
+        alert("Removido com sucesso");
+        this.view(this._id, "");
+      }, err => {
+        console.log(err);
+      })
   }
 
   public removeField() {
@@ -242,19 +297,27 @@ export class RuleComponent implements OnInit {
     this.setTypes();
   }
 
-  public view(_id: string) {
+  public removeRule() {
+
+  }
+
+
+  public view(_id: string, rule: string) {
     if (_id != undefined) {
       this.ruleService.getRuleByIdObservable(_id)
         .subscribe(res => {
           this._id = _id;
+          if (rule != "") {
+            this.ruleTitle = rule;
+          }
 
           var fields = res.fields;
 
           this.fieldsRuleView = new Array<Field>();
 
-          for(let field of fields) {
-            for(let fieldSelected of this.fieldsSelected) {
-              if(field._id == fieldSelected._id) {
+          for (let field of fields) {
+            for (let fieldSelected of this.fieldsSelected) {
+              if (field._id == fieldSelected._id) {
                 this.fieldsRuleView.push(fieldSelected);
               }
             }
@@ -262,15 +325,15 @@ export class RuleComponent implements OnInit {
 
           this.fieldsRuleViewNenhum = new Array<Field>();
 
-          for(let field of fields) {
-            for(let fieldSelected of this.fieldsNenhum) {
-              if(field._id == fieldSelected._id) {
+          for (let field of fields) {
+            for (let fieldSelected of this.fieldsNenhum) {
+              if (field._id == fieldSelected._id) {
                 this.fieldsRuleViewNenhum.push(fieldSelected);
               }
             }
           }
 
-          
+
 
         }, err => {
           console.log(err);
@@ -281,7 +344,7 @@ export class RuleComponent implements OnInit {
   public insertField(content) {
     this.modalService.open(content, { centered: true, size: 'lg' });
   }
-  
+
 
   public insertRule() {
     let fieldsInsert = new Array<Field>();
@@ -289,10 +352,10 @@ export class RuleComponent implements OnInit {
       for (let field of this.fields) {
         if (field._id == String(fieldSel)) {
           fieldsInsert.push(field);
-          if(field.needOtherId == true) {
-            for(let fieldOtherId of this.fields) { 
-              if(field.otherId == fieldOtherId._id){
-                if(fieldOtherId.titleType == "Nenhum") {
+          if (field.needOtherId == true) {
+            for (let fieldOtherId of this.fields) {
+              if (field.otherId == fieldOtherId._id) {
+                if (fieldOtherId.titleType == "Nenhum") {
                   fieldsInsert.push(fieldOtherId);
                 }
               }
@@ -302,7 +365,7 @@ export class RuleComponent implements OnInit {
       }
     }
 
-    
+
 
     this.rule.fields = fieldsInsert;
 

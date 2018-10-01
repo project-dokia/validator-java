@@ -11,7 +11,7 @@ function webpackEmptyAsyncContext(req) {
 	// Here Promise.resolve().then() is used instead of new Promise() to prevent
 	// uncaught exception popping up in devtools
 	return Promise.resolve().then(function() {
-		var e = new Error('Cannot find module "' + req + '".');
+		var e = new Error("Cannot find module '" + req + "'");
 		e.code = 'MODULE_NOT_FOUND';
 		throw e;
 	});
@@ -837,7 +837,7 @@ var ModelComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".gap-top5 {\n    margin-top:5px;\n}\n\n.gap-top10 {\n    margin-top:10px;\n}\n\n.border-other {\n    margin-top:0px;\n    padding:5px;\n    border: #CCCCCC 1px solid;\n    border-radius: 3px;\n}\n\n.gap-top20 {\n    margin-top:20px;\n}"
 
 /***/ }),
 
@@ -848,7 +848,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <!-- <h4 class=\"card-title\">Rule</h4>   -->\n    <div class=\"card m-2\">\n        <div class=\"card-body\">\n            <h4 class=\"card-text\">Cadatro</h4>\n            <div class=\"row m-2\">\n                <div class=\"col-2 text-right\">\n                    <h5>Description</h5>\n                </div>\n                <div class=\"col-10\">\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"rule.description\">\n                </div>\n            </div>\n            <div class=\"row m-2\" *ngFor=\"let ruleObject of fieldsSelected; let i = index\">\n                <div class=\"col-2 text-right\">\n                    <h5>Field</h5>\n                </div>\n                <div class=\"col-6\">\n                    <select class=\"form-control\" [(ngModel)]=\"fieldsSelected[i]\">\n                        <option *ngFor=\"let field of fields\" value=\"{{field._id}}\">{{field.title}}</option>\n                    </select>\n                </div>\n                <div class=\"col-2 text-right\" *ngIf=\"(( fieldsSelected.length - 1) | number) == (i | number)\">\n                    <input type=\"button\" value=\"ADD\" class=\"btn btn-primary form-control\" (click)=\"addField()\">\n                </div>\n                <div class=\"col-2 text-right\" *ngIf=\"(( fieldsSelected.length - 1) | number) > 0 && i != 0 && (( fieldsSelected.length - 1) | number) == (i | number)\">\n                    <input type=\"button\" value=\"REMOVE\" class=\"btn btn-danger form-control\" (click)=\"removeField()\">\n                </div>\n            </div>\n            <div class=\"row m-2\">\n                <div class=\"col-6 offset-6 text-right\">\n                    <input type=\"button\" value=\"INSERT\" class=\"btn btn-primary form-control\" (click)=\"insertRule()\">\n                </div>\n            </div>\n        </div>\n    </div>\n    <hr/>\n    <div class=\"card m-2\">\n        <div class=\"card-body\">\n            <h4 class=\"card-text\">List Rules</h4>\n            <hr/>\n            <div class=\"row m-2\">\n                <div class=\"col-12\">\n                    <table class=\"table table-striped table-horvered\">\n                        <thead>\n                            <tr>\n                                <th>Description</th>\n                                <th>_id</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr *ngFor=\"let rule of rules\">\n                                <td>{{rule.description}}</td>\n                                <td>{{rule._id}}</td>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"container-fluid\">\n    <!-- <h4 class=\"card-title\">Rule</h4>   -->\n    <div class=\"card m-2\">\n        <div class=\"card-body\">\n            <h4 class=\"card-text\">Add Rule</h4>\n            <div class=\"row m-2\">\n                <div class=\"col-2 text-right gap-top5\">\n                    <h5>Description</h5>\n                </div>\n                <div class=\"col-10\">\n                    <input type=\"text\" class=\"form-control\" [(ngModel)]=\"rule.description\">\n                </div>\n            </div>\n            <div class=\"row m-2\" *ngFor=\"let ruleObject of fieldsSelectedForm; let i = index\">\n                <div class=\"col-2 text-right gap-top5\">\n                    <h5>Field</h5>\n                </div>\n                <div class=\"col-2\">\n                    <select class=\"form-control\" [(ngModel)]=\"fieldsSelectedForm[i]\" (change)=\"changeField(i)\">\n                        <option *ngFor=\"let field of fields\" value=\"{{field._id}}\">{{field.title}}</option>\n                    </select>\n                </div>\n                <div class=\"col-2 text-center gap-top5\">\n                    <h5>{{fieldsSelectedFormOthers[i] != ''? 'Other Id': ''}}</h5>\n                </div>\n                <div class=\"col-2 text-left gap-top5 border-other\">\n                    {{fieldsSelectedFormOthers[i]}}\n                </div>\n                <div class=\"col-2 text-right\" *ngIf=\"(( fieldsSelectedForm.length - 1) | number) == (i | number)\">\n                    <input type=\"button\" value=\"ADD\" class=\"btn btn-dark form-control\" (click)=\"addField()\">\n                </div>\n                <div class=\"col-2 text-right\" *ngIf=\"(( fieldsSelectedForm.length - 1) | number) > 0 && i != 0 && (( fieldsSelectedForm.length - 1) | number) == (i | number)\">\n                    <input type=\"button\" value=\"REMOVE\" class=\"btn btn-danger form-control\" (click)=\"removeField()\">\n                </div>\n            </div>\n            <hr/>\n            <div class=\"row m-2 \">\n                <div class=\"col-6 offset-3 text-right gap-top20\">\n                    <input type=\"button\" value=\"INSERT\" class=\"btn btn-primary form-control\" (click)=\"insertRule()\">\n                </div>\n            </div>\n        </div>\n    </div>\n    <hr/>\n    <div class=\"card m-2\">\n        <div class=\"card-body\">\n            <h4 class=\"card-text\">List Rules</h4>\n            <hr/>\n            <div class=\"row m-2\">\n                <div class=\"col-12\">\n                    <div class=\"row m-2\" *ngFor=\"let rule of rules\">\n                        <div class=\"col-2 text-right gap-top10\">\n                            <h5>{{rule.description}}</h5>\n                        </div>\n                        <div class=\"col-5 text-center gap-top10\">\n                            <h5>.......................................................</h5>\n                        </div>\n                        <div class=\"col-3 text-right\">\n                            <input type=\"button\" value=\"VIEW\" class=\"btn btn-primary form-control\" (click)=\"view(rule._id, rule.description)\">\n                        </div>\n                        <div class=\"col-2 text-right\">\n                            <input type=\"button\" value=\"REMOVE\" class=\"btn btn-danger form-control\" (click)=\"removeRule(rule._id)\">\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <hr/>\n    <div class=\"card m-2\" *ngIf=\"_id != '' && _id != undefined\">\n        <div class=\"card-body\">\n            <h4 class=\"card-text\">List Fields - {{ruleTitle}}</h4>\n            <div class=\"row\">\n                <div class=\"col-4 offset-8\">\n                    <input type=\"button\" value=\"INSERT\" class=\"btn btn-primary form-control\" (click)=\"insertField(content)\">\n                </div>\n            </div>\n            <hr/>\n            <div class=\"row m-2\">\n                <div class=\"col-12\">\n                    <div class=\"table-responsive\">\n                        <table class=\"table table-striped table-horvered \">\n                            <thead>\n                                <tr>\n                                    <!-- <th>_id</th> -->\n                                    <th>Title</th>\n                                    <th>Model</th>\n                                    <!-- <th>Need Other ID?</th> -->\n                                    <th>Type</th>\n                                    <th>Title</th>\n                                    <th>Model</th>\n                                    <th>Percentage</th>\n                                    <!-- <th>Dependency</th> -->\n                                    <!-- <th>Dependency ID</th> -->\n                                    <th>Edit</th>\n                                </tr>\n                            </thead>\n                            <tbody>\n                                <tr *ngFor=\"let field of fieldsRuleView\">\n                                    <!-- <td>{{field._id}}</td> -->\n                                    <td>{{field.title}}</td>\n                                    <td>{{field.titleModel}}</td>\n                                    <!-- <td>{{field.needOtderId}}</td> -->\n                                    <td>{{field.titleType}}</td>\n                                    <td>{{field.titleId}}</td>\n                                    <td>{{field.titleModelId}}</td>\n                                    <td>{{field.percentage == 100 || field.percentage == 0 ? '' : field.percentage}}</td>\n                                    <!-- <td>{{field.dependency}}</td> -->\n                                    <!-- <td>{{field.idDependency}}</td> -->\n                                    <td>\n                                        <i class=\"fa fa-2x fa-remove click\" style=\"cursor:pointer;\" (click)=\"removeFieldFromRule(field._id)\"></i>\n                                    </td>\n                                </tr>\n                            </tbody>\n                        </table>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <div class=\"card-body\">\n            <h4 class=\"card-text\">List (Nenhum)\n            </h4>\n            <hr/>\n            <div class=\"row m-2\">\n                <div class=\"col-12\">\n                    <div class=\"table-responsive\">\n                        <table class=\"table table-striped table-horvered \">\n                            <thead>\n                                <tr>\n                                    <!-- <th>_id</th> -->\n                                    <th>Title</th>\n                                    <th>Model</th>\n                                    <!-- <th>Need Other ID?</th> -->\n                                    <th>Type</th>\n                                    <!-- <th>Title</th> -->\n                                    <!-- <th>Model</th> -->\n                                    <!-- <th>Percentage</th> -->\n                                    <!-- <th>Dependency</th> -->\n                                    <!-- <th>Dependency ID</th> -->\n\n                                    <th>Edit</th>\n                                </tr>\n                            </thead>\n                            <tbody>\n                                <tr *ngFor=\"let field of fieldsRuleViewNenhum\">\n                                    <!-- <td>{{field._id}}</td> -->\n                                    <td>{{field.title}}</td>\n                                    <td>{{field.titleModel}}</td>\n                                    <!-- <td>{{field.needOtderId}}</td> -->\n                                    <td>{{field.titleType}}</td>\n                                    <!-- <td>{{field.titleId}}</td> -->\n                                    <!-- <td>{{field.titleModelId}}</td> -->\n                                    <!-- <td>{{field.percentage}}</td> -->\n                                    <!-- <td>{{field.dependency}}</td> -->\n                                    <!-- <td>{{field.idDependency}}</td> -->\n                                    <td>\n                                        <i class=\"fa fa-2x fa-remove click\" style=\"cursor:pointer;\" (click)=\"removeFieldFromRule(field._id)\"></i>\n                                    </td>\n                                </tr>\n                            </tbody>\n                        </table>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <ng-template #content let-c=\"close\" let-d=\"dismiss\">\n        <div class=\"modal-header\">\n            <h4 class=\"modal-title\">Update Field</h4>\n            <button type=\"button\" class=\"close\" aria-label=\"Close\" (click)=\"d('Cross click')\">\n                <span aria-hidden=\"true\">&times;</span>\n            </button>\n        </div>\n        <div class=\"modal-body\">\n            <div class=\"row\">\n                <div class=\"col-12\">\n                    <div class=\"row m-2\">\n                        <div class=\"col-2 text-right\">\n                            <h5>Field</h5>\n                        </div>\n                        <div class=\"col-6\">\n                            <select class=\"form-control\" [(ngModel)]=\"fieldAddrule\" (change)=\"changeFieldAddRule()\">\n                                <option *ngFor=\"let field of fields\" value=\"{{field._id}}\">{{field.title}}</option>\n                            </select>\n                        </div>\n                    </div>\n                    <div class=\"row m-2\" *ngIf=\"fieldAddruleOtherId != '' && fieldAddruleOtherId != undefined\">\n                        <div class=\"col-2 text-right\">\n                            <h5>Other Id</h5>\n                        </div>\n                        <div class=\"col-6\">\n                            <h5>{{fieldAddruleOtherId}}</h5>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-light\" id=\"close\" (click)=\"c('Close click')\">Close</button>\n            <button type=\"button\" class=\"btn btn-primary\" (click)=\"insertFieldFromRule()\">INSERT</button>\n        </div>\n    </ng-template>\n</div>"
 
 /***/ }),
 
@@ -865,7 +865,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _service_rule_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../service/rule.service */ "./src/service/rule.service.ts");
 /* harmony import */ var _model_rule__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../model/rule */ "./src/model/rule.ts");
-/* harmony import */ var _service_field_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../service/field.service */ "./src/service/field.service.ts");
+/* harmony import */ var _model_field__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../model/field */ "./src/model/field.ts");
+/* harmony import */ var _service_field_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../service/field.service */ "./src/service/field.service.ts");
+/* harmony import */ var _service_type_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../service/type.service */ "./src/service/type.service.ts");
+/* harmony import */ var _service_model_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../service/model.service */ "./src/service/model.service.ts");
+/* harmony import */ var _node_modules_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../node_modules/@ng-bootstrap/ng-bootstrap */ "./node_modules/@ng-bootstrap/ng-bootstrap/index.js");
+/* harmony import */ var _model_field_rule__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../model/field-rule */ "./src/model/field-rule.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -879,24 +884,131 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
+
+
+
+
 var RuleComponent = /** @class */ (function () {
-    function RuleComponent(ruleService, fieldService) {
+    function RuleComponent(ruleService, fieldService, typeService, modelService, modalService) {
         this.ruleService = ruleService;
         this.fieldService = fieldService;
+        this.typeService = typeService;
+        this.modelService = modelService;
+        this.modalService = modalService;
     }
     RuleComponent.prototype.ngOnInit = function () {
         this.rule = new _model_rule__WEBPACK_IMPORTED_MODULE_2__["Rule"]();
         this.rule.type = "RULE";
         this.fieldsSelected = new Array();
-        this.fieldsSelected.push("");
+        this.fieldsSelected.push(new _model_field__WEBPACK_IMPORTED_MODULE_3__["Field"]());
+        this.fieldsSelectedForm = new Array();
+        this.fieldsSelectedForm.push("");
+        this.fieldsSelectedFormOthers = new Array();
+        this.fieldsSelectedFormOthers.push("");
         this.getAllRules();
         this.getAllFields();
     };
+    RuleComponent.prototype.changeField = function (index) {
+        var contains = false;
+        for (var _i = 0, _a = this.fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            if (field._id == this.fieldsSelectedForm[parseInt(index)]) {
+                if (field.needOtherId == true) {
+                    for (var _b = 0, _c = this.fields; _b < _c.length; _b++) {
+                        var fieldOtherId = _c[_b];
+                        if (field.otherId == fieldOtherId._id) {
+                            if (fieldOtherId.titleType == "Nenhum") {
+                                this.fieldsSelectedFormOthers[parseInt(index)] = fieldOtherId.title;
+                                contains = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (contains == false) {
+            this.fieldsSelectedFormOthers[parseInt(index)] = "";
+        }
+    };
+    RuleComponent.prototype.changeFieldAddRule = function (index) {
+        var contains = false;
+        for (var _i = 0, _a = this.fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            if (field._id == this.fieldAddrule) {
+                if (field.needOtherId == true) {
+                    for (var _b = 0, _c = this.fields; _b < _c.length; _b++) {
+                        var fieldOtherId = _c[_b];
+                        if (field.otherId == fieldOtherId._id) {
+                            if (fieldOtherId.titleType == "Nenhum") {
+                                this.fieldAddruleOtherId = String(fieldOtherId.title);
+                                contains = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (contains == false) {
+            this.fieldAddruleOtherId = "";
+        }
+    };
     RuleComponent.prototype.addField = function () {
-        this.fieldsSelected.push("");
+        this.fieldsSelectedForm.push(new _model_field__WEBPACK_IMPORTED_MODULE_3__["Field"]());
+        this.fieldsSelectedFormOthers.push("");
+    };
+    RuleComponent.prototype.insertFieldFromRule = function () {
+        var _this = this;
+        var fieldRule = new _model_field_rule__WEBPACK_IMPORTED_MODULE_8__["FieldRule"]();
+        fieldRule.idField = this.fieldAddrule;
+        fieldRule._id = this._id;
+        this.ruleService.addFieldFromRule(fieldRule)
+            .subscribe(function (res) {
+            var contains = false;
+            for (var _i = 0, _a = _this.fields; _i < _a.length; _i++) {
+                var field = _a[_i];
+                if (field.title == _this.fieldAddruleOtherId) {
+                    contains = true;
+                    fieldRule.idField = String(field._id);
+                    fieldRule._id = _this._id;
+                    _this.ruleService.addFieldFromRule(fieldRule)
+                        .subscribe(function (res) {
+                        alert("Inserido com sucesso");
+                        _this.view(_this._id, "");
+                        var close = document.getElementById("close");
+                        close.click();
+                    }, function (err) {
+                        console.log(err);
+                    });
+                    break;
+                }
+            }
+            if (contains == false) {
+                alert("Inserido com sucesso");
+                _this.view(_this._id, "");
+                var close_1 = document.getElementById("close");
+                close_1.click();
+            }
+        }, function (err) {
+            console.log(err);
+        });
+    };
+    RuleComponent.prototype.removeFieldFromRule = function (idField) {
+        var _this = this;
+        var fieldRule = new _model_field_rule__WEBPACK_IMPORTED_MODULE_8__["FieldRule"]();
+        fieldRule.idField = idField;
+        fieldRule._id = this._id;
+        this.ruleService.removeFieldFromRule(fieldRule)
+            .subscribe(function (res) {
+            alert("Removido com sucesso");
+            _this.view(_this._id, "");
+        }, function (err) {
+            console.log(err);
+        });
     };
     RuleComponent.prototype.removeField = function () {
-        this.fieldsSelected.pop();
+        this.fieldsSelectedForm.pop();
+        this.fieldsSelectedFormOthers.pop();
     };
     RuleComponent.prototype.getAllRules = function () {
         var _this = this;
@@ -908,21 +1020,172 @@ var RuleComponent = /** @class */ (function () {
     };
     RuleComponent.prototype.getAllFields = function () {
         var _this = this;
-        this.fieldService.getFieldsObservable().
-            subscribe(function (res) {
-            _this.fields = new Array();
-            _this.fields = res;
-        });
+        this.field = new _model_field__WEBPACK_IMPORTED_MODULE_3__["Field"]();
+        this.models = new Array();
+        this.fields = new Array();
+        this.types = new Array();
+        this.field.type = "FIELD";
+        if (this.fields.length == 0) {
+            this.fieldService.getFieldsObservable().
+                subscribe(function (res) {
+                _this.fields = new Array();
+                _this.fields = res;
+                _this.getAllTypes();
+            });
+        }
+        else {
+            this.setFields();
+        }
+    };
+    RuleComponent.prototype.getAllTypes = function () {
+        var _this = this;
+        if (this.types.length == 0) {
+            this.typeService.getTypesObservable().
+                subscribe(function (res) {
+                _this.types = new Array();
+                _this.types = res;
+                _this.setFields();
+            });
+        }
+        else {
+            this.setTypes();
+        }
+    };
+    RuleComponent.prototype.setFields = function () {
+        for (var _i = 0, _a = this.fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            for (var _b = 0, _c = this.fields; _b < _c.length; _b++) {
+                var otherField = _c[_b];
+                if (otherField._id == field.otherId) {
+                    field.titleId = otherField.title;
+                }
+            }
+        }
+        this.getAllModels();
+    };
+    RuleComponent.prototype.setTypes = function () {
+        var count = 0;
+        for (var _i = 0, _a = this.fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            for (var _b = 0, _c = this.types; _b < _c.length; _b++) {
+                var type = _c[_b];
+                if (type._id == field.idType) {
+                    this.fields[count].titleType = type.description;
+                }
+            }
+            count++;
+        }
+        this.fieldsNenhum = new Array();
+        this.fieldsSelected = new Array();
+        for (var _d = 0, _e = this.fields; _d < _e.length; _d++) {
+            var field = _e[_d];
+            if (field.titleType == "Nenhum") {
+                this.fieldsNenhum.push(field);
+            }
+            else {
+                this.fieldsSelected.push(field);
+            }
+        }
+    };
+    RuleComponent.prototype.getAllModels = function () {
+        var _this = this;
+        if (this.models.length == 0) {
+            this.modelService.getModelsObservable().
+                subscribe(function (res) {
+                _this.models = new Array();
+                _this.models = res;
+                _this.setModels();
+            });
+        }
+        else {
+            this.setModels();
+        }
+    };
+    RuleComponent.prototype.setModels = function () {
+        for (var _i = 0, _a = this.fields; _i < _a.length; _i++) {
+            var field = _a[_i];
+            for (var _b = 0, _c = this.models; _b < _c.length; _b++) {
+                var model = _c[_b];
+                if (model._id == field.idModel) {
+                    field.titleModel = model.description;
+                }
+            }
+        }
+        for (var _d = 0, _e = this.fields; _d < _e.length; _d++) {
+            var fieldTop = _e[_d];
+            for (var _f = 0, _g = this.fields; _f < _g.length; _f++) {
+                var field = _g[_f];
+                if (field.otherId == fieldTop._id) {
+                    for (var _h = 0, _j = this.models; _h < _j.length; _h++) {
+                        var model = _j[_h];
+                        if (model._id == fieldTop.idModel) {
+                            field.titleModelId = model.description;
+                        }
+                    }
+                }
+            }
+        }
+        this.setTypes();
+    };
+    RuleComponent.prototype.removeRule = function () {
+    };
+    RuleComponent.prototype.view = function (_id, rule) {
+        var _this = this;
+        if (_id != undefined) {
+            this.ruleService.getRuleByIdObservable(_id)
+                .subscribe(function (res) {
+                _this._id = _id;
+                if (rule != "") {
+                    _this.ruleTitle = rule;
+                }
+                var fields = res.fields;
+                _this.fieldsRuleView = new Array();
+                for (var _i = 0, fields_1 = fields; _i < fields_1.length; _i++) {
+                    var field = fields_1[_i];
+                    for (var _a = 0, _b = _this.fieldsSelected; _a < _b.length; _a++) {
+                        var fieldSelected = _b[_a];
+                        if (field._id == fieldSelected._id) {
+                            _this.fieldsRuleView.push(fieldSelected);
+                        }
+                    }
+                }
+                _this.fieldsRuleViewNenhum = new Array();
+                for (var _c = 0, fields_2 = fields; _c < fields_2.length; _c++) {
+                    var field = fields_2[_c];
+                    for (var _d = 0, _e = _this.fieldsNenhum; _d < _e.length; _d++) {
+                        var fieldSelected = _e[_d];
+                        if (field._id == fieldSelected._id) {
+                            _this.fieldsRuleViewNenhum.push(fieldSelected);
+                        }
+                    }
+                }
+            }, function (err) {
+                console.log(err);
+            });
+        }
+    };
+    RuleComponent.prototype.insertField = function (content) {
+        this.modalService.open(content, { centered: true, size: 'lg' });
     };
     RuleComponent.prototype.insertRule = function () {
         var _this = this;
         var fieldsInsert = new Array();
-        for (var _i = 0, _a = this.fieldsSelected; _i < _a.length; _i++) {
+        for (var _i = 0, _a = this.fieldsSelectedForm; _i < _a.length; _i++) {
             var fieldSel = _a[_i];
             for (var _b = 0, _c = this.fields; _b < _c.length; _b++) {
                 var field = _c[_b];
-                if (field._id == fieldSel) {
+                if (field._id == String(fieldSel)) {
                     fieldsInsert.push(field);
+                    if (field.needOtherId == true) {
+                        for (var _d = 0, _e = this.fields; _d < _e.length; _d++) {
+                            var fieldOtherId = _e[_d];
+                            if (field.otherId == fieldOtherId._id) {
+                                if (fieldOtherId.titleType == "Nenhum") {
+                                    fieldsInsert.push(fieldOtherId);
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -932,8 +1195,8 @@ var RuleComponent = /** @class */ (function () {
             _this.getAllRules();
             _this.rule = new _model_rule__WEBPACK_IMPORTED_MODULE_2__["Rule"]();
             _this.rule.type = "RULE";
-            _this.fieldsSelected = new Array();
-            _this.fieldsSelected.push("");
+            _this.fieldsSelectedForm = new Array();
+            _this.fieldsSelectedForm.push(new _model_field__WEBPACK_IMPORTED_MODULE_3__["Field"]());
         });
     };
     RuleComponent = __decorate([
@@ -941,10 +1204,13 @@ var RuleComponent = /** @class */ (function () {
             selector: 'app-rule',
             template: __webpack_require__(/*! ./rule.component.html */ "./src/app/rule/rule.component.html"),
             styles: [__webpack_require__(/*! ./rule.component.css */ "./src/app/rule/rule.component.css")],
-            providers: [_service_rule_service__WEBPACK_IMPORTED_MODULE_1__["RuleService"], _service_field_service__WEBPACK_IMPORTED_MODULE_3__["FieldService"]]
+            providers: [_service_rule_service__WEBPACK_IMPORTED_MODULE_1__["RuleService"], _service_field_service__WEBPACK_IMPORTED_MODULE_4__["FieldService"]]
         }),
         __metadata("design:paramtypes", [_service_rule_service__WEBPACK_IMPORTED_MODULE_1__["RuleService"],
-            _service_field_service__WEBPACK_IMPORTED_MODULE_3__["FieldService"]])
+            _service_field_service__WEBPACK_IMPORTED_MODULE_4__["FieldService"],
+            _service_type_service__WEBPACK_IMPORTED_MODULE_5__["TypeService"],
+            _service_model_service__WEBPACK_IMPORTED_MODULE_6__["ModelService"],
+            _node_modules_ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_7__["NgbModal"]])
     ], RuleComponent);
     return RuleComponent;
 }());
@@ -1346,6 +1612,26 @@ var Document = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/model/field-rule.ts":
+/*!*********************************!*\
+  !*** ./src/model/field-rule.ts ***!
+  \*********************************/
+/*! exports provided: FieldRule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FieldRule", function() { return FieldRule; });
+var FieldRule = /** @class */ (function () {
+    function FieldRule() {
+    }
+    return FieldRule;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/model/field.ts":
 /*!****************************!*\
   !*** ./src/model/field.ts ***!
@@ -1737,11 +2023,20 @@ var RuleService = /** @class */ (function () {
         this.headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]().set('Content-Type', 'application/json');
         this.ruleURL = _environments_environment__WEBPACK_IMPORTED_MODULE_2__["environment"].apiUrl + '/rule';
     }
+    RuleService.prototype.getRuleByIdObservable = function (_id) {
+        return this.http.get(this.ruleURL + "/" + _id);
+    };
     RuleService.prototype.getRulesObservable = function () {
         return this.http.get(this.ruleURL);
     };
     RuleService.prototype.insertRuleObservable = function (rule) {
         return this.http.post(this.ruleURL, rule);
+    };
+    RuleService.prototype.removeFieldFromRule = function (fieldRule) {
+        return this.http.post(this.ruleURL + "/remove-field", fieldRule);
+    };
+    RuleService.prototype.addFieldFromRule = function (fieldRule) {
+        return this.http.post(this.ruleURL + "/add-field", fieldRule);
     };
     RuleService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({

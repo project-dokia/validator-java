@@ -57,9 +57,9 @@ public class RuleController {
 		
 		fields = rule.getFields();
 		if(field != null) {
-			System.out.println("Augusto viadao");
 			fields.add(field);
 		}
+		
 		rule.setFields(fields);
 		
 		
