@@ -57,6 +57,13 @@ public class RuleController {
 		
 		fields = rule.getFields();
 		if(field != null) {
+			if(fieldRule.isUseOtherId()) {
+				field.setIdType("fecde76de43641609a7da3a6a2014642");
+				field.setNeedOtherId(false);
+				field.setOtherId("");
+				field.setPercentage(0);
+			}
+			
 			fields.add(field);
 		}
 		

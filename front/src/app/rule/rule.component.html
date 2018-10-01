@@ -49,13 +49,10 @@
             <div class="row m-2">
                 <div class="col-12">
                     <div class="row m-2" *ngFor="let rule of rules">
-                        <div class="col-2 text-right gap-top10">
+                        <div class="col-8 text-left gap-top10">
                             <h5>{{rule.description}}</h5>
                         </div>
-                        <div class="col-5 text-center gap-top10">
-                            <h5>.......................................................</h5>
-                        </div>
-                        <div class="col-3 text-right">
+                        <div class="col-2 text-right">
                             <input type="button" value="VIEW" class="btn btn-primary form-control" (click)="view(rule._id, rule.description)">
                         </div>
                         <div class="col-2 text-right">
@@ -89,7 +86,7 @@
                                     <th>Type</th>
                                     <th>Title</th>
                                     <th>Model</th>
-                                    <th>Percentage</th>
+                                    <!-- <th>Percentage</th> -->
                                     <!-- <th>Dependency</th> -->
                                     <!-- <th>Dependency ID</th> -->
                                     <th>Edit</th>
@@ -104,7 +101,7 @@
                                     <td>{{field.titleType}}</td>
                                     <td>{{field.titleId}}</td>
                                     <td>{{field.titleModelId}}</td>
-                                    <td>{{field.percentage == 100 || field.percentage == 0 ? '' : field.percentage}}</td>
+                                    <!-- <td>{{field.percentage == 100 || field.percentage == 0 ? '' : field.percentage}}</td> -->
                                     <!-- <td>{{field.dependency}}</td> -->
                                     <!-- <td>{{field.idDependency}}</td> -->
                                     <td>
@@ -148,7 +145,7 @@
                                     <td>{{field.title}}</td>
                                     <td>{{field.titleModel}}</td>
                                     <!-- <td>{{field.needOtderId}}</td> -->
-                                    <td>{{field.titleType}}</td>
+                                    <td>Nenhum</td>
                                     <!-- <td>{{field.titleId}}</td> -->
                                     <!-- <td>{{field.titleModelId}}</td> -->
                                     <!-- <td>{{field.percentage}}</td> -->

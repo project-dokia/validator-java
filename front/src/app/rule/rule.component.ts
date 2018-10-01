@@ -94,10 +94,8 @@ export class RuleComponent implements OnInit {
         if (field.needOtherId == true) {
           for (let fieldOtherId of this.fields) {
             if (field.otherId == fieldOtherId._id) {
-              if (fieldOtherId.titleType == "Nenhum") {
-                this.fieldAddruleOtherId = String(fieldOtherId.title);
-                contains = true;
-              }
+              this.fieldAddruleOtherId = String(fieldOtherId.title);
+              contains = true;
             }
           }
         }
@@ -122,11 +120,13 @@ export class RuleComponent implements OnInit {
     this.ruleService.addFieldFromRule(fieldRule)
       .subscribe(res => {
         let contains = false;
+
         for (let field of this.fields) {
           if (field.title == this.fieldAddruleOtherId) {
             contains = true;
             fieldRule.idField = String(field._id);
             fieldRule._id = this._id;
+            fieldRule.useOtherId = true;
 
             this.ruleService.addFieldFromRule(fieldRule)
               .subscribe(res => {
@@ -135,6 +135,7 @@ export class RuleComponent implements OnInit {
 
                 let close = document.getElementById("close");
                 close.click();
+
               }, err => {
                 console.log(err);
               })
@@ -314,16 +315,25 @@ export class RuleComponent implements OnInit {
           var fields = res.fields;
 
           this.fieldsRuleView = new Array<Field>();
+          this.fieldsRuleViewNenhum = new Array<Field>();
 
           for (let field of fields) {
             for (let fieldSelected of this.fieldsSelected) {
               if (field._id == fieldSelected._id) {
-                this.fieldsRuleView.push(fieldSelected);
+                if (field.idType == "fecde76de43641609a7da3a6a2014642") {
+                  // fieldSelected.idType = "fecde76de43641609a7da3a6a2014642";
+                  // fieldSelected.otherId = "false";
+                  // fieldSelected.needOtherId = false;
+                  // fieldSelected.titleType = "Nenhum";
+                  // fieldSelected.titleModelId = "";
+
+                  this.fieldsRuleViewNenhum.push(fieldSelected);
+                } else {
+                  this.fieldsRuleView.push(fieldSelected);
+                }
               }
             }
           }
-
-          this.fieldsRuleViewNenhum = new Array<Field>();
 
           for (let field of fields) {
             for (let fieldSelected of this.fieldsNenhum) {
@@ -357,6 +367,14 @@ export class RuleComponent implements OnInit {
               if (field.otherId == fieldOtherId._id) {
                 if (fieldOtherId.titleType == "Nenhum") {
                   fieldsInsert.push(fieldOtherId);
+                } else {
+                  fieldOtherId.idType = "fecde76de43641609a7da3a6a2014642";
+                  fieldOtherId.otherId = "false";
+                  fieldOtherId.needOtherId = false;
+                  fieldOtherId.titleType = "Nenhum";
+                  fieldOtherId.titleModelId = "";
+
+                  fieldsInsert.push(fieldOtherId);
                 }
               }
             }
@@ -364,8 +382,6 @@ export class RuleComponent implements OnInit {
         }
       }
     }
-
-
 
     this.rule.fields = fieldsInsert;
 

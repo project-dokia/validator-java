@@ -4,7 +4,14 @@ public class FieldRule {
 
 	private String idField;
 	private String _id;
+	private boolean useOtherId;
 	
+	public boolean isUseOtherId() {
+		return useOtherId;
+	}
+	public void setUseOtherId(boolean useOtherId) {
+		this.useOtherId = useOtherId;
+	}
 	public String getIdField() {
 		return idField;
 	}
