@@ -51,6 +51,23 @@ export class ValidatorComponent implements OnInit {
     for (const rule of this.rules) {
       if (count == index) {
         this.rule = rule;
+
+        let fields = this.rule.fields;
+        this.rule.fields = Array<Field>();
+
+        for(let field of fields) {
+          var contains = false;
+          for(let fieldRule of this.rule.fields) {
+            if(fieldRule._id == field._id) {
+              contains = true;
+            }
+          }
+
+          if(contains == false) {
+            this.rule.fields.push(field);
+          }
+        }
+
       }
       count++;
     }

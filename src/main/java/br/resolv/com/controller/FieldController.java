@@ -78,12 +78,8 @@ public class FieldController {
 		for (Field field : fields) {
 			for (Type type : types) {
 				if (field.getIdType() != null && type.get_id() != null) {
-					//boolean result = false;
 					ResultVerifyRule resultVerifyRule = new ResultVerifyRule();
-//					
-					
 					if (field.getIdType().equals(type.get_id())) {
-						
 						if (type.getCommand().equals("equals")) {
 							resultVerifyRule = verifyRule(field, fields, "equals");
 						} else if (type.getCommand().equals("number")) {

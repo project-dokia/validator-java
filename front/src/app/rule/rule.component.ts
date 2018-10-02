@@ -43,7 +43,7 @@ export class RuleComponent implements OnInit {
   fieldsRuleView: Field[];
   fieldsSelectedForm: any[];
   fieldsSelectedFormOthers: any[];
-  fieldsRuleViewNenhum: any[];
+  fieldsRuleViewNenhum: Field[];
   fieldAddrule: string;
   fieldAddruleOtherId: string;
 
@@ -321,15 +321,29 @@ export class RuleComponent implements OnInit {
             for (let fieldSelected of this.fieldsSelected) {
               if (field._id == fieldSelected._id) {
                 if (field.idType == "fecde76de43641609a7da3a6a2014642") {
-                  // fieldSelected.idType = "fecde76de43641609a7da3a6a2014642";
-                  // fieldSelected.otherId = "false";
-                  // fieldSelected.needOtherId = false;
-                  // fieldSelected.titleType = "Nenhum";
-                  // fieldSelected.titleModelId = "";
 
-                  this.fieldsRuleViewNenhum.push(fieldSelected);
+                  var contains = false;
+                  for(let field of this.fieldsRuleViewNenhum) {
+                    if(field._id == fieldSelected._id) {
+                      contains = true;
+                    }
+                  }
+
+                  if(contains == false) {
+                    this.fieldsRuleViewNenhum.push(fieldSelected);
+                  }
                 } else {
-                  this.fieldsRuleView.push(fieldSelected);
+                  var contains = false;
+                  for(let field of this.fieldsRuleView) {
+                    if(field._id == fieldSelected._id) {
+                      contains = true;
+                    }
+                  }
+
+                  if(contains == false) {
+                    this.fieldsRuleView.push(fieldSelected);
+                  }
+
                 }
               }
             }
@@ -338,7 +352,16 @@ export class RuleComponent implements OnInit {
           for (let field of fields) {
             for (let fieldSelected of this.fieldsNenhum) {
               if (field._id == fieldSelected._id) {
-                this.fieldsRuleViewNenhum.push(fieldSelected);
+                var contains = false;
+                for(let field of this.fieldsRuleViewNenhum) {
+                  if(field._id == fieldSelected._id) {
+                    contains = true;
+                  }
+                }
+
+                if(contains == false) {
+                  this.fieldsRuleViewNenhum.push(fieldSelected);
+                }
               }
             }
           }

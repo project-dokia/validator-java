@@ -47,8 +47,21 @@ public class ValidatorController {
 		FieldController fieldController = new FieldController();
 		List<Field> fields = fieldController.setValuesFields(document.getInputs(), rule.getFields());
 
+		List<Field> fieldsRule = new ArrayList<Field>();
+		for (Field field : rule.getFields()) {
+			for (Field fieldOriginal : fields) {
+				if (field.get_id().equals(fieldOriginal.get_id())) {
+					if (field.getValue() != null) {
+						if (!field.getValue().equals("")) {
+							fieldsRule.add(field);
+						}
+					}
+				}
+			}
+		}
+
 		List<ResultValidator> results = new ArrayList<ResultValidator>();
-		results = fieldController.documentVersusRule(fields, types);
+		results = fieldController.documentVersusRule(fieldsRule, types);
 
 		ArrayList<Result> resultsValidator = new ArrayList<Result>();
 
