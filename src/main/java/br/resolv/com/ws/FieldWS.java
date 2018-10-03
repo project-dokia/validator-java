@@ -42,12 +42,18 @@ public class FieldWS {
 		CloudantFactory cloudantFactory = new CloudantFactory();
 		String _id = cloudantFactory.insert(field, conn);
 		
-		RuleController ruleController = new RuleController();
-		Rule rule = ruleController.getRuleById("90ad561435df4489b29e9fa8b4540315", conn);
+//		RuleController ruleController = new RuleController();
+//		Rule rule = ruleController.getRuleById("90ad561435df4489b29e9fa8b4540315", conn);
 		
-		rule.getFields().add(field);
+//		List<Rule> rules = ruleController.getRules(conn);
+//		
+//		if(rules != null) {
+//			for(Rule rule : rules) {
+//				rule.getFields().add(field);
+//				conn.update(rule);
+//			}
+//		}
 		
-		conn.update(rule);
 		
 		return Response.status(200).entity("{\"_id\": \"" +  _id + "\"}").build();
 	}
@@ -74,18 +80,24 @@ public class FieldWS {
 		conn.update(fieldUpdate);
 		
 		RuleController ruleController = new RuleController();
-		Rule rule = ruleController.getRuleById("90ad561435df4489b29e9fa8b4540315", conn);
 		
-		int count = 0;
-		for(Field field : rule.getFields()) {
-			if(fieldUpdate.get_id().equals(field.get_id())) {
-				rule.getFields().set(count, fieldUpdate);
+		List<Rule> rules = ruleController.getRules(conn);
+		
+		if(rules != null) {
+			for(Rule rule : rules) {
+				int count = 0;
+				for(Field field : rule.getFields()) {
+					if(fieldUpdate.get_id().equals(field.get_id())) {
+						rule.getFields().set(count, fieldUpdate);
+						
+					}
+					count++;
+				}
 				
+				conn.update(rule);
 			}
-			count++;
 		}
 		
-		conn.update(rule);
 		
 		return Response.status(200).entity(true).build();
 	}
