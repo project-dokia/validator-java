@@ -51,11 +51,11 @@ public class ValidatorController {
 		for (Field field : rule.getFields()) {
 			for (Field fieldOriginal : fields) {
 				if (field.get_id().equals(fieldOriginal.get_id())) {
-					if (field.getValue() != null) {
-						if (!field.getValue().equals("")) {
+//					if (field.getValue() != null) {
+//						if (!field.getValue().equals("")) {
 							fieldsRule.add(field);
-						}
-					}
+//						}
+//					}
 				}
 			}
 		}
@@ -187,9 +187,30 @@ public class ValidatorController {
 							result.getPercentage(), result.getPercentageResult()));
 				}
 			}
-
 		}
-
-		return resultsValidator;
+		
+		ArrayList<Result> resultSelectedValidator = new ArrayList<Result>();
+		
+		for(Result result : resultsValidator) {
+				boolean contains = false;
+				for(Result resultSelected : resultSelectedValidator) {
+					if(result.getTitle().equals(resultSelected.getTitle())) {
+						if(result.getDescriptionType().equals(resultSelected.getDescriptionType())) {
+							if(result.getTitleOther().equals(resultSelected.getTitleOther())) {
+								if(result.getValue().equals(resultSelected.getValue())) {
+									contains = true;
+								}	
+							}
+						}
+					}
+				}
+				
+				if(contains == false) {
+					resultSelectedValidator.add(result);
+				}
+						
+		}
+		
+		return resultSelectedValidator;
 	}
 }

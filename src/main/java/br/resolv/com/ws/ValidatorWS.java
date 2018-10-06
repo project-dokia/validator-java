@@ -42,8 +42,8 @@ public class ValidatorWS {
 		int hours = new Date().getHours();
 		int minute = new Date().getMinutes();
 
-		conn.save(new LogRequestValidator(document, result, hours + ":" + (minute < 10 ? "0" + minute : minute),
-				day + "/" + month, "OK"));
+		conn.save(new LogRequestValidator(document, result, (hours < 10 ? "0" + hours : hours) + ":" + (minute < 10 ? "0" + minute : minute),
+				(day < 10 ? "0" + day : day) + "/" + (month < 10 ? "0" + month : month), "OK"));
 
 		return Response.status(200).entity(result).build();
 	}
