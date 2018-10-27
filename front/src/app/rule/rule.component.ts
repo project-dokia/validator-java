@@ -47,6 +47,10 @@ export class RuleComponent implements OnInit {
   fieldAddrule: string;
   fieldAddruleOtherId: string;
 
+  importantAcceptancePercentage: String
+  acceptancePercentage: String;
+  idRuleUpdate: String;
+
   _id: string;
   ngOnInit() {
 
@@ -302,6 +306,14 @@ export class RuleComponent implements OnInit {
 
   }
 
+  public saveUpdate() {
+    this.ruleService.updatePercentageObservable(this.idRuleUpdate, this.importantAcceptancePercentage, this.acceptancePercentage)
+      .subscribe(res => {
+        alert("Update Success!");
+      }, err => {
+        console.log(err);
+      })
+  }
 
   public view(_id: string, rule: string) {
     if (_id != undefined) {
@@ -311,6 +323,10 @@ export class RuleComponent implements OnInit {
           if (rule != "") {
             this.ruleTitle = rule;
           }
+
+          this.importantAcceptancePercentage = res.importantAcceptancePercentage;
+          this.acceptancePercentage = res.acceptancePercentage
+          this.idRuleUpdate = res._id;
 
           var fields = res.fields;
 
@@ -323,26 +339,28 @@ export class RuleComponent implements OnInit {
                 if (field.idType == "fecde76de43641609a7da3a6a2014642") {
 
                   var contains = false;
-                  for(let field of this.fieldsRuleViewNenhum) {
-                    if(field._id == fieldSelected._id) {
+                  for (let field of this.fieldsRuleViewNenhum) {
+                    if (field._id == fieldSelected._id) {
                       contains = true;
                     }
                   }
 
-                  if(contains == false) {
+                  if (contains == false) {
                     this.fieldsRuleViewNenhum.push(fieldSelected);
                   }
                 } else {
                   var contains = false;
-                  for(let field of this.fieldsRuleView) {
-                    if(field._id == fieldSelected._id) {
+                  for (let field of this.fieldsRuleView) {
+                    if (field._id == fieldSelected._id) {
                       contains = true;
                     }
                   }
 
-                  if(contains == false) {
+                  if (contains == false) {
                     this.fieldsRuleView.push(fieldSelected);
                   }
+
+
 
                 }
               }
@@ -353,13 +371,13 @@ export class RuleComponent implements OnInit {
             for (let fieldSelected of this.fieldsNenhum) {
               if (field._id == fieldSelected._id) {
                 var contains = false;
-                for(let field of this.fieldsRuleViewNenhum) {
-                  if(field._id == fieldSelected._id) {
+                for (let field of this.fieldsRuleViewNenhum) {
+                  if (field._id == fieldSelected._id) {
                     contains = true;
                   }
                 }
 
-                if(contains == false) {
+                if (contains == false) {
                   this.fieldsRuleViewNenhum.push(fieldSelected);
                 }
               }

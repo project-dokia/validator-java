@@ -12,6 +12,7 @@ import { ModelService } from '../../service/model.service';
 import { Document } from '../../model/document';
 import { ValidatorService } from '../../service/validator.service';
 import { Result } from '../../model/result';
+import { ResultRule } from '../../model/result-rule';
 
 @Component({
   selector: 'app-validator',
@@ -35,6 +36,12 @@ export class ValidatorComponent implements OnInit {
   models: Model[];
   fields: Field[];
   types: Type[];
+
+  resultDokia:String;
+  resultPercentageImportant:String;
+  importantAcceptancePercentage:String;
+  resultPercentage:String;
+  acceptancePercentage:String;
 
   rule: Rule;
   ngOnInit() {
@@ -183,9 +190,15 @@ export class ValidatorComponent implements OnInit {
     document.inputs = inputs;
     document.idRule = this.rule._id;
 
-    this.validatorService.insertValidatorObservable(document).subscribe((res: Array<Result>) => {
+    this.validatorService.insertValidatorObservable(document).subscribe((res: ResultRule) => {
       let result = Array<Result>();
-      result = res;
+      result = res.result;
+
+      this.resultDokia = String(res.resultDokia);
+      this.resultPercentageImportant = String(res.resultPercentageImportant);
+      this.importantAcceptancePercentage = String(res.importantAcceptancePercentage);
+      this.resultPercentage = String(res.resultPercentage);
+      this.acceptancePercentage = String(res.acceptancePercentage);
 
       let count = 0;
       for(let fields of this.rule.fields) {

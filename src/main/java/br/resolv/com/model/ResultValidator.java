@@ -15,9 +15,11 @@ public class ResultValidator {
 	private String idModel;
 	private double percentage;
 	private double percentageResult;
+	private boolean important;
 
 	public ResultValidator(String idField, Object value, boolean result, String titleValidator, String descriptionType,
-			boolean dependency, String idDependency, String idModel, String idOther, double percentage, double percentageResult) {
+			boolean dependency, String idDependency, String idModel, String idOther, double percentage,
+			double percentageResult, boolean important) {
 		this.idField = idField;
 		this.value = value;
 		this.result = result;
@@ -29,15 +31,12 @@ public class ResultValidator {
 		this.idOther = idOther;
 		this.percentage = percentage;
 		this.percentageResult = percentageResult;
+		this.important = important;
 	}
 
-	
-	
 	public String getIdOther() {
 		return idOther;
 	}
-
-
 
 	public void setIdOther(String idOther) {
 		this.idOther = idOther;
@@ -47,13 +46,9 @@ public class ResultValidator {
 		return idModel;
 	}
 
-
-
 	public void setIdModel(String idModel) {
 		this.idModel = idModel;
 	}
-
-
 
 	public boolean isDependency() {
 		return dependency;
@@ -127,25 +122,25 @@ public class ResultValidator {
 		this.descriptionType = descriptionType;
 	}
 
-
-
 	public double getPercentage() {
 		return percentage;
 	}
-
-
 
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
 	}
 
-
-
 	public double getPercentageResult() {
 		return percentageResult;
 	}
 
+	public boolean isImportant() {
+		return important;
+	}
 
+	public void setImportant(boolean important) {
+		this.important = important;
+	}
 
 	public void setPercentageResult(double percentageResult) {
 		this.percentageResult = percentageResult;

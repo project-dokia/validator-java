@@ -24,4 +24,6 @@ export class Field {
 	result:String;
 	percentage: number;
 	percentageResult: number;
+
+	important:boolean;
 }

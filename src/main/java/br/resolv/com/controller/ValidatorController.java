@@ -99,7 +99,7 @@ public class ValidatorController {
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
 									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
-									result.getPercentage(), result.getPercentageResult()));
+									result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 						} else {
 
 							// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
@@ -110,7 +110,7 @@ public class ValidatorController {
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
 									result.getDescriptionType(), fieldOther, valueOther, modelDescription, false,
-									result.getPercentage(), result.getPercentageResult()));
+									result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 						}
 
 					} else {
@@ -142,7 +142,7 @@ public class ValidatorController {
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
 									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
-									result.getPercentage(), result.getPercentageResult()));
+									result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 
 						} else {
 
@@ -162,7 +162,7 @@ public class ValidatorController {
 							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 									result.getTitleValidator(), result.getValue().toString(),
 									result.getDescriptionType(), fieldOther, valueOther, modelDescription, false,
-									result.getPercentage(), result.getPercentageResult()));
+									result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 						}
 					}
 				} else {
@@ -184,7 +184,7 @@ public class ValidatorController {
 
 					resultsValidator.add(new Result(result.getIdField(), result.isResult(), result.getTitleValidator(),
 							result.getValue().toString(), result.getDescriptionType(), "", "", modelDescription, false,
-							result.getPercentage(), result.getPercentageResult()));
+							result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 				}
 			}
 		}

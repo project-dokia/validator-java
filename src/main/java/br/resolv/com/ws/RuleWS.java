@@ -26,12 +26,12 @@ import br.resolv.com.model.Rule;
 import br.resolv.com.util.JavaException;
 import br.resolv.com.util.MyUtils;
 
-
 @Path("/rule")
 public class RuleWS {
 
-	@Context HttpServletRequest request;
-	
+	@Context
+	HttpServletRequest request;
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -39,67 +39,77 @@ public class RuleWS {
 		Database conn = MyUtils.getStoredConnection(request);
 		CloudantFactory cloudantFactory = new CloudantFactory();
 		String _id = cloudantFactory.insert(rule, conn);
-		return Response.status(200).entity("{\"_id\": \"" +  _id + "\"}").build();
+		return Response.status(200).entity("{\"_id\": \"" + _id + "\"}").build();
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/remove-field")
 	public Response removeFieldFromRule(FieldRule fieldRule) throws JavaException {
-		Database conn = MyUtils.getStoredConnection(request);	
+		Database conn = MyUtils.getStoredConnection(request);
 		RuleController ruleController = new RuleController();
-		return Response.status(200).entity("{\"result\": \"" +  ruleController.removeFieldFromRule(fieldRule, conn) + "\"}").build();
+		return Response.status(200)
+				.entity("{\"result\": \"" + ruleController.removeFieldFromRule(fieldRule, conn) + "\"}").build();
 	}
-	
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/add-field")
 	public Response addFieldFromRule(FieldRule fieldRule) throws JavaException {
-		Database conn = MyUtils.getStoredConnection(request);	
+		Database conn = MyUtils.getStoredConnection(request);
 		RuleController ruleController = new RuleController();
-		return Response.status(200).entity("{\"result\": \"" +  ruleController.addFieldFromRule(fieldRule, conn) + "\"}").build();
+		return Response.status(200).entity("{\"result\": \"" + ruleController.addFieldFromRule(fieldRule, conn) + "\"}")
+				.build();
 	}
-	
+
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/update-percentage/{idRule}/{importantAcceptancePercentage}/{acceptancePercentage}")
+	public Response updatePercentage(
+			@PathParam("idRule") String idRule,
+			@PathParam("importantAcceptancePercentage") String importantAcceptancePercentage,
+			@PathParam("acceptancePercentage") String acceptancePercentage) throws JavaException {
+		Database conn = MyUtils.getStoredConnection(request);
+		RuleController ruleController = new RuleController();
+		return Response.status(200).entity("{\"result\": \"" + ruleController.updatePercentage(idRule, importantAcceptancePercentage, acceptancePercentage, conn) + "\"}")
+				.build();
+	}
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{_id}")
 	public Response getRuleById(@PathParam("_id") String _id) {
 		Database conn = MyUtils.getStoredConnection(request);
-		
+
 		RuleController ruleController = new RuleController();
 		Rule rule = ruleController.getRuleById(_id, conn);
-		
-		return Response.status(200).entity(rule).build(); 
+
+		return Response.status(200).entity(rule).build();
 	}
-	
+
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAll() {
 		Database conn = MyUtils.getStoredConnection(request);
 
 		List<Rule> rules = new ArrayList<Rule>();
-		
+
 		try {
-			ViewResponse<String, Rule> response  = conn.getViewRequestBuilder("rule", "rule-view")
-			.newRequest(Key.Type.STRING, Rule.class)
-			.limit(50)
-			.includeDocs(true)
-			.build()
-			.getResponse();
-			
-			
-			for(Rule rowRule : response.getValues()) {
+			ViewResponse<String, Rule> response = conn.getViewRequestBuilder("rule", "rule-view")
+					.newRequest(Key.Type.STRING, Rule.class).limit(50).includeDocs(true).build().getResponse();
+
+			for (Rule rowRule : response.getValues()) {
 				rules.add(rowRule);
 			}
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return Response.status(200).entity(rules).build(); 
+
+		return Response.status(200).entity(rules).build();
 	}
 }

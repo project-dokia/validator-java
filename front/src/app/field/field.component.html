@@ -82,6 +82,17 @@
         </div>
       </div>
       <div class="row m-2">
+        <div class="col-3 text-right">
+          <h5>Important</h5>
+        </div>
+        <div class="col-9">
+          <td class="text-center">
+            <label>
+              <input type="checkbox" [(ngModel)]="field.important" class="gap-top5"> Yes</label>
+          </td>
+        </div>
+      </div>
+      <div class="row m-2">
         <div class="col-6 offset-6 text-right">
           <input type="button" value="INSERT" class="btn btn-primary form-control" (click)="insertField()">
         </div>
@@ -110,6 +121,7 @@
                   <th>Percentage</th>
                   <!-- <th>Dependency</th> -->
                   <!-- <th>Dependency ID</th> -->
+                  <th>Important</th>
                   <th>Edit</th>
                 </tr>
               </thead>
@@ -123,6 +135,8 @@
                   <td>{{field.titleId}}</td>
                   <td>{{field.titleModelId}}</td>
                   <td>{{field.percentage == 100 || field.percentage == 0 ? '' : field.percentage}}</td>
+                  <td>{{field.important == undefined || field.important == false ? 'NO' : 'YES'}}</td>
+
                   <!-- <td>{{field.dependency}}</td> -->
                   <!-- <td>{{field.idDependency}}</td> -->
                   <td>
@@ -270,6 +284,17 @@
               <select class="form-control" [(ngModel)]="fieldEdit.idDependency">
                 <option *ngFor="let field of fields" value="{{fieldEdit._id}}">{{fieldEdit.title}}</option>
               </select>
+            </div>
+          </div>
+          <div class="row m-2">
+            <div class="col-3 text-right">
+              <h5>Important</h5>
+            </div>
+            <div class="col-9">
+              <td class="text-center">
+                <label>
+                  <input type="checkbox" [(ngModel)]="fieldEdit.important" class="gap-top5"> Yes</label>
+              </td>
             </div>
           </div>
         </div>

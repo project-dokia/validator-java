@@ -14,6 +14,7 @@ public class Field {
 	private boolean dependency;
 	private String idDependency;
 	private double percentage;
+	private boolean important;
 	
 	
 	public Field() {
@@ -173,5 +174,13 @@ public class Field {
 
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
+	}
+
+	public boolean isImportant() {
+		return important;
+	}
+
+	public void setImportant(boolean important) {
+		this.important = important;
 	}
 }

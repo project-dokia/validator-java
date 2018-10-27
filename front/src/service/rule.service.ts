@@ -21,6 +21,10 @@ export class RuleService {
   }
 
 
+  updatePercentageObservable(idRule: String, importantAcceptancePercentage: String, acceptancePercentage: String) : Observable<Object> {
+    return this.http.post<Object>(this.ruleURL + "/update-percentage/" + idRule + "/" + importantAcceptancePercentage + "/" + acceptancePercentage, {});
+  }
+
 
   getRulesObservable(): Observable<Object> {
     return this.http.get<Rule[]>(this.ruleURL)

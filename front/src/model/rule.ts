@@ -6,4 +6,6 @@ export class Rule {
     fields: Field[];
     type: String;
     description: String;
+    acceptancePercentage:String;
+    importantAcceptancePercentage:String;
 }

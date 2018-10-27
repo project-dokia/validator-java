@@ -9,6 +9,8 @@ public class Rule {
 	private List<Field> fields;
 	private String type;
 	private String description;
+	private String acceptancePercentage;
+	private String importantAcceptancePercentage;
 
 	public Rule(String _id, List<Field> fields) {
 		this._id = _id;
@@ -78,5 +80,21 @@ public class Rule {
 
 	public void setId(String _id) {
 		this._id = _id;
+	}
+
+	public String getAcceptancePercentage() {
+		return acceptancePercentage;
+	}
+
+	public void setAcceptancePercentage(String acceptancePercentage) {
+		this.acceptancePercentage = acceptancePercentage;
+	}
+
+	public String getImportantAcceptancePercentage() {
+		return importantAcceptancePercentage;
+	}
+
+	public void setImportantAcceptancePercentage(String importantAcceptancePercentage) {
+		this.importantAcceptancePercentage = importantAcceptancePercentage;
 	}
 }

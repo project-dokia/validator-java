@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
 import { Observable } from 'rxjs';
 import { Document } from '../model/document';
+import { ResultRule } from '../model/result-rule';
 // import { input } from '../model/input';
 
 @Injectable({
@@ -19,8 +20,8 @@ export class ValidatorService {
 //     return this.http.get<validator[]>(this.validatorURL)
 //   }
 
-  insertValidatorObservable(document: Document) : Observable<Object> {
-    return this.http.post<Object>(this.validatorURL, document);
+  insertValidatorObservable(document: Document) : Observable<ResultRule> {
+    return this.http.post<ResultRule>(this.validatorURL, document);
   }
 
 }

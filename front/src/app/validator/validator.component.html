@@ -31,6 +31,34 @@
   <div class="card m-2">
     <div class="card-body">
       <h4 class="card-text">Lista</h4>
+
+      <div class="row m-2" *ngIf="rule.fields != undefined">
+        <div class="col-12">
+          	<div class="row">
+              <div class="col-4 text-left" *ngIf="resultDokia != undefined"><h5>Result Dokia</h5></div>
+              <div class="col-2"><h4>{{resultDokia}}</h4></div>
+            </div>
+            <div class="row">
+              <div class="col-4 text-left" *ngIf="resultPercentageImportant != undefined"><h5>Result Percentage Important</h5></div>
+              <div class="col-2"><h4>{{resultPercentageImportant}}</h4></div>
+            </div>
+            <div class="row">
+              <div class="col-4 text-left" *ngIf="importantAcceptancePercentage != undefined"><h5>Important Acceptance Percentage</h5></div>
+              <div class="col-2"><h4>{{importantAcceptancePercentage}}</h4></div>
+            </div>
+            <div class="row">
+              <div class="col-4 text-left" *ngIf="resultPercentage != undefined"><h5>Result Percentage</h5></div>
+              <div class="col-2"><h4>{{resultPercentage}}</h4></div>
+            </div>
+            <div class="row">
+              <div class="col-4 text-left" *ngIf="acceptancePercentage != undefined"><h5>Acceptance Percentage</h5></div>
+              <div class="col-2"><h4>{{acceptancePercentage}}</h4></div>
+            </div>
+
+        </div>
+      </div>
+
+
       <div class="row m-2">
         <div class="col-12">
           <div class="table-responsive">
@@ -60,7 +88,8 @@
                   <td>{{field.titleType}}</td>
                   <td>{{field.titleId}}</td>
                   <td>{{field.titleModelId}}</td>
-                  <td>{{field.percentage == 100 || field.percentage == 0 || field.percentage == undefined ? '' : field.percentage + '%'}}</td>
+                  <td>{{field.percentage == 100 || field.percentage == 0 || field.percentage == undefined ? '' : field.percentage
+                    + '%'}}</td>
                   <td>{{field.percentageResult == undefined || field.percentageResult == 0 ? '' : field.percentageResult + '%'}}</td>
                   <td>{{field.result}}</td>
                   <td>

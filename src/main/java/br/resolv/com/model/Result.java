@@ -13,7 +13,8 @@ public class Result {
 	private boolean exist;
 	private double percentage;
 	private double percentageResult;
-	
+	private boolean important;
+
 	public double getPercentage() {
 		return percentage;
 	}
@@ -83,7 +84,8 @@ public class Result {
 	}
 
 	public Result(String idField, boolean result, String title, String value, String descriptionType, String titleOther,
-			String valueOther, String model, boolean exist, double percentage, double percentageResult) {
+			String valueOther, String model, boolean exist, double percentage, double percentageResult,
+			boolean important) {
 		this.idField = idField;
 		this.result = result;
 		this.title = title;
@@ -95,10 +97,17 @@ public class Result {
 		this.exist = exist;
 		this.percentage = percentage;
 		this.percentageResult = percentageResult;
+		this.important = important;
 	}
 
-	
-	
+	public boolean isImportant() {
+		return important;
+	}
+
+	public void setImportant(boolean important) {
+		this.important = important;
+	}
+
 	public boolean isExist() {
 		return exist;
 	}

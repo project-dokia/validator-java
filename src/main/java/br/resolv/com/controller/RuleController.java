@@ -28,11 +28,35 @@ public class RuleController {
 		return rules.get(0);
 	}
 
+	public boolean updatePercentage(String idRule, String importantAcceptancePercentage, String acceptancePercentage,
+			Database conn) {
+		List<Rule> list = conn.findByIndex("{\"_id\": \"" + idRule + "\"}", Rule.class, new FindByIndexOptions());
+
+		Rule rule = new Rule();
+		if (list != null) {
+			try {
+				rule = list.get(0);
+
+				rule.setAcceptancePercentage(acceptancePercentage);
+				rule.setImportantAcceptancePercentage(importantAcceptancePercentage);
+
+				conn.update(rule);
+
+				return true;
+			} catch (Exception e) {
+				return false;
+			}
+		} else {
+			return false;
+		}
+
+	}
+
 	public List<Rule> getRules(Database conn) {
 		ViewResponse<String, Rule> result = null;
 		try {
-			result = conn.getViewRequestBuilder("rule", "rule-view")
-					.newRequest(Key.Type.STRING, Rule.class).limit(5000).includeDocs(true).build().getResponse();
+			result = conn.getViewRequestBuilder("rule", "rule-view").newRequest(Key.Type.STRING, Rule.class).limit(5000)
+					.includeDocs(true).build().getResponse();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
