@@ -103,12 +103,21 @@ public class ValidatorController {
 						}
 
 						if (result.getValue() != null) {
-							if (result.getValue().equals("")) {
+							
+							if(fieldOther.equals("")) {
+								for(Field field :rule.getFields()) {
+									if(field.get_id().equals(field.getOtherId())) {
+										fieldOther = field.getTitle();
+									}
+								}
+							}
+							
+//							if (!result.getValue().equals("")) {
 								resultsValidator.add(new Result(result.getIdField(), result.isResult(),
 										result.getTitleValidator(), result.getValue().toString(),
 										result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
 										result.getPercentage(), result.getPercentageResult(), result.isImportant()));
-							}
+//							}
 						} else {
 
 							// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
