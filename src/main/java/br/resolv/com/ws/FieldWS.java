@@ -23,6 +23,7 @@ import com.cloudant.client.api.views.Key;
 import com.cloudant.client.api.views.ViewResponse;
 
 import br.resolv.com.controller.RuleController;
+import br.resolv.com.controller.SyncController;
 import br.resolv.com.factory.CloudantFactory;
 import br.resolv.com.model.Field;
 import br.resolv.com.model.Rule;
@@ -128,6 +129,16 @@ public class FieldWS {
 			e.printStackTrace();
 		}
 		
+		return Response.status(200).entity(fields).build(); 
+	}
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all")
+	public Response allFields() {
+		Database conn = MyUtils.getStoredConnection(request);
+		SyncController syncController = new SyncController(conn);
+		List<Field> fields = syncController.getFields();
 		return Response.status(200).entity(fields).build(); 
 	}
 	

@@ -4,14 +4,16 @@ import java.util.List;
 
 public class LogRequestValidator {
 
+	private String _id;
+	private String _rev;
 	private Document documentRequest;
-	private List<Result> result;
+	private ResultRule result;
 	private String requestTime;
 	private String requestDate;
 	private String status;
 	private String type;
 
-	public LogRequestValidator(Document documentRequest, List<Result> result, String requestTime, String requestDate,
+	public LogRequestValidator(Document documentRequest, ResultRule result, String requestTime, String requestDate,
 			String status) {
 		this.documentRequest = documentRequest;
 		this.result = result;
@@ -33,11 +35,11 @@ public class LogRequestValidator {
 		this.documentRequest = documentRequest;
 	}
 
-	public List<Result> getResult() {
+	public ResultRule getResult() {
 		return result;
 	}
 
-	public void setResult(List<Result> result) {
+	public void setResult(ResultRule result) {
 		this.result = result;
 	}
 
@@ -71,5 +73,21 @@ public class LogRequestValidator {
 
 	public void setRequestDate(String requestDate) {
 		this.requestDate = requestDate;
+	}
+
+	public String get_id() {
+		return _id;
+	}
+
+	public void set_id(String _id) {
+		this._id = _id;
+	}
+
+	public String get_rev() {
+		return _rev;
+	}
+
+	public void set_rev(String _rev) {
+		this._rev = _rev;
 	}
 }

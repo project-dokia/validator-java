@@ -15,6 +15,7 @@ public class  Document {
 	
 	public Document(String idRule, List<Input> inputs) {
 		this.idRule = idRule;
+		this.inputs = null;
 		this.inputs = inputs;
 	}
 

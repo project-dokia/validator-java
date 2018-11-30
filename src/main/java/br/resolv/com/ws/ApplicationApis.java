@@ -20,6 +20,7 @@ public class ApplicationApis extends Application {
         classes.add(RuleWS.class);
         classes.add(ModelWS.class);
         classes.add(FeedbackWS.class);
+        classes.add(SyncWS.class);
         return classes;
     }
 }

@@ -7,6 +7,7 @@ import com.cloudant.client.api.Database;
 
 import br.resolv.com.model.Document;
 import br.resolv.com.model.Field;
+import br.resolv.com.model.Input;
 import br.resolv.com.model.Model;
 import br.resolv.com.model.Result;
 import br.resolv.com.model.ResultValidator;
@@ -21,30 +22,12 @@ public class ValidatorController {
 		this.conn = conn;
 	}
 
-	public ValidatorController() {
-		this.conn = null;
-	}
-
-	private void sleep() {
-		try {
-			Thread.sleep(300);
-		} catch (InterruptedException ex) {
-		}
-	}
-
 	public List<Result> validate(Document document) {
-		RuleController ruleController = new RuleController();
-		Rule rule = ruleController.getRuleById(document.getIdRule(), conn);
-
-		TypeController typeController = new TypeController();
-		List<Type> types = typeController.getAllTypes(this.conn);
-
-		ModelController modelController = new ModelController();
-		List<Model> models = modelController.getAllModels(this.conn);
-
-		sleep();
-
+		SyncController syncController = new SyncController(conn);
 		FieldController fieldController = new FieldController();
+		Rule rule = syncController.ruleById(document.getIdRule());
+		List<Type> types = syncController.getTypes();
+		List<Model> models = syncController.getModels();
 		List<Field> fields = fieldController.setValuesFields(document.getInputs(), rule.getFields());
 
 		List<Field> fieldsRule = new ArrayList<Field>();
@@ -52,8 +35,32 @@ public class ValidatorController {
 			for (Field fieldOriginal : fields) {
 				if (field.get_id().equals(fieldOriginal.get_id())) {
 //					if (field.getValue() != null) {
+//					if (field.getValue() != null) {
 //						if (!field.getValue().equals("")) {
+					boolean contains = false;
+					for (Input input : document.getInputs()) {
+						if (input.getIdField().equals(field.get_id())) {
+							contains = true;
+						}
+					}
+
+					if (contains == true) {
+						boolean contains2 = false;
+
+						for (Field fieldsRulesIteration : fieldsRule) {
+							if (fieldsRulesIteration.get_id().equals(field.get_id())) {
+								contains2 = true;
+							}
+						}
+
+						if (!contains2)
 							fieldsRule.add(field);
+					} else {
+						field.setValue("");
+						fieldsRule.add(field);
+					}
+
+//					}
 //						}
 //					}
 				}
@@ -96,10 +103,12 @@ public class ValidatorController {
 						}
 
 						if (result.getValue() != null) {
-							resultsValidator.add(new Result(result.getIdField(), result.isResult(),
-									result.getTitleValidator(), result.getValue().toString(),
-									result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
-									result.getPercentage(), result.getPercentageResult(), result.isImportant()));
+							if (result.getValue().equals("")) {
+								resultsValidator.add(new Result(result.getIdField(), result.isResult(),
+										result.getTitleValidator(), result.getValue().toString(),
+										result.getDescriptionType(), fieldOther, valueOther, modelDescription, true,
+										result.getPercentage(), result.getPercentageResult(), result.isImportant()));
+							}
 						} else {
 
 							// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
@@ -165,52 +174,52 @@ public class ValidatorController {
 									result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 						}
 					}
-				} else {
-
-					// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
-
-					String modelDescription = "";
-
-					for (Model model : models) {
-						if (model.get_id().equals(result.getIdModel())) {
-							modelDescription = model.getDescription();
-						}
-					}
-
-					if (result.getValue() == null)
-						result.setValue("");
-
-					result.setResult(false);
-
-					resultsValidator.add(new Result(result.getIdField(), result.isResult(), result.getTitleValidator(),
-							result.getValue().toString(), result.getDescriptionType(), "", "", modelDescription, false,
-							result.getPercentage(), result.getPercentageResult(), result.isImportant()));
 				}
+//				else {
+//
+//					// CONDICAO ADICIONADA PARA RETORNAR TODOS OS RESULTADOS (MESMO QUE FALSE)
+//
+//					String modelDescription = "";
+//
+//					for (Model model : models) {
+//						if (model.get_id().equals(result.getIdModel())) {
+//							modelDescription = model.getDescription();
+//						}
+//					}
+//
+//					if (result.getValue() == null)
+//						result.setValue("");
+//
+//					result.setResult(false);
+//
+//					resultsValidator.add(new Result(result.getIdField(), result.isResult(), result.getTitleValidator(),
+//							result.getValue().toString(), result.getDescriptionType(), "", "", modelDescription, false,
+//							result.getPercentage(), result.getPercentageResult(), result.isImportant()));
+//				}
 			}
 		}
-		
+
 		ArrayList<Result> resultSelectedValidator = new ArrayList<Result>();
-		
-		for(Result result : resultsValidator) {
-				boolean contains = false;
-				for(Result resultSelected : resultSelectedValidator) {
-					if(result.getTitle().equals(resultSelected.getTitle())) {
-						if(result.getDescriptionType().equals(resultSelected.getDescriptionType())) {
-							if(result.getTitleOther().equals(resultSelected.getTitleOther())) {
-								if(result.getValue().equals(resultSelected.getValue())) {
-									contains = true;
-								}	
+
+		for (Result result : resultsValidator) {
+			boolean contains = false;
+			for (Result resultSelected : resultSelectedValidator) {
+				if (result.getTitle().equals(resultSelected.getTitle())) {
+					if (result.getDescriptionType().equals(resultSelected.getDescriptionType())) {
+						if (result.getTitleOther().equals(resultSelected.getTitleOther())) {
+							if (result.getValue().equals(resultSelected.getValue())) {
+								contains = true;
 							}
 						}
 					}
 				}
-				
-				if(contains == false) {
-					resultSelectedValidator.add(result);
-				}
-						
+			}
+
+			if (contains == false) {
+				resultSelectedValidator.add(result);
+			}
 		}
-		
+
 		return resultSelectedValidator;
 	}
 }

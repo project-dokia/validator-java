@@ -1,14 +1,20 @@
 package br.resolv.com.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cloudant.client.api.Database;
+import com.cloudant.client.api.views.Key;
+import com.cloudant.client.api.views.ViewResponse;
+
 import br.resolv.com.model.Field;
 import br.resolv.com.model.Input;
 import br.resolv.com.model.ResultValidator;
 import br.resolv.com.model.ResultVerifyRule;
+import br.resolv.com.model.Rule;
 import br.resolv.com.model.Type;
 import br.resolv.com.util.Comparator;
 
@@ -34,15 +40,17 @@ public class FieldController {
 					if (validatorEquals.get_id().equals(field.getOtherId())) {
 						if (field.getValue() != null && validatorEquals.getValue() != null) {
 							if (command.equals("equals")) {
-								percentage = printSimilarity(validatorEquals.getValue().toString(), field.getValue().toString());
-								
+								percentage = printSimilarity(validatorEquals.getValue().toString(),
+										field.getValue().toString());
+
 								if (percentage >= field.getPercentage()) {
 									result = true;
 								} else {
 									result = false;
 								}
 							} else if (command.equals("menor_igual_data")) {
-								return new ResultVerifyRule(verifyDate(validatorEquals.getValue(), field.getValue()), 100);
+								return new ResultVerifyRule(verifyDate(validatorEquals.getValue(), field.getValue()),
+										100);
 							}
 
 						}
@@ -55,10 +63,10 @@ public class FieldController {
 
 	public boolean verifyDate(Object dateInitial, Object dateFinal) {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
+
 		String strDateInitial = dateInitial.toString(); // "28/04/2018";
 		String strDateFinal = dateFinal.toString(); // "25/04/2018";
-	
+
 		try {
 			java.util.Date dtInitial = sdf.parse(strDateInitial);
 			java.util.Date dtFinal = sdf.parse(strDateFinal);
@@ -106,8 +114,13 @@ public class FieldController {
 						} else if (type.getCommand().equals("menor_igual_data")) {
 							resultVerifyRule = verifyRule(field, fields, "menor_igual_data");
 						}
-						
-						results.add(new ResultValidator(field.get_id(), field.getValue(), resultVerifyRule.isResult(), field.getTitle(), type.getDescription(), field.isDependency(), field.getIdDependency(), field.getIdModel(), field.getOtherId(), field.getPercentage(), resultVerifyRule.getPercentage(), field.isImportant()));
+
+						ResultValidator resultValidator = new ResultValidator(field.get_id(), field.getValue(),
+								resultVerifyRule.isResult(), field.getTitle(), type.getDescription(),
+								field.isDependency(), field.getIdDependency(), field.getIdModel(), field.getOtherId(),
+								field.getPercentage(), resultVerifyRule.getPercentage(), field.isImportant());
+
+						results.add(resultValidator);
 					}
 				}
 			}
@@ -129,50 +142,73 @@ public class FieldController {
 
 		return results;
 	}
-	
+
 	public static double similarity(String s1, String s2) {
-        String longer = s1, shorter = s2;
-        if (s1.length() < s2.length()) { // longer should always have greater length
-            longer = s2; shorter = s1;
-        }
-        int longerLength = longer.length();
-        if (longerLength == 0) { return 1.0; /* both strings are zero length */ }
-        /* // If you have StringUtils, you can use it to calculate the edit distance:
-        return (longerLength - StringUtils.getLevenshteinDistance(longer, shorter)) /
-                                                             (double) longerLength; */
-        return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
- 
-    }
- 
-    public static int editDistance(String s1, String s2) {
-        s1 = s1.toLowerCase();
-        s2 = s2.toLowerCase();
- 
-        int[] costs = new int[s2.length() + 1];
-        for (int i = 0; i <= s1.length(); i++) {
-            int lastValue = i;
-            for (int j = 0; j <= s2.length(); j++) {
-                if (i == 0)
-                    costs[j] = j;
-                else {
-                    if (j > 0) {
-                        int newValue = costs[j - 1];
-                        if (s1.charAt(i - 1) != s2.charAt(j - 1))
-                            newValue = Math.min(Math.min(newValue, lastValue),
-                                    costs[j]) + 1;
-                        costs[j - 1] = lastValue;
-                        lastValue = newValue;
-                    }
-                }
-            }
-            if (i > 0)
-                costs[s2.length()] = lastValue;
-        }
-        return costs[s2.length()];
-    }
- 
-    public double printSimilarity(String s, String t) {
-        return (similarity(s, t) * 100);
-    }
+		String longer = s1, shorter = s2;
+		if (s1.length() < s2.length()) { // longer should always have greater length
+			longer = s2;
+			shorter = s1;
+		}
+		int longerLength = longer.length();
+		if (longerLength == 0) {
+			return 1.0;
+			/* both strings are zero length */ }
+		/*
+		 * // If you have StringUtils, you can use it to calculate the edit distance:
+		 * return (longerLength - StringUtils.getLevenshteinDistance(longer, shorter)) /
+		 * (double) longerLength;
+		 */
+		return (longerLength - editDistance(longer, shorter)) / (double) longerLength;
+
+	}
+
+	public static int editDistance(String s1, String s2) {
+		s1 = s1.toLowerCase();
+		s2 = s2.toLowerCase();
+
+		int[] costs = new int[s2.length() + 1];
+		for (int i = 0; i <= s1.length(); i++) {
+			int lastValue = i;
+			for (int j = 0; j <= s2.length(); j++) {
+				if (i == 0)
+					costs[j] = j;
+				else {
+					if (j > 0) {
+						int newValue = costs[j - 1];
+						if (s1.charAt(i - 1) != s2.charAt(j - 1))
+							newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+						costs[j - 1] = lastValue;
+						lastValue = newValue;
+					}
+				}
+			}
+			if (i > 0)
+				costs[s2.length()] = lastValue;
+		}
+		return costs[s2.length()];
+	}
+
+	public double printSimilarity(String s, String t) {
+		return (similarity(s, t) * 100);
+	}
+
+	public List<Field> getAllDocument(Database conn) {
+		List<Field> fields = new ArrayList<Field>();
+
+		try {
+			ViewResponse<String, Field> response = conn.getViewRequestBuilder("field", "field-view")
+					.newRequest(Key.Type.STRING, Field.class).limit(50).includeDocs(true).build().getResponse();
+
+			for (Field rowRule : response.getValues()) {
+				fields.add(rowRule);
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return fields;
+	}
 
 }

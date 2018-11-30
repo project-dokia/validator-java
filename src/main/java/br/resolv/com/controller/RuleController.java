@@ -18,6 +18,7 @@ import br.resolv.com.factory.CloudantFactory;
 import br.resolv.com.model.Field;
 import br.resolv.com.model.FieldRule;
 import br.resolv.com.model.Rule;
+import br.resolv.com.util.MyUtils;
 
 public class RuleController {
 
@@ -26,6 +27,25 @@ public class RuleController {
 		List<Rule> rules = conn.query(new QueryBuilder(operationSelector).build(), Rule.class).getDocs();
 
 		return rules.get(0);
+	}
+	
+	public List<Rule> getAllDocument(Database conn) {
+		List<Rule> rules = new ArrayList<Rule>();
+
+		try {
+			ViewResponse<String, Rule> response = conn.getViewRequestBuilder("rule", "rule-view")
+					.newRequest(Key.Type.STRING, Rule.class).limit(50).includeDocs(true).build().getResponse();
+
+			for (Rule rowRule : response.getValues()) {
+				rules.add(rowRule);
+			}
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return rules;
 	}
 
 	public boolean updatePercentage(String idRule, String importantAcceptancePercentage, String acceptancePercentage,
