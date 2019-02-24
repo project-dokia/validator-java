@@ -49,7 +49,7 @@ public class FieldController {
 									result = false;
 								}
 							} else if (command.equals("menor_igual_data")) {
-								return new ResultVerifyRule(verifyDate(validatorEquals.getValue(), field.getValue()),
+								return new ResultVerifyRule(verifyDate(field.getValue(), validatorEquals.getValue()),
 										100);
 							}
 
