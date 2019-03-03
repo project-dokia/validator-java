@@ -17,6 +17,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpsRequestInterceptor, HTTPStatus } from '../service/interceptor.module';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { HistoryComponent } from './history/history.component';
+import { AdminComponent } from './admin/admin.component';
+import { TypeAccessComponent } from './admin/type-access/type-access.component';
+import { AddTypeAccessComponent } from './admin/type-access/add/add-type-access.component';
 
 const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
 
@@ -30,6 +33,9 @@ const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
     HistoryComponent,
     ValidatorComponent,
     ModelComponent,
+    AdminComponent,
+    TypeAccessComponent,
+    AddTypeAccessComponent,
   ],
   imports: [
     NgbModule.forRoot(),

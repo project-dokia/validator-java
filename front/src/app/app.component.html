@@ -1,11 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" routerLinkActive="active" routerLink="/validator">Dok.IA Rules</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-    aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" routerLink="/admin">Admin</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" routerLinkActive="active" routerLink="/type">Type</a>
       </li>
@@ -27,7 +30,7 @@
     </ul>
   </div>
   <form class="form-inline my-2 my-lg-0">
-      <strong class=" mr-sm-2 white">Last update {{lastSync}}</strong>
+    <strong class=" mr-sm-2 white">Last update {{lastSync}}</strong>
     <button class="btn btn-outline-primary my-2 my-sm-0" type="button" (click)="sync();">Sync</button>
   </form>
 </nav>

@@ -8,9 +8,16 @@ import { ValidatorComponent } from './validator/validator.component';
 import { ModelComponent } from './model/model.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { HistoryComponent } from './history/history.component';
+import { AdminComponent } from './admin/admin.component';
+import { TypeAccessComponent } from './admin/type-access/type-access.component';
+import { AddTypeAccessComponent } from './admin/type-access/add/add-type-access.component';
 
 
 const routes: Routes = [
+  { path: 'admin', component: AdminComponent },
+  { path: 'admin/type-access', component: TypeAccessComponent },
+  { path: 'admin/type-access/add', component: AddTypeAccessComponent },
+  { path: 'admin/type-access/edit', component: AddTypeAccessComponent },
   { path: 'type', component: TypeComponent },
   { path: 'field', component: FieldComponent },
   { path: 'rule', component: RuleComponent },
