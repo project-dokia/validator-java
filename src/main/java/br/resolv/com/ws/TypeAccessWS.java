@@ -1,5 +1,9 @@
 package br.resolv.com.ws;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,10 +16,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.cloudant.client.api.Database;
+import com.cloudant.client.api.views.Key;
+import com.cloudant.client.api.views.ViewResponse;
 
-import br.resolv.com.controller.RuleController;
 import br.resolv.com.controller.TypeAccessController;
-import br.resolv.com.model.FieldRule;
+import br.resolv.com.factory.CloudantFactory;
+import br.resolv.com.model.Model;
+import br.resolv.com.model.TypeAccess;
 import br.resolv.com.util.JavaException;
 import br.resolv.com.util.MyUtils;
 
@@ -27,8 +34,8 @@ public class TypeAccessWS {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/all-permissions")
 	public Response getFieldById(@PathParam("_id") String _id) {
-//		Database conn = MyUtils.getStoredConnection(request);
 	
 		TypeAccessController typeAccessController = new TypeAccessController();
 		return Response.status(200).entity(typeAccessController.getAllPermissions()).build();
@@ -38,12 +45,40 @@ public class TypeAccessWS {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/add-field")
-	public Response addFieldFromRule(FieldRule fieldRule) throws JavaException {
+	public Response insert(TypeAccess typeAccess) throws JavaException {
 		Database conn = MyUtils.getStoredConnection(request);
-		RuleController ruleController = new RuleController();
-		return Response.status(200).entity("{\"result\": \"" + ruleController.addFieldFromRule(fieldRule, conn) + "\"}")
-				.build();
+		CloudantFactory cloudantFactory = new CloudantFactory();
+		String _id = cloudantFactory.insert(typeAccess, conn);
+
+		return Response.status(200).entity("{\"_id\": \"" +  _id + "\"}").build();
+	}	
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getAll() {
+		Database conn = MyUtils.getStoredConnection(request);
+	
+		List<TypeAccess> typesAccess = new ArrayList<TypeAccess>();
+		
+		try {
+			ViewResponse<String, TypeAccess> response  = conn.getViewRequestBuilder("type-access", "type-access-view")
+			.newRequest(Key.Type.STRING, TypeAccess.class)
+			.limit(50)
+			.includeDocs(true)
+			.build()
+			.getResponse();
+			
+			
+			for(TypeAccess rowModel : response.getValues()) {
+				typesAccess.add(rowModel);
+			}
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return Response.status(200).entity(typesAccess).build(); 
 	}
 	
 }

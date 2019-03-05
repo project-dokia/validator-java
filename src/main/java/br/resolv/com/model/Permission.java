@@ -7,6 +7,10 @@ public class Permission {
 	private boolean enable;
 	
 	
+	public Permission() {
+		
+	}
+	
 	public Permission(String title, String description, boolean enable) {
 		this.title = title;
 		this.enable = enable;

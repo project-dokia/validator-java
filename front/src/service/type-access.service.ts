@@ -17,7 +17,11 @@ export class TypeAccessService {
   private typeAccessURL = environment.apiUrl + '/type-access';
 
   getAllPermissions(): Observable<Array<Permission>> {
-    return this.http.get<Array<Permission>>(this.typeAccessURL)
+    return this.http.get<Array<Permission>>(this.typeAccessURL + "/all-permissions")
+  }
+
+  getAll(): Observable<Array<TypeAccess>> {
+    return this.http.get<Array<TypeAccess>>(this.typeAccessURL)
   }
 
   insertTypeAccess(typeAccess: TypeAccess) : Observable<Object> {

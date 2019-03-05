@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Permission } from 'src/model/permission';
 import { TypeAccessService } from 'src/service/type-access.service';
+import { TypeAccess } from 'src/model/type-access';
 
 @Component({
   selector: 'app-model',
@@ -11,6 +12,7 @@ import { TypeAccessService } from 'src/service/type-access.service';
 export class AddTypeAccessComponent implements OnInit {
 
   permissions: Array<Permission>;
+  typeAccess:TypeAccess;
 
   constructor(
     public typeAccessProvider: TypeAccessService
@@ -19,7 +21,7 @@ export class AddTypeAccessComponent implements OnInit {
   ngOnInit(
 
   ) {
-
+    this.typeAccess = new TypeAccess();
     this.getAllPermissions();
   }
 
@@ -30,6 +32,17 @@ export class AddTypeAccessComponent implements OnInit {
       }, err => {
         console.log(err);
       })
+  }
+
+  public insertTypeAccess() {
+    this.typeAccess.permissions = this.permissions;
+
+    this.typeAccessProvider.insertTypeAccess(this.typeAccess)
+    .subscribe(res=> {
+      console.log(res);
+    }, err=> {
+      console.log(err);
+    })
   }
 
 }

@@ -6,6 +6,7 @@ public class TypeAccess {
 
 	private ArrayList<Permission> permissions;
 	private String title;
+	private String type;
 
 	public ArrayList<Permission> getPermissions() {
 		return permissions;
@@ -18,5 +19,15 @@ public class TypeAccess {
 	}
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public TypeAccess() {
+		this.type = "TYPEACCESS";
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
 	}
 }
