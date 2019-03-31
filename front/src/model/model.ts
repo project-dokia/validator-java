@@ -3,4 +3,5 @@ export class Model {
     _rev:String;
     description:String;
     type:String;
+    idClient:String;
 }

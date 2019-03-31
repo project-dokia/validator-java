@@ -21,34 +21,24 @@ import com.cloudant.client.api.views.ViewResponse;
 
 import br.resolv.com.controller.TypeAccessController;
 import br.resolv.com.factory.CloudantFactory;
-import br.resolv.com.model.Model;
+import br.resolv.com.model.Client;
 import br.resolv.com.model.TypeAccess;
 import br.resolv.com.util.JavaException;
 import br.resolv.com.util.MyUtils;
 
-@Path("/type-access")
-public class TypeAccessWS {
+@Path("/client")
+public class ClientWS {
 
 	@Context
 	HttpServletRequest request;
 	
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/all-permissions")
-	public Response getFieldById(@PathParam("_id") String _id) {
-	
-		TypeAccessController typeAccessController = new TypeAccessController();
-		return Response.status(200).entity(typeAccessController.getAllPermissions()).build();
-	}
-	
-	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response insert(TypeAccess typeAccess) throws JavaException {
+	public Response insert(Client client) throws JavaException {
 		Database conn = MyUtils.getStoredConnection(request);
 		CloudantFactory cloudantFactory = new CloudantFactory();
-		String _id = cloudantFactory.insert(typeAccess, conn);
+		String _id = cloudantFactory.insert(client, conn);
 
 		return Response.status(200).entity("{\"_id\": \"" +  _id + "\"}").build();
 	}	
@@ -58,19 +48,19 @@ public class TypeAccessWS {
 	public Response getAll() {
 		Database conn = MyUtils.getStoredConnection(request);
 	
-		List<TypeAccess> typesAccess = new ArrayList<TypeAccess>();
+		List<Client> client = new ArrayList<Client>();
 		
 		try {
-			ViewResponse<String, TypeAccess> response  = conn.getViewRequestBuilder("type-access", "type-access-view")
-			.newRequest(Key.Type.STRING, TypeAccess.class)
+			ViewResponse<String, Client> response  = conn.getViewRequestBuilder("client", "client-view")
+			.newRequest(Key.Type.STRING, Client.class)
 			.limit(50)
 			.includeDocs(true)
 			.build()
 			.getResponse();
 			
 			
-			for(TypeAccess rowModel : response.getValues()) {
-				typesAccess.add(rowModel);
+			for(Client rowModel : response.getValues()) {
+				client.add(rowModel);
 			}
 			
 		} catch (IOException e) {
@@ -78,6 +68,6 @@ public class TypeAccessWS {
 			e.printStackTrace();
 		}
 		
-		return Response.status(200).entity(typesAccess).build(); 
+		return Response.status(200).entity(client).build(); 
 	}
 }

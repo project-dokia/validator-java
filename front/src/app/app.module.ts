@@ -20,6 +20,8 @@ import { HistoryComponent } from './history/history.component';
 import { AdminComponent } from './admin/admin.component';
 import { TypeAccessComponent } from './admin/type-access/type-access.component';
 import { AddTypeAccessComponent } from './admin/type-access/add/add-type-access.component';
+import { ClientComponent } from './admin/client/client.component';
+import { AddClientComponent } from './admin/client/add/add-client.component';
 
 const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
 
@@ -36,6 +38,8 @@ const RxJS_Services = [HttpsRequestInterceptor, HTTPStatus];
     AdminComponent,
     TypeAccessComponent,
     AddTypeAccessComponent,
+    ClientComponent,
+    AddClientComponent,
   ],
   imports: [
     NgbModule.forRoot(),

@@ -22,8 +22,6 @@ export class FeedbackService {
     return this.http.get<Feedback[]>(this.feedbackURL + "/solved")
   }
 
-  
-
   updateStatus(id: String) : Observable<Object> {
     return this.http.post<Object>(this.feedbackURL + "/" + id, {});
   }

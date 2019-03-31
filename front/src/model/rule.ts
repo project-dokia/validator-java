@@ -8,4 +8,5 @@ export class Rule {
     description: String;
     acceptancePercentage:String;
     importantAcceptancePercentage:String;
+    idClient:String;
 }

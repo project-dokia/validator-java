@@ -26,4 +26,6 @@ export class Field {
 	percentageResult: number;
 
 	important:boolean;
+
+	idClient:String;
 }

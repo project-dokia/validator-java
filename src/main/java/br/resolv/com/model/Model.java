@@ -5,6 +5,7 @@ public class Model {
 	private String _rev;
 	private String description;
 	private String type;
+	private String idClient;
 
 	public Model(String _id, String _rev, String description) {
 		this._id = _id;
@@ -52,5 +53,13 @@ public class Model {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getIdClient() {
+		return idClient;
+	}
+
+	public void setIdClient(String idClient) {
+		this.idClient = idClient;
 	}
 }

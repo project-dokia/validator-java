@@ -11,6 +11,8 @@ import { HistoryComponent } from './history/history.component';
 import { AdminComponent } from './admin/admin.component';
 import { TypeAccessComponent } from './admin/type-access/type-access.component';
 import { AddTypeAccessComponent } from './admin/type-access/add/add-type-access.component';
+import { ClientComponent } from './admin/client/client.component';
+import { AddClientComponent } from './admin/client/add/add-client.component';
 
 
 const routes: Routes = [
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'admin/type-access', component: TypeAccessComponent },
   { path: 'admin/type-access/add', component: AddTypeAccessComponent },
   { path: 'admin/type-access/edit', component: AddTypeAccessComponent },
+  { path: 'admin/client', component: ClientComponent },
+  { path: 'admin/client/add', component: AddClientComponent },
   { path: 'type', component: TypeComponent },
   { path: 'field', component: FieldComponent },
   { path: 'rule', component: RuleComponent },
@@ -25,6 +29,11 @@ const routes: Routes = [
   { path: 'validator', component: ValidatorComponent },
   { path: 'tickets', component: FeedbackComponent },
   { path: 'tickets/history', component: HistoryComponent },
+  
+
+
+  
+
   { path: '', component: ValidatorComponent }
 ];
 

@@ -22,6 +22,7 @@ public class ApplicationApis extends Application {
         classes.add(FeedbackWS.class);
         classes.add(SyncWS.class);
         classes.add(TypeAccessWS.class);
+        classes.add(ClientWS.class);
         return classes;
     }
 }

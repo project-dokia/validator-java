@@ -1,0 +1,22 @@
+<div class="container-fluid">
+   <div class="card m-2">
+      <div class="card-body">
+         <h4 class="card-text">ADD CLIENT</h4>
+      </div>
+   </div>
+
+   <div class="row m-2">
+      <div class="col-3 text-right gap-top5">
+         <h5>Title</h5>
+      </div>
+      <div class="col-9">
+         <input type="text" class="form-control" [(ngModel)]="client.name">
+      </div>
+   </div>
+   <div class="row m-2">
+      <div class="col-6 offset-6 text-right">
+         <input type="button" value="INSERT" class="btn btn-primary form-control" (click)="addClient()">
+      </div>
+   </div>
+
+</div>

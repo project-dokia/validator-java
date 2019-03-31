@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <div class="card m-2">
+       <div class="card-body">
+          <h4 class="card-text">CLIENT</h4>
+       </div>
+    </div>
+
+    
+    <div class="row m-2">
+      <div class="col-6 offset-3 text-right">
+         <input type="button" value="ADD" class="btn btn-primary form-control"routerLink="/admin/client/add">
+      </div>
+   </div>
+
+   <div class="row m-2">
+      <div class="col-12">
+         <table class="table table-striped table-horvered">
+            <thead>
+               <tr>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Action</th>
+               </tr>
+            </thead>
+            <tbody>
+               <tr *ngFor="let client of clients">
+                  <td>{{client.name}}</td>
+                  <td><input type="button" value="EDIT" class="btn btn-primary form-control"></td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </div>
+
+ </div>
