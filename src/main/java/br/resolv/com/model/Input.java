@@ -6,16 +6,18 @@ public class Input {
 	private String _rev;
 	private Object value;
 	private String idField;
+	private String entity;
 
 	public Input() {
 		
 	}
 	
-	public Input(String _id, String _rev, Object value, String idField) {
+	public Input(String _id, String _rev, Object value, String idField, String entity) {
 		this._id = _id;
 		this.value = value;
 		this._rev = _rev;
 		this.idField = idField;
+		this.entity = entity;
 	}
 
 	public String get_id() {
@@ -50,4 +52,11 @@ public class Input {
 		this.idField = idField;
 	}
 
+	public String getEntity() {
+		return entity;
+	}
+
+	public void setEntity(String entity) {
+		this.entity = entity;
+	}
 }

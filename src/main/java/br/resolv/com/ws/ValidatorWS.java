@@ -1,5 +1,6 @@
 package br.resolv.com.ws;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.cloudant.client.api.Database;
 import br.resolv.com.controller.SyncController;
 import br.resolv.com.controller.ValidatorController;
 import br.resolv.com.model.Document;
+import br.resolv.com.model.Field;
 import br.resolv.com.model.Input;
 import br.resolv.com.model.LogRequestValidator;
 import br.resolv.com.model.Result;
@@ -37,28 +39,46 @@ public class ValidatorWS {
 		} catch (InterruptedException ex) {
 		}
 	}
-	
+
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response validator(Document document) throws JavaException {
 		sleep();
-		
+
 		Database conn = MyUtils.getStoredConnection(request);
+
+		SyncController syncController = new SyncController(conn);
+
+		List<Field> fields = new ArrayList<Field>();
+
+		fields = syncController.getFields();
+
+		for (Input input : document.getInputs()) {
+			if (input.get_id() == null) {
+				if (input.getEntity() != null) {
+					if (fields != null) {
+						for (Field field : fields) {
+							if (field.getTitle().equals(input.getEntity())) {
+								input.setIdField("" + field.get_id());
+							}
+						}
+					}
+
+				}
+			}
+		}
 
 		ValidatorController validatorController = new ValidatorController(conn);
 		Document documentCreate = new Document(document.getIdRule(), document.getInputs());
 		List<Result> result = validatorController.validate(documentCreate);
-		
+
 		int day = new Date().getDay();
 		int month = new Date().getMonth();
 
 		int hours = new Date().getHours();
 		int minute = new Date().getMinutes();
 
-		
-		SyncController syncController = new SyncController(conn);
-		
 		Rule rule = syncController.ruleById(document.getIdRule());
 
 		double count = 0;
@@ -99,7 +119,8 @@ public class ValidatorWS {
 
 		boolean resultDokia = false;
 		if (resultCount >= Double.parseDouble(rule.getAcceptancePercentage())) {
-			if (resultCountImportant >= Double.parseDouble(rule.getImportantAcceptancePercentage()) || countImportant == 0) {
+			if (resultCountImportant >= Double.parseDouble(rule.getImportantAcceptancePercentage())
+					|| countImportant == 0) {
 				resultDokia = true;
 			}
 		}
@@ -111,18 +132,18 @@ public class ValidatorWS {
 		resultRule.setImportantAcceptancePercentage(Integer.parseInt(rule.getImportantAcceptancePercentage()));
 		resultRule.setResultPercentage((int) resultCount);
 		resultRule.setAcceptancePercentage(Integer.parseInt(rule.getAcceptancePercentage()));
-		
+
 		LogRequestValidator logRequestValidator = new LogRequestValidator(document, resultRule,
 				(hours < 10 ? "0" + hours : hours) + ":" + (minute < 10 ? "0" + minute : minute),
 				(day < 10 ? "0" + day : day) + "/" + (month < 10 ? "0" + month : month), "OK");
 
 		logRequestValidator.set_id("" + new Date().getTime());
 		conn.save(logRequestValidator);
-		
+
 		document = null;
 		logRequestValidator = null;
 		result = null;
-		
+
 		return Response.status(200).entity(resultRule).build();
 	}
 }

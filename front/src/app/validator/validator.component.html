@@ -9,14 +9,14 @@
             <thead>
               <tr>
                 <th>Description</th>
-                <!-- <th>_id</th> -->
+                <th>_id</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let rule of rules; let i = index">
                 <td>{{rule.description}}</td>
-                <!-- <td>{{rule._id}}</td> -->
+                <td>{{rule._id}}</td>
                 <td>
                   <input type="button" value="TEST" class="btn btn-primary form-control" (click)="addValidator(i)">
                 </td>

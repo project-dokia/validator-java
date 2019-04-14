@@ -21,10 +21,14 @@ import br.resolv.com.util.Comparator;
 public class FieldController {
 
 	public List<Field> setValuesFields(List<Input> inputs, List<Field> fields) {
-		for (Field field : fields) {
-			for (Input input : inputs) {
-				if (input.getIdField().equals(field.get_id())) {
-					field.setValue(input.getValue());
+		if (fields != null) {
+			for (Field field : fields) {
+				if (inputs != null) {
+					for (Input input : inputs) {
+						if (input.getIdField().equals(field.get_id())) {
+							field.setValue(input.getValue());
+						}
+					}
 				}
 			}
 		}
@@ -126,19 +130,22 @@ public class FieldController {
 			}
 		}
 
-//		for (ResultValidator resultValidator : results) {
-//			if (resultValidator.isDependency() == true) {
-//				for (ResultValidator resultValidatorDependency : results) {
-//					if (resultValidatorDependency.getIdField().equals(resultValidator.getIdField())) {
-//						if (resultValidatorDependency.isResult() == true && resultValidator.isResult() == true) {
-//							resultValidator.setResult(true);
-//						} else {
-//							resultValidator.setResult(false);
-//						}
-//					}
-//				}
-//			}
-//		}
+		// for (ResultValidator resultValidator : results) {
+		// if (resultValidator.isDependency() == true) {
+		// for (ResultValidator resultValidatorDependency : results) {
+		// if
+		// (resultValidatorDependency.getIdField().equals(resultValidator.getIdField()))
+		// {
+		// if (resultValidatorDependency.isResult() == true &&
+		// resultValidator.isResult() == true) {
+		// resultValidator.setResult(true);
+		// } else {
+		// resultValidator.setResult(false);
+		// }
+		// }
+		// }
+		// }
+		// }
 
 		return results;
 	}

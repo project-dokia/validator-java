@@ -182,6 +182,7 @@ export class ValidatorComponent implements OnInit {
       let input = new Input();
       input.idField = field._id;
       input.value = field.value;
+      input.entity = field.title;
 
       inputs.push(input);
     }

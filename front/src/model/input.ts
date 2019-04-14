@@ -3,4 +3,5 @@ export class Input {
     _rev:String;
     value:String;
     idField:String;
+    entity:String;
 }
